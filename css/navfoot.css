@@ -1,0 +1,79 @@
+/* Base styles for the navbar - applies when no media query condition is met (default) */
+.navbar {
+    width: 100%;
+    height: 60px; /* Default height for large screens */
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: #333;
+    z-index: 1000;
+    
+}
+
+.navbar a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 20px 22px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+.navbar a:hover, .navbar a:focus {
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 3px solid #fc521e;
+    box-shadow: inset 0 -3px 0 0 #ff5722;
+    
+}
+.navbar-logo {
+    height: 60px; /* Adjust based on your desired logo size */
+    margin-right: 20px; /* Add some space between the logo and the navigation links */
+}
+
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar {
+        height: 50px; /* Slightly smaller height for medium screens */
+    }
+    .navbar a {
+        padding: 15px 20px; /* Adjust padding to match the new height */
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .navbar {
+        height: 40px; /* Smaller height for small screens */
+    }
+    .navbar a {
+        padding: 10px 18px; /* Adjust padding to match the new height */
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+    .navbar {
+        height: 35px; /* Smallest height for extra small screens */
+    }
+    .navbar a {
+        padding: 8px 16px; /* Adjust padding to match the new height */
+    }
+}
+
+.footer {
+    width: 100%;
+    background-color: #333; /* Dark background for the footer */
+    color: #fff; /* White text color */
+    text-align: center; /* Center the text */
+    padding: 20px 0; /* Add some padding above and below the text */
+    position: fixed; /* Fix the footer at the bottom of the page */
+    bottom: 0; /* Align the footer at the bottom */
+    left: 0; /* Align the footer to the left edge */
+}
