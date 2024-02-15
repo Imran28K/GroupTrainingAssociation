@@ -11,7 +11,7 @@
 
 <body>
     <?php include '../navfooter/navbar.php'; ?>
-     This is where you put your content in each page
+     <!--This is where you put your content in each page>
     <?php include '../navfooter/footer.php'; ?>
 </body>
 
