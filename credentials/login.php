@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
+//An example of a query using the connection
+<?php
+    require_once("dbconnection.php");
+    $queryLogIn = "SELECT * FROM learner WHERE ID = learner.uniqueLearnerNumber";
+    $resultLogIn = $mysqli->query($queryLab);
+?>
+
 <body>
     <?php include '../include/navbar.php'; ?>
     <div class="login-container">
