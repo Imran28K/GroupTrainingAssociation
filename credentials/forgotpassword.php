@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include '../navfooter/navbar.php'; ?>
+    <?php include '../include/navbar.php'; ?>
     <div class="login-container">
         <h1>Email Verification</h1>
         <form action="query/forgotpassword-query.php" method="post" class="login-form">
@@ -21,7 +21,7 @@
             <button type="submit" class="login-button">Submit</button>
         </form>
     </div>
-    <?php include '../navfooter/footer.php'; ?>
+    <?php include '../include/footer.php'; ?>
 </body>
 
 </html>
