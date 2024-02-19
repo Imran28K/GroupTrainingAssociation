@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
-//An example of a query using the connection
+//Example of a working query proving the database connection works (for me)
 <?php
     require_once("dbconnection.php");
-    $queryLogIn = "SELECT * FROM learner WHERE ID = learner.uniqueLearnerNumber";
-    $resultLogIn = $mysqli->query($queryLab);
+    $queryTest = "UPDATE learner SET learnerFirstName = 'Joe' WHERE UniqueLearnerNumber = '1000000000-DFY3'";
+    $resultTest = $mysqli->query($queryTest);
 ?>
 
 <body>
-    <?php include '../include/navbar.php'; ?>
+    <?php include '../navfooter/navbar.php'; ?>
     <div class="login-container">
         <h1>Sign In</h1>
         <form action="query/loginquery.php" method="post" class="login-form">
@@ -33,7 +33,7 @@
             </div>
         </form>
     </div>
-    <?php include '../include/footer.php'; ?>
+    <?php include '../navfooter/footer.php'; ?>
 </body>
 
 </html>
