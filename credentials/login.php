@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
-<!--Example of a working query proving the database connection works (for me)
-<?php
-//    require_once("dbconnection.php");
-//    $queryTest = "UPDATE learner SET learnerFirstName = 'Joseph' WHERE UniqueLearnerNumber = '1000000000-DFY3'";
-//    $resultTest = $mysqli->query($queryTest);
-?> -->
-
 <body>
     <?php include '../include/navbar.php'; ?>
     <div class="login-container">

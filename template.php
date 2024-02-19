@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <?php include '../navfooter/navbar.php'; ?>
+    <?php include '../include/navbar.php'; ?>
      <!--This is where you put your content in each page>
-    <?php include '../navfooter/footer.php'; ?>
+    <?php include '../include/footer.php'; ?>
 </body>
 
 </html>

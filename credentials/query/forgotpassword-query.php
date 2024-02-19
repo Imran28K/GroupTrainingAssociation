@@ -20,4 +20,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 */
 ?>
 
-Imran will be completing the code in this file Jefin is smart yes i agree
+Imran will be completing the code in this file
