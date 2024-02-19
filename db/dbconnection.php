@@ -6,9 +6,11 @@
 
     $mysqli = new mysqli (DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME) ;
 
+    /*
     if (!$mysqli){
         die("Error" . mysqli_connect_error());
     }
     else
     echo "Connection established"
+    */
 ?>
