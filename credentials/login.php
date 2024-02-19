@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include '../navfooter/navbar.php'; ?>
+    <?php include '../include/navbar.php'; ?>
     <div class="login-container">
         <h1>Sign In</h1>
         <form action="query/loginquery.php" method="post" class="login-form">
@@ -26,7 +26,7 @@
             </div>
         </form>
     </div>
-    <?php include '../navfooter/footer.php'; ?>
+    <?php include '../include/footer.php'; ?>
 </body>
 
 </html>
