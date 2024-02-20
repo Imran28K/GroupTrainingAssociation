@@ -20,7 +20,7 @@
             <div class="input-group">
                 <input type="password" id="password" name="password" required placeholder="Password">
             </div>
-            <button type="submit" class="login-button">Sign In</button>
+            <button type="submit" name="submit" class="login-button">Sign In</button>
             <div class="form-footer">
                 <a href="forgotpassword.php" class="link">Forgot Password?</a>
             </div>
