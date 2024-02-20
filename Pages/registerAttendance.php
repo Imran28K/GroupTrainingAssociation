@@ -2,11 +2,22 @@
 <html lang="en">
 
 <?php 
-$sessionID = $_POST[sessionID];
-require_once '../../db/dbconnection.php';
-$queryLots = "SELECT * FROM attendance WHERE sessionID == '$UserIDLots' AND LotEndTime > '$now'";
-$resultLots = $mysqli->query($queryLots); 
+session_start();
+if ($_SESSION['sessionID'] == ""){
+    $sessionID = $_POST['sessionID'];
+    $_SESSION['sessionID'] = $sessionID;
+}
+else {
+    $sessionID = $_SESSION['sessionID'];
+    }
+require_once ("../db/dbconnection.php");
+//$queryAttendance = "SELECT * FROM attendance WHERE SessionID == '9'";
+//$resultAttendance = $mysqli->query($queryAttendance);
+
+$queryAttendance = "SELECT * FROM attendance WHERE SessionID = '$SessionID'"; 
+$resultAttendance = $mysqli->query($queryAttendance); 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,9 +33,13 @@ $resultLots = $mysqli->query($queryLots);
             <td>Learner name</td>
             <td>Present?</td>
         </tr>
-        <?php while ($obj = $resultLots -> fetch_object());
+        <?php while ($obj = $resultAttendance -> fetch_object());
+        //$learnerID = {$obj -> UniqueLearnerNumber};
+        $queryLearner = "SELECT * FROM learners WHERE UniqueLearnerNumber = '{$obj -> UniqueLearnerNumber}'";
+        $resultLearner = $mysqli->query($queryLearner);
+        $obj2 = $resultLearner -> fetch_object();
         echo"<tr>
-            <td>Learner</td>
+            <td>{$obj2 -> LearnerFirstName}.''.{$obj -> LearnerLastName}</td>
             <td>
                 <form action='/query/register.php'>
                     <input type='checkbox' id='attended' name='attended' value='attended'>
