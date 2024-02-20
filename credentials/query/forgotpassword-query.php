@@ -1,14 +1,52 @@
-This checks whether the email exists in the database, if there is none then it will
-require user to enter an existing email.
 
-If email inputted == to one of the emails in the database, then generate a new password and send
-it to the email.
+<?php
+require_once '../../db/dbconnection.php';
+$userEmail = $_POST['email'];
 
-The new generated password will then update the current password for that email in the database.
-Hello
+// Define an associative array mapping tables to their email columns
+$tableColumnMapping = [
+    'learner' => 'LearnerEmail',
+    'tutor' => 'TutorEmail',
+    'employer' => 'EmployerEmail'
+];
+
+$emailFound = false;
+$tableFound = '';
+
+foreach ($tableColumnMapping as $table => $emailColumn) {
+    
+    $query = "SELECT * FROM {$table} WHERE {$emailColumn} = ?";
+    $stmt = $mysqli->prepare($query);
+
+    if ($stmt) {
+        // Bind the user email to the query and execute
+        $stmt->bind_param('s', $userEmail);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            
+            $emailFound = true;
+            $tableFound = $table;
+            break; 
+        }
+
+        $stmt->close();
+    } else {
+        echo "Error preparing statement for table $table: " . $mysqli->error;
+    }
+}
+
+if ($emailFound) {
+    echo "Email found in table: $tableFound";
+
+} else {
+    echo "Email not found in any table.";
+    
+}
 
 
-
+?>
 
 
 <?php
@@ -20,4 +58,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 */
 ?>
 
-Imran will be completing the code in this file
