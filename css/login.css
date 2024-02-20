@@ -83,3 +83,50 @@ h1 {
 .tools a.tool:hover {
     background-color: #e1e1e1;
 }
+
+/*From here and downwards is the notification design after doing the email verification for forgot password */
+.notification {
+    position: relative; /* Position the notification absolutely within the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    left: 50%; /* Centering the notification horizontally */
+    transform: translateX(-50%); /* Shift it back to truly center it, considering its own width */
+    width: auto; /* Adjust the width as necessary, or use 'auto' */
+    max-width: 90%; /* Ensuring it doesn't stretch too far on smaller screens */
+    padding: 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visibility */
+    z-index: 1000; /* Ensures the notification is above other content */
+}
+
+.notification.success {
+    background-color: #4CAF50; /* Green */
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.notification.error {
+    background-color: #f44336; /* Red */
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.notification p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px 16px;
+    cursor: pointer;
+}
