@@ -39,7 +39,9 @@ foreach ($tableColumnMapping as $table => $emailColumn) {
 
 if ($emailFound) {
     echo "Email found in table: $tableFound";
-    
+    header("Location: ../../send.php?email=" . urlencode($userEmail));
+    exit;
+
 } else {
     echo "Email not found in any table.";
     
