@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Name of Page</title>
+  <title>Learner Home</title>
   <link rel="stylesheet" href="../../css/login.css">
   <link rel="stylesheet" href="../../css/navfoot.css">
 </head>
@@ -75,7 +75,6 @@
   </head>
 
   <body>
-
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br>
@@ -117,3 +116,5 @@
 </body>
 
 </html>
+
+
