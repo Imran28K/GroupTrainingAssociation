@@ -39,7 +39,7 @@ foreach ($tableColumnMapping as $table => $emailColumn) {
 
 if ($emailFound) {
     echo "Email found in table: $tableFound";
-    
+
 } else {
     echo "Email not found in any table.";
     
