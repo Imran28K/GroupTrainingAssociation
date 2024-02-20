@@ -81,9 +81,9 @@
       <br>
       <br>
       <br>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
+      <a href="#">View Progress</a>
+      <a href="#">View Attendance</a>
+      <a href="#">Employment Status</a>
       <a href="#">Contact</a>
     </div>
 
