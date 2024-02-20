@@ -41,7 +41,22 @@ foreach ($tableColumnMapping as $table => $columns) {
 }
 
 if ($loginSuccessful) {
-    echo "Login successful. User role: $userRole.";
+    //echo "Login succssful. User role: $userRole.";
+    if($userRole == "learner") {
+        header('location:http://localhost/GroupTrainingAssociation/users/learner/learner.php');
+    } 
+    elseif($userRole == "employer") {
+        header('location:http://localhost/GroupTrainingAssociation/users/employer/employer.php');
+    } 
+    elseif($userRole == "tutor") {
+        header('location:http://localhost/GroupTrainingAssociation/users/tutor/tutor.php');
+    } 
+    
+    else {
+        header('location:http://localhost/GroupTrainingAssociation/users/admin/admin.php');
+    }
+      
+ 
     // once success it will let u know the role of the user
 } else {
     echo "Login failed.";
