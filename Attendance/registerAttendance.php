@@ -20,10 +20,10 @@ $getApprenticeship = $resultSessions -> fetch_object();
 $apprenticeship = $getApprenticeship -> apprenticeshipName;
 $apprenticeshipString = strval($apprenticeship);
 
-$queryAddLearners = "SELECT * FROM learner WHERE ApprenticeshipName = '$apprenticeshipString'"; 
-$resultAddLearners= $mysqli->query($queryAddLearners);
+$queryLearner = "SELECT * FROM learner WHERE ApprenticeshipName = '$apprenticeshipString'"; 
+$resultLearner= $mysqli->query($queryLearner);
 
-while ($getLearners = $resultAddLearners -> fetch_object()){
+while ($getLearners = $resultLearner -> fetch_object()){
 $learner = $getLearners -> UniqueLearnerNumber;
 
 $queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID"; 
