@@ -158,9 +158,13 @@ $obj = $resultLearner -> fetch_object();
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+<<<<<<< HEAD
         <?php 
         echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
         ?>
+=======
+        <h3>Joseph Denton</h3>
+>>>>>>> 8179dc8080b0d081a478e3edbe75c2cb9cf617d9
         <p>Tutor</p>
       </div>
       <ul>
@@ -199,7 +203,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Settings</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Logout</span>
           </a>
