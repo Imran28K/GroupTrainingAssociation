@@ -32,6 +32,9 @@
             </div>
             <button type="submit" name="submit" class="attendance-submit">Create Session</button>
         </form>
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='../users/tutor/attendanceLanding.php'> Back attendance </a> </li>
+    </ul>
     </div>
     <?php include '../include/footer.php'; ?>
 </body>

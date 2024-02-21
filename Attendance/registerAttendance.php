@@ -94,6 +94,10 @@ $resultAttendance = $mysqli->query($queryAttendance);
         }
         }        ?>
         </table>
+
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='registerChoice.php'> Back to register choice </a> </li>
+    </ul>
     </div>
 <?php include '../include/footer.php'; ?>
 </body>
