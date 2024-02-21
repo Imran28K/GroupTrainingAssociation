@@ -26,18 +26,20 @@ $resultAddLearners= $mysqli->query($queryAddLearners);
 while ($getLearners = $resultAddLearners -> fetch_object()){
 $learner = $getLearners -> UniqueLearnerNumber;
 
-$queryAttendanceCheck = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
+$queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
 
-$getLearnerCheck = $resultAttendanceCheck -> fetch_object();
-$learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+if ($resultAttendanceCheck != NULL){
+    $getLearnerCheck = $resultAttendanceCheck -> fetch_object();
+    $learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+}
+else {
+    $learnerCheck = "Empty";
+}
 
 if ($learnerCheck != $learner){
 $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
 $resultAddLearners= $mysqli->query($queryAddLearners);
-
-$queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
-$resultAttendance = $mysqli->query($queryAttendance); 
 }
 }
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
