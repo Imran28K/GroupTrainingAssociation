@@ -40,7 +40,8 @@ foreach ($tableColumnMapping as $table => $emailColumn) {
 }
 
 if ($emailFound) {
-    
+    $OTP = random_int(000000, 999999);
+    $stringOTP = strval($OTP);
     require '../../phpmailer/src/Exception.php';
     require '../../phpmailer/src/PHPMailer.php';
     require '../../phpmailer/src/SMTP.php';
@@ -63,8 +64,8 @@ if ($emailFound) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Password Reset';
-        $mail->Body    = 'Your password reset instructions go here...';
+        $mail->Subject = 'Your one time password';
+        $mail->Body    = 'Your One Time Password is: ' . $stringOTP;
 
         $mail->send();
         // Redirect to forgotpassword.php with a success message
@@ -82,16 +83,8 @@ if ($emailFound) {
     
 }
 
-
 ?>
 
 
-<?php
-/*
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    echo $email . "<br>";
-}
-*/
-?>
+
 
