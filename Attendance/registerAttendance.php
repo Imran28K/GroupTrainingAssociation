@@ -29,12 +29,13 @@ $learner = $getLearners -> UniqueLearnerNumber;
 $queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
 
-$getLearnerCheck = $resultAttendanceCheck -> fetch_object();
-$learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+    $getLearnerCheck = $resultAttendanceCheck -> fetch_object();
+    $learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
 
 if ($learnerCheck != $learner){
 $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
 $resultAddLearners= $mysqli->query($queryAddLearners);
+header('location:http://localhost/GroupTrainingAssociation/attendance/registerAttendance.php');
 }
 }
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
