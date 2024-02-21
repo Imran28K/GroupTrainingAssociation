@@ -150,7 +150,7 @@
         <p>Learner</p>
       </div>
       <ul>
-        <li><a href="../../learnerprogress/learnerprogress.php" class="active">
+        <li><a href="#" class="active">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
