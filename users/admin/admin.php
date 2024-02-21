@@ -1,119 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Name of Page</title>
-  <link rel="stylesheet" href="../../css/login.css">
-  <link rel="stylesheet" href="../../css/navfoot.css">
-</head>
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	list-style: none;
+	font-family: 'Open Sans', sans-serif;
+}
 
-<body>
-  <?php include '../../include/navbar.php'; ?>
-  <!DOCTYPE html>
-  <html>
+body{
+	background: #f5f6fa;
+}
 
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      body {
-        font-family: "Lato", sans-serif;
-        transition: background-color .5s;
-      }
+.wrapper .sidebar{
+	background: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 225px;
+	height: 100%;
+	padding: 30px 0;
+	transition: all 0.5s ease;
+}
 
-      .sidenav {
-        height: 87.5%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-      }
+.wrapper .sidebar .profile{
+	margin-bottom: 30px;
+	text-align: center;
+}
 
-      .sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
+.wrapper .sidebar .profile img{
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	display: block;
+}
 
-      }
+.wrapper .sidebar .profile h3{
+	color: #8d599f;
+	margin: 10px 0 5px;
+}
 
-      .sidenav a:hover {
-        color: #f1f1f1;
-      }
+.wrapper .sidebar .profile p{
+	color: #666;
+	font-size: 14px;
+}
 
-      .sidenav .closebtn {
-        position: absolute;
-        top: -20;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-      }
+.wrapper .sidebar ul li a{
+	padding: 13px 30px;
+	display: block;
+	border-bottom: 1px solid #ececec;
+	color: #666;
+	font-size: 14px;
+	position: relative;
+}
 
-      #main {
-        transition: margin-left .5s;
-        padding: 16px;
-      }
+.wrapper .sidebar ul li a .icon{
+	color: #c7cfdb;
+	width: 30px;
+	display: inline-block;
+}
 
-      @media screen and (max-height: 450px) {
-        .sidenav {
-          padding-top: 15px;
-        }
+.wrapper .sidebar ul li a:before{
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 3px;
+	height: 100%;
+	background: #8d599f;
+	display: none;
+}
 
-        .sidenav a {
-          font-size: 18px;
-        }
-      }
+.wrapper .sidebar ul li a:hover,
+.wrapper .sidebar ul li a.active{
+	color: #8d599f;
+	background: linear-gradient(to right, #fff, #f6edfc)
+}
+
+.wrapper .sidebar ul li a:hover .icon,
+.wrapper .sidebar ul li a.active .icon{
+	color: #8d599f;
+}
+
+.wrapper .sidebar ul li a:hover:before,
+.wrapper .sidebar ul li a.active:before{
+	display: block;
+}
+
+.wrapper .section{
+	width: calc(100% - 225px);
+	margin-left: 225px;
+	transition: all 0.5s ease;
+}
+
+.wrapper .section .top_navbar{
+	background: #fff;
+	height: 50px;
+	border: 1px solid #f5f6fa;
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
+}
+
+.wrapper .section .top_navbar .hamburger a{
+	font-size: 24px;
+	color: #8d599f;
+}
+
+.wrapper .section .top_navbar .hamburger a:hover{
+	color: #cbaede;
+}
+
+.wrapper .section .container{
+	margin: 30px;
+	background: #fff;
+	padding: 50px;
+	line-height: 28px;
+}
+
+body.active .wrapper .sidebar{
+	left: -225px;
+}
+
+body.active .wrapper .section{
+	margin-left: 0;
+	width: 100%;
+}
     </style>
-  </head>
+<head>
+	<meta charset="utf-8">
+	<title>Side Navigation Bar</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
 
-  <body>
+<div class="wrapper">
+	<div class="sidebar">
+		<div class="profile">
+			<img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+			<h3>Saffi Ullah</h3>
+			<p>Admin</p>
+		</div>
+		<ul>
+			<li><a href="#" class="active">
+				<span class="icon"><i class="fas fa-home"></i></span>
+				<span class="item">View Progress</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-desktop"></i></span>
+				<span class="item">View Attendance</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-user-friends"></i></span>
+				<span class="item">Employment Status</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+				<span class="item">Module Information</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-database"></i></span>
+				<span class="item">Development</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-chart-line"></i></span>
+				<span class="item">Reports</span>
+				</a>
+			</li>
+			<li><a href="#">
+				<span class="icon"><i class="fas fa-user-shield"></i></span>
+				<span class="item">Settings</span>
+				</a>
+			</li>
+			<li><a href="C:\xampp\htdocs\GroupTrainingAssociation\credentials\login.php">
+				<span class="icon"><i class="fas fa-cog"></i></span>
+				<span class="item">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="section">
+		<div class="top_navbar">
+			<div class="hamburger">
+				<a href="#"><i class="fas fa-bars"></i></a>
+			</div>
+		</div>
+		<div class="container">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	</div>
+</div>
 
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br>
-      <br>
-      <br>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
-    </div>
+<script type="text/javascript">
+	var hamburger = document.querySelector(".hamburger");
+	hamburger.addEventListener("click", function(){
+		document.querySelector("body").classList.toggle("active");
+	})
+</script>
 
-    <div id="main">
-      <h2>Welcome to Admin's Page</h2>
-      <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that we add a black see-through background-color to body when the sidenav is opened.</p>
-      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-    </div>
-
-    <script>
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-      }
-
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-      }
-    </script>
-
-  </body>
-
-  </html>
-
-
-
-  <?php include '../../include/footer.php'; ?>
 </body>
-
 </html>
