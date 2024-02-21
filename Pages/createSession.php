@@ -26,6 +26,10 @@
                 <label for="timeEnd">session end </label>
                 <input type="time" id="timeEnd" name="timeEnd" required>
             </div>
+            <div class="input-group">
+                <label for="apprenticeship">apprenticeship session group</label>
+                <input type="apprenticeship" id="apprenticeship" name="apprenticeship" required>
+            </div>
             <button type="submit" name="submit" class="attendance-submit">Create Session</button>
         </form>
     </div>

@@ -2,6 +2,9 @@
 <html lang="en">
 
 <?php 
+session_start();
+$_SESSION['sessionID'] = "";
+$sessionID = $_SESSION['sessionID'];
 require_once ("../db/dbconnection.php");
 $queryRegisterList = "SELECT * FROM registersessions";
 $resultRegisterList = $mysqli->query($queryRegisterList); 
@@ -32,7 +35,7 @@ $resultRegisterList = $mysqli->query($queryRegisterList);
                         <td>{$obj -> TimeEnd}</td>
                         <td>
                     <form action='registerAttendance.php' name='sessionID' method='post'>
-                    <input type='hidden' id='sessionID' name='sessionID' value='{$obj->SessionID}'>
+                    <input type='hidden' id='sessionID' name='sessionID' value={$obj -> SessionID}>
                     <input type='submit' value='Select Date'>
                     </form>
                     </td></tr>";
