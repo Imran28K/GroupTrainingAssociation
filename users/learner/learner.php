@@ -134,7 +134,6 @@ body.active .wrapper .section{
 <head>
 	<meta charset="utf-8">
 	<title>Side Navigation Bar</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 <body>
@@ -182,9 +181,9 @@ body.active .wrapper .section{
 				<span class="item">Settings</span>
 				</a>
 			</li>
-			<li><a href="#">
+			<li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
 				<span class="icon"><i class="fas fa-cog"></i></span>
-				<span class="item">Logout</span>
+				<span class="item" href="login.php">Logout</span>
 				</a>
 			</li>
 		</ul>
