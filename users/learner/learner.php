@@ -2,7 +2,6 @@
 <html>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
   * {
     margin: 0;
     padding: 0;
@@ -140,13 +139,27 @@
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
+<?php
+session_start();
+require_once '../../db/dbconnection.php';
+
+$learnerID = $_SESSION['userID'];
+
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultLearner = $mysqli->query($queryLearner);
+
+$obj = $resultLearner -> fetch_object();
+?>
+
 <body>
 
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <h3>Joseph Denton</h3>
+        <?php 
+        echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
+        ?>
         <p>Learner</p>
       </div>
       <ul>
@@ -155,7 +168,7 @@
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/attendanceLanding.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>

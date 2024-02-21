@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../db/dbconnection.php';
-
+session_start();
 $userEmail = $_POST['email'];
 $userPassword = $_POST['password'];
 
@@ -31,7 +31,14 @@ foreach ($tableColumnMapping as $table => $columns) {
             
             $loginSuccessful = true;
             $userRole = $table; // Keep track of which table (role) the user was found in
+
+            $queryFetch = "SELECT * FROM {$table} WHERE {$columns['emailColumn']} = '$userEmail' AND {$columns['passwordColumn']} = '$userPassword'";
+            $resultFetch = $mysqli->query($queryFetch);
+            $fetch = $resultFetch->fetch_object();
+            $userID = $fetch->UniqueLearnerNumber;
+            $_SESSION['userID'] = $userID;
             break;
+ 
         }
 
         $stmt->close();
@@ -64,7 +71,3 @@ if ($loginSuccessful) {
 }
 
 ?>
-
-
-
-i will do login query - imran nikhil
