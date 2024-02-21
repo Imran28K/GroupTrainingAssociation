@@ -6,7 +6,7 @@
     
     <title>Learner_Progress</title>
    
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../css/learnerprogress.css" />
   </head>
   <body>
     <h2 class="chart-heading">Learner Progress</h2>
