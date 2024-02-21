@@ -7,7 +7,13 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/navfoot.css">
+
 </head>
+
+<?php
+    session_start();
+    $_SESSION['userID'] = ""; 
+?>
 
 <body>
     <?php include '../include/navbar.php'; ?>
