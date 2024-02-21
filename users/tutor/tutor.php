@@ -147,7 +147,7 @@
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <h3>Joseph Denton</h3>
-        <p>Learner</p>
+        <p>Tutor</p>
       </div>
       <ul>
         <li><a href="#" class="active">
