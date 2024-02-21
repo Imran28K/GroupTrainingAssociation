@@ -29,10 +29,9 @@ $learner = $getLearners -> UniqueLearnerNumber;
 $queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
 
-if ($resultAttendanceCheck != NULL){
-    $getLearnerCheck = $resultAttendanceCheck -> fetch_object();
-    $learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
-}
+$getLearnerCheck = $resultAttendanceCheck -> fetch_object();
+$learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+
 else {
     $learnerCheck = "Empty";
 }
