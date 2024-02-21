@@ -12,7 +12,7 @@ if (!$mysqli) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
+//temporary, the id should be received from learner.php so any learners that is logged in it will take their specific learner id or number
 $uniqueLearnerNumber = '1000000000-DFY3';
 
 $sql = "SELECT ApprenticeshipName, Cohort FROM learner WHERE UniqueLearnerNumber = ?";
