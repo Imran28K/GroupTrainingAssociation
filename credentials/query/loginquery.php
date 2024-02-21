@@ -35,7 +35,19 @@ foreach ($tableColumnMapping as $table => $columns) {
             $queryFetch = "SELECT * FROM {$table} WHERE {$columns['emailColumn']} = '$userEmail' AND {$columns['passwordColumn']} = '$userPassword'";
             $resultFetch = $mysqli->query($queryFetch);
             $fetch = $resultFetch->fetch_object();
-            $userID = $fetch->UniqueLearnerNumber;
+            if($userRole == "learner") {
+                $userID = $fetch->UniqueLearnerNumber;
+            } 
+            elseif($userRole == "employer") {
+                $userID = $fetch->EmployerID;
+            } 
+            elseif($userRole == "tutor") {
+                $userID = $fetch->TutorID;
+            } 
+            
+            else {
+                $userID = $fetch->TutorID;
+            }
             $_SESSION['userID'] = $userID;
             break;
  
