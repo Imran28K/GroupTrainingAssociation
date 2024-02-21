@@ -13,21 +13,35 @@ else {
 
 require_once ("../db/dbconnection.php");
 
-$queryAttendance = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
-$resultAttendance = $mysqli->query($queryAttendance); 
+$querySessions = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
+$resultSessions = $mysqli->query($querySessions); 
 
-$getApprenticeship = $resultAttendance -> fetch_object();
+$getApprenticeship = $resultSessions -> fetch_object();
 $apprenticeship = $getApprenticeship -> apprenticeshipName;
 $apprenticeshipString = strval($apprenticeship);
 
 $queryAddLearners = "SELECT * FROM learner WHERE ApprenticeshipName = '$apprenticeshipString'"; 
 $resultAddLearners= $mysqli->query($queryAddLearners);
 
-$getLearners = $resultAddLearners -> fetch_object();
+while ($getLearners = $resultAddLearners -> fetch_object()){
 $learner = $getLearners -> UniqueLearnerNumber;
 
+$queryAttendanceCheck = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
+$resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
+
+$getLearnerCheck = $resultAttendanceCheck -> fetch_object();
+$learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+
+if ($learnerCheck != $learner){
 $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
 $resultAddLearners= $mysqli->query($queryAddLearners);
+
+$queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
+$resultAttendance = $mysqli->query($queryAttendance); 
+}
+}
+$queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
+$resultAttendance = $mysqli->query($queryAttendance); 
 ?>
 
 <head>
@@ -48,7 +62,7 @@ $resultAddLearners= $mysqli->query($queryAddLearners);
         <?php while ($obj = $resultAttendance -> fetch_object()){
         $learnerID = $obj -> UniqueLearnerNumber;
 
-        $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
+        $queryLearner = "SELECT * FROM learner LEFT JOIN attendance ON attendance.UniqueLearnerNumber = learner.UniqueLearnerNumber AND attendance.sessionID = '$sessionID' WHERE learner.UniqueLearnerNumber = '$learnerID'";    
         $resultLearner = $mysqli->query($queryLearner);
         $obj2 = $resultLearner -> fetch_object();
         if ($obj -> Present == "No"){
@@ -60,6 +74,7 @@ $resultAddLearners= $mysqli->query($queryAddLearners);
             <td> 
                 <form action='../credentials/query/register.php' name='attendance' method='post'>
                     <input type='hidden' id='learnerID' name='learnerID' value=$learnerID>
+                    <input type='hidden' id='SessionID' name='sessionID' value=$sessionID>
                     <input type='submit' value='Mark present'>
                 </form>
             </td>
@@ -74,6 +89,7 @@ $resultAddLearners= $mysqli->query($queryAddLearners);
             <td> 
                 <form action='../credentials/query/unregister.php' name='attendance' method='post'>
                     <input type='hidden' id='learnerID' name='learnerID' value=$learnerID>
+                    <input type='hidden' id='SessionID' name='sessionID' value=$sessionID>
                     <input type='submit' value='Mark not present'>
                 </form>
             </td>
