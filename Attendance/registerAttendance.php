@@ -32,10 +32,6 @@ $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
 $getLearnerCheck = $resultAttendanceCheck -> fetch_object();
 $learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
 
-else {
-    $learnerCheck = "Empty";
-}
-
 if ($learnerCheck != $learner){
 $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
 $resultAddLearners= $mysqli->query($queryAddLearners);

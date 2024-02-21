@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $querySession = "INSERT INTO registerSessions (SessionDate, TimeStart, TimeEnd, apprenticeshipName) VALUES ('$date', '$timeStartString', '$timeEndString', '$apprenticeship')";
     $resultSession = $mysqli->query($querySession);
-    header('location:http://localhost/GroupTrainingAssociation/pages/registerChoice.php');
+    header('location:http://localhost/GroupTrainingAssociation/attendance/registerChoice.php');
 }
 
 ?>

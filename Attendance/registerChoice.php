@@ -25,6 +25,7 @@ $resultRegisterList = $mysqli->query($queryRegisterList);
             <td>Date</td>
             <td>Time Start</td>
             <td>Time End</td>
+            <td>Apprenticeship</td>
             <td>Select</td>
         </tr>
         <?php while ($obj = $resultRegisterList -> fetch_object()){
@@ -33,6 +34,7 @@ $resultRegisterList = $mysqli->query($queryRegisterList);
                         <td>{$obj -> SessionDate}</td>
                         <td>{$obj -> TimeStart}</td>
                         <td>{$obj -> TimeEnd}</td>
+                        <td>{$obj -> apprenticeshipName}</td>
                         <td>
                     <form action='registerAttendance.php' name='sessionID' method='post'>
                     <input type='hidden' id='sessionID' name='sessionID' value={$obj -> SessionID}>

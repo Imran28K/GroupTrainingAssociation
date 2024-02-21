@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $queryAttended= "UPDATE attendance SET present = 'No' WHERE UniqueLearnerNumber = '$learnerIDString' AND sessionID = '$sessionIDString'";
     $resultAttended = $mysqli->query($queryAttended);
-    header('location:http://localhost/GroupTrainingAssociation/pages/registerAttendance.php');
+    header('location:http://localhost/GroupTrainingAssociation/attendance/registerAttendance.php');
 }
 
 ?>
