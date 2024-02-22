@@ -163,7 +163,7 @@ $obj = $resultLearner -> fetch_object();
         <p>Learner</p>
       </div>
       <ul>
-        <li><a href="#" class="active">
+        <li><a href="learner.php" class="active">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
@@ -183,7 +183,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../../users/sharedfiles/learnerinfo/learnerinfo.php">
+        <li><a href="../../users/learner/learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">User Information</span>
           </a>

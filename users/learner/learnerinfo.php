@@ -141,7 +141,7 @@
 
 <?php
 session_start();
-require_once '../../../db/dbconnection.php';
+require_once '../../db/dbconnection.php';
 
 $learnerID = $_SESSION['userID'];
 
@@ -178,7 +178,7 @@ mysqli_close($mysqli);
         ?>
       </div>
       <ul>
-        <li><a href="../users/learner/learner.php">
+        <li><a href="learner.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
@@ -198,7 +198,7 @@ mysqli_close($mysqli);
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../learnerinfo/learnerinfo.php" class="active">
+        <li><a href="learnerinfo.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
