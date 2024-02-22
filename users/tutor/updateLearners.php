@@ -14,7 +14,7 @@ $resultSessions = $mysqli->query($querySessions);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View learners tutor</title>
+    <title>Update learners</title>
     <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
@@ -33,9 +33,9 @@ $resultSessions = $mysqli->query($querySessions);
                 {$obj -> ApprenticeshipName}
             </td>
             <td>
-                <form action='viewLearnerDetails.php' name='uniqueLearnerNumber' method='post'>
+                <form action='../../learnerprogress/learnerprogress.php' name='uniqueLearnerNumber' method='post'>
                 <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='View progress'>
+                <input type='submit' value='Update this learner's progress'>
             </form>
             </td>
         </tr>";
