@@ -11,9 +11,9 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$learnerID = $_SESSION['userID'];
+$userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$learnerID'"; 
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
 $details = $resultLearner -> fetch_object();
@@ -73,8 +73,8 @@ $details = $resultLearner -> fetch_object();
       </div class="container">
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='../../attendance/registerChoice.php'> Register Attendance </a> </li>
-        <li> <a href='../../attendance/createSession.php'> Create a new session </a> </li>
+        <li> <a href='registerChoice.php'> Register Attendance </a> </li>
+        <li> <a href='createSession.php'> Create a new session </a> </li>
       </ul>
 
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>

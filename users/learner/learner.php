@@ -143,9 +143,9 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$learnerID = $_SESSION['userID'];
+$userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner -> fetch_object();

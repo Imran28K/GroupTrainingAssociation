@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <title>Admin home</title>
+  <title>view learner details</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
@@ -13,12 +14,18 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$userID = $_SESSION['userID'];
+$tutorID = $_SESSION['userID'];
 
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultDetails = $mysqli->query($queryDetails);
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$tutorID'"; 
+$resultDetails= $mysqli->query($queryDetails);
 
 $details = $resultDetails -> fetch_object();
+
+$learnerID = $_POST['uniqueLearnerNumber'];
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultLearner= $mysqli->query($queryLearner);
+
+$learnerDetails = $resultLearner -> fetch_object();
 ?>
 
 <body>
@@ -33,7 +40,7 @@ $details = $resultDetails -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="admin.php" class="active">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
@@ -43,7 +50,7 @@ $details = $resultDetails -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="viewLearnersAdmin.php">
+        <li><a href="viewLearnersAdmin.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View learners</span>
           </a>
@@ -77,7 +84,8 @@ $details = $resultDetails -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
+        <?php echo"<h2>{$learnerDetails -> LearnerFirstName} {$learnerDetails -> LearnerLastName}'s progress</h2>"?>
+        <h3 class="chart-heading">Learner Progress</h3>
         <div class="programming-stats">
           <div class="chart-container">
             <canvas class="my-chart"></canvas>

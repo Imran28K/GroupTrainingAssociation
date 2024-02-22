@@ -54,10 +54,10 @@ foreach ($tableColumnMapping as $table => $columns) {
             $resultCheck = $mysqli->query($queryCheck);
 
             if ($resultCheck->num_rows != 0){
-                $userRole = "Admin";
+                $userRole = "admin";
             }
+            $_SESSION['userRole'] = $userRole;
             break;
- 
         }
 
         $stmt->close();

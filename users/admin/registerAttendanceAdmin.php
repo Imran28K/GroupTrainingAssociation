@@ -11,7 +11,7 @@ else {
     $sessionID = $_SESSION['sessionID'];
 }
 
-require_once ("../db/dbconnection.php");
+require_once ("../../db/dbconnection.php");
 
 $querySessions = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
 $resultSessions = $mysqli->query($querySessions); 
@@ -40,9 +40,9 @@ $resultAddLearners= $mysqli->query($queryAddLearners);
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendance = $mysqli->query($queryAttendance); 
 
-$learnerID = $_SESSION['userID'];
+$userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$learnerID'"; 
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
 $details = $resultLearner -> fetch_object();
@@ -52,7 +52,7 @@ $details = $resultLearner -> fetch_object();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance Page</title>
-    <link rel="stylesheet" type="text/css" href="../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -68,33 +68,38 @@ $details = $resultLearner -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/tutor.php">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/attendanceLanding.php" class="active">
+        <li><a href="attendanceLandingAdmin.php" class="active">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/viewLearnersTutor.php">
+        <li><a href="viewLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/updateLearners.php">
+        <li><a href="updateLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="adminConsole.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
+          </a>
+        </li>
+		    <li><a href="#">
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
@@ -128,7 +133,7 @@ $details = $resultLearner -> fetch_object();
                 {$obj -> Present}
             </td>
             <td> 
-                <form action='../credentials/query/register.php' name='attendance' method='post'>
+                <form action='../../credentials/query/register.php' name='attendance' method='post'>
                     <input type='hidden' id='learnerID' name='learnerID' value=$learnerID>
                     <input type='hidden' id='SessionID' name='sessionID' value=$sessionID>
                     <input type='submit' value='Mark present'>
@@ -143,7 +148,7 @@ $details = $resultLearner -> fetch_object();
                 {$obj -> Present}
             </td>
             <td> 
-                <form action='../credentials/query/unregister.php' name='attendance' method='post'>
+                <form action='../../credentials/query/unregister.php' name='attendance' method='post'>
                     <input type='hidden' id='learnerID' name='learnerID' value=$learnerID>
                     <input type='hidden' id='SessionID' name='sessionID' value=$sessionID>
                     <input type='submit' value='Mark not present'>
@@ -155,7 +160,7 @@ $details = $resultLearner -> fetch_object();
         </table>
 
     <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='registerChoice.php'> Back to register choice </a> </li>
+        <li> <a href='registerChoiceAdmin.php'> Back to register choice </a> </li>
     </ul>
     </div>
 

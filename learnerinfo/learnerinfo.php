@@ -13,13 +13,13 @@
 
 session_start();
 require_once '../db/dbconnection.php';
-$learnerID =  $_SESSION['userID'];
+$userID =  $_SESSION['userID'];
 
 $sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName FROM learner WHERE UniqueLearnerNumber = ? ";
 
 $stmt = mysqli_prepare($mysqli, $sql);
 
-mysqli_stmt_bind_param($stmt, "s", $learnerID);
+mysqli_stmt_bind_param($stmt, "s", $userID);
 
 mysqli_stmt_execute($stmt);
 
@@ -84,7 +84,7 @@ mysqli_close($mysqli);
                         <tr>
                             <td>ULN</td>
                             <td>:</td>
-                            <td><?php echo $learnerID; ?></td>
+                            <td><?php echo $userID; ?></td>
                         </tr>
                         <tr>
                             <td>Employer</td>
