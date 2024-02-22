@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
   * {
@@ -130,18 +129,19 @@
     width: 100%;
   }
 </style>
+<html>
 
 <head>
   <meta charset="utf-8">
-  <title>Side Navigation Bar</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
+  <title>Learner Info</title>
+  
+  <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <?php
 session_start();
-require_once '../../db/dbconnection.php';
+require_once '../db/dbconnection.php';
 
 $learnerID = $_SESSION['userID'];
 
@@ -149,6 +149,21 @@ $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner -> fetch_object();
+
+$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
+
+$stmt = mysqli_prepare($mysqli, $sql);
+mysqli_stmt_bind_param($stmt, "s", $learnerID);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $AppreticeshipName, $EmployerID);
+if (mysqli_stmt_fetch($stmt)) {
+    
+} else {
+    echo "0 results";
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($mysqli);
 ?>
 
 <body>
@@ -159,11 +174,11 @@ $obj = $resultLearner -> fetch_object();
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
+        echo"<p>Learner</p>";
         ?>
-        <p>Learner</p>
       </div>
       <ul>
-        <li><a href="#" class="active">
+        <li><a href="../users/learner/learner.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
@@ -173,9 +188,9 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="C:\xampp\htdocs\GroupTrainingAssociation\users\sharedfiles\viewemployer\view-employer.php">
+        <li><a href="#">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View Employer</span>
+            <span class="item">Employment Status</span>
           </a>
         </li>
         <li><a href="#">
@@ -183,8 +198,8 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../../learnerinfo/learnerinfo.php">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+        <li><a href="../learnerinfo/learnerinfo.php" class="active">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
         </li>
@@ -202,20 +217,61 @@ $obj = $resultLearner -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
+      <div class="main">
+       
+       <div class="card">
+           <div class="card-body">
+              
+               <table>
+                   <tbody>
+                       <tr>
+                           <td>Name</td>
+                           <td>:</td>
+                           <td><?php echo $LearnerFirstName . " " . $LearnerLastName; ?> </td>
+                       </tr>
+                       <tr>
+                           <td>ULN</td>
+                           <td>:</td>
+                           <td><?php echo $learnerID; ?></td>
+                       </tr>
+                       <tr>
+                           <td>Employer</td>
+                           <td>:</td>
+                           <td>Employer 10</td>
+                       </tr>
+                       <tr>
+                           <td>Email</td>
+                           <td>:</td>
+                           <td><?php echo $LearnerEmail; ?></td>
+                       </tr>
+                       <tr>
+                           <td>Cohort</td>
+                           <td>:</td>
+                           <td><?php echo  $Cohort; ?></td>
+                       </tr>
+                       <tr>
+                           <td>Apprenticeship</td>
+                           <td>:</td>
+                           <td><?php echo $AppreticeshipName; ?></td>
+                       </tr>
+                       <tr>
+                           <td>Start Date</td>
+                           <td>:</td>
+                           <td>01/07/2022</td>
+                       </tr>
+                       <tr>
+                           <td>End Date</td>
+                           <td>:</td>
+                           <td>27/12/2023</td>
+                       </tr>
+                       
+                   </tbody>
+               </table>
+           </div>
+       </div>
 
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
-      </div>
+       
+   </div>
     </div>
   </div>
 
