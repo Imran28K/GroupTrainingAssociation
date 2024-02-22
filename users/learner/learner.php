@@ -183,16 +183,6 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-database"></i></span>
-            <span class="item">Development</span>
-          </a>
-        </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-chart-line"></i></span>
-            <span class="item">Reports</span>
-          </a>
-        </li>
         <li><a href="../../learnerinfo/learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">User Information</span>
