@@ -94,17 +94,17 @@ mysqli_close($mysqli);
                         <tr>
                             <td>Email</td>
                             <td>:</td>
-                            <td>dave34@gmail.com</td>
+                            <td><?php echo $LearnerEmail; ?></td>
                         </tr>
                         <tr>
                             <td>Cohort</td>
                             <td>:</td>
-                            <td>Sheffield, UK</td>
+                            <td><?php echo  $Cohort; ?></td>
                         </tr>
                         <tr>
                             <td>Apprenticeship</td>
                             <td>:</td>
-                            <td>Light Vehicle L3</td>
+                            <td><?php echo $AppreticeshipName; ?></td>
                         </tr>
                         <tr>
                             <td>Start Date</td>
