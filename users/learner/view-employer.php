@@ -16,16 +16,9 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $EmployerID = $_SESSION['userID'];
-
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
-$resultLearner = $mysqli->query($queryLearner);
-
-$obj = $resultLearner -> fetch_object();
-
-$sql = "SELECT EmployerFirstName, EmployerLastName, EmployerEmail FROM employer WHERE UniqueEmployerNumber = ? ";
-
+$sql = "SELECT EmployerFirstName, EmployerLastName, EmployerEmail FROM employer WHERE EmployerID = ? ";
 $stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $learnerID);
+mysqli_stmt_bind_param($stmt, "s", $EmployerID);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
 if (mysqli_stmt_fetch($stmt)) {
@@ -45,8 +38,8 @@ mysqli_close($mysqli);
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
-        echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
-        echo"<p>Learner</p>";
+        echo"<h3>{$EmployerFirstName} {$EmployerLastName}</h3>";
+        echo"<p>Employer</p>";
         ?>
       </div>
       <ul>
@@ -60,9 +53,9 @@ mysqli_close($mysqli);
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Employment Status</span>
+            <span class="item">Your Employer</span>
           </a>
         </li>
         <li><a href="#">
@@ -97,44 +90,24 @@ mysqli_close($mysqli);
                <table>
                    <tbody>
                        <tr>
-                           <td>Name</td>
+                           <td>Employer Name</td>
                            <td>:</td>
-                           <td><?php echo $LearnerFirstName . " " . $LearnerLastName; ?> </td>
-                       </tr>
-                       <tr>
-                           <td>ULN</td>
-                           <td>:</td>
-                           <td><?php echo $learnerID; ?></td>
-                       </tr>
-                       <tr>
-                           <td>Employer</td>
-                           <td>:</td>
-                           <td>Employer 10</td>
+                           <td><?php echo $EmployerFirstName . " " . $EmployerLastName; ?> </td>
                        </tr>
                        <tr>
                            <td>Email</td>
                            <td>:</td>
-                           <td><?php echo $LearnerEmail; ?></td>
+                           <td><?php echo $EmployerEmail; ?></td>
                        </tr>
                        <tr>
-                           <td>Cohort</td>
+                           <td>Employer Details</td>
                            <td>:</td>
-                           <td><?php echo  $Cohort; ?></td>
+                           <td>GTA Doncaster</td>
                        </tr>
                        <tr>
-                           <td>Apprenticeship</td>
+                           <td>Phone#</td>
                            <td>:</td>
-                           <td><?php echo $AppreticeshipName; ?></td>
-                       </tr>
-                       <tr>
-                           <td>Start Date</td>
-                           <td>:</td>
-                           <td>01/07/2022</td>
-                       </tr>
-                       <tr>
-                           <td>End Date</td>
-                           <td>:</td>
-                           <td>27/12/2023</td>
+                           <td>07481088745</td>
                        </tr>
                        
                    </tbody>

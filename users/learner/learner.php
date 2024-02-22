@@ -173,7 +173,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="C:\xampp\htdocs\GroupTrainingAssociation\users\sharedfiles\viewemployer\view-employer.php">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
