@@ -198,7 +198,7 @@ mysqli_close($mysqli);
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../learnerinfo/learnerinfotest.php" class="active">
+        <li><a href="../learnerinfo/learnerinfo.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
