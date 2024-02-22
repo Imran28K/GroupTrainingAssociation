@@ -112,7 +112,7 @@ mysqli_close($mysqli);
           <div class="card">
             <div class="card-body">
 
-              <table>
+              <table class="info-table">
                 <tbody>
                   <tr>
                     <td>Name</td>
