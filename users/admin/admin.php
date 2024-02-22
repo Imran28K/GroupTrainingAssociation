@@ -157,9 +157,9 @@ body.active .wrapper .section{
 				<span class="item">View Attendance</span>
 				</a>
 			</li>
-			<li><a href="#">
+			<li><a href="../tutor/viewLearnersTutor">
 				<span class="icon"><i class="fas fa-user-friends"></i></span>
-				<span class="item">Employment Status</span>
+				<span class="item">View Learners</span>
 				</a>
 			</li>
 			<li><a href="#">

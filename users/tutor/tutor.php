@@ -169,29 +169,14 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="attendanceLanding.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="viewLearnersTutor.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Employment Status</span>
-          </a>
-        </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-            <span class="item">Module Information</span>
-          </a>
-        </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-database"></i></span>
-            <span class="item">Development</span>
-          </a>
-        </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-chart-line"></i></span>
-            <span class="item">Reports</span>
+            <span class="item">View learners</span>
           </a>
         </li>
         <li><a href="#">
