@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-session_start();
-$_SESSION['sessionID'] = "";
-$sessionID = $_SESSION['sessionID'];
-require_once ("../db/dbconnection.php");
-$queryRegisterList = "SELECT * FROM registersessions";
-$resultRegisterList = $mysqli->query($queryRegisterList); 
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
-    <link rel="stylesheet" href="../css/attendance.css">
-    <link rel="stylesheet" href="../css/navfoot.css">
-    <link rel="stylesheet" type="text/css" href="../css/sidebarStyling.css">
+    <title>Attendance Page</title>
+    <link rel="stylesheet" href="../../css/navfoot.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <?php
-$learnerID = $_SESSION['userID'];
+session_start();
+require_once '../../db/dbconnection.php';
 
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$learnerID'"; 
+$userID = $_SESSION['userID'];
+
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
 $details = $resultLearner -> fetch_object();
@@ -79,37 +72,34 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-      </div>
+      </div class="container">
 
-    <div class="attendance-container">
-        <h1>Attendance</h1>
-        <table>
-        <tr>
-            <td>Date</td>
-            <td>Time Start</td>
-            <td>Time End</td>
-            <td>Apprenticeship</td>
-            <td>Select</td>
-        </tr>
-        <?php while ($obj = $resultRegisterList -> fetch_object()){
-                    echo"
-                    <tr>
-                        <td>{$obj -> SessionDate}</td>
-                        <td>{$obj -> TimeStart}</td>
-                        <td>{$obj -> TimeEnd}</td>
-                        <td>{$obj -> apprenticeshipName}</td>
-                        <td>
-                    <form action='registerAttendance.php' name='sessionID' method='post'>
-                    <input type='hidden' id='sessionID' name='sessionID' value={$obj -> SessionID}>
-                    <input type='submit' value='Select Date'>
-                    </form>
-                    </td></tr>";
-        }?>
-        </table>
+      <div class="attendance-container">
+        <h1>Create session</h1>
+        <form action="../../credentials/query/createSession.php" method="post" class="login-form">
+            <div class="input-group">
+                <label for="date">date </label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="input-group">
+                <label for="timeStart">session start </label>
+                <input type="time" id="timeStart" name="timeStart" required>
+            </div>
+            <div class="input-group">
+                <label for="timeEnd">session end </label>
+                <input type="time" id="timeEnd" name="timeEnd" required>
+            </div>
+            <div class="input-group">
+                <label for="apprenticeship">apprenticeship session group</label>
+                <input type="apprenticeship" id="apprenticeship" name="apprenticeship" required>
+            </div>
+            <button type="submit" name="submit" class="attendance-submit">Create Session</button>
+        </form>
     <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='../users/tutor/attendanceLanding.php'> Back attendance </a> </li>
+        <li> <a href='attendanceLanding.php'> Back to attendance </a> </li>
     </ul>
     </div>
+  </div>
 
   <script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");

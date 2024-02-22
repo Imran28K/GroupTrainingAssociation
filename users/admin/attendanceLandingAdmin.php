@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php 
-session_start();
-require_once ("../../db/dbconnection.php");
-$tutorID = $_SESSION['userID'];
-
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
-$resultSessions = $mysqli->query($querySessions); 
-
-?>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update learners</title>
-    <link rel="stylesheet" href="../css/attendance.css">
-    <link rel="stylesheet" href="../css/navfoot.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>attendance landing page</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-</head>
+  </head>
 
 <?php
+session_start();
+require_once '../../db/dbconnection.php';
+
 $userID = $_SESSION['userID'];
 
 $queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
-$obj = $resultLearner -> fetch_object();
+$details = $resultLearner -> fetch_object();
 ?>
 
   <body>
@@ -37,43 +26,49 @@ $obj = $resultLearner -> fetch_object();
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
-        echo"<h3>{$obj->TutorFirstName} {$obj->TutorLastName}</h3>";
-        echo"<p>{$obj->Role}</p>";
+        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
         ?>
       </div>
       <ul>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/tutor.php">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="attendanceLanding.php">
+        <li><a href="attendanceLandingAdmin.php" class="active">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="viewLearnersTutor.php">
+        <li><a href="viewLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="updateLearners.php" class="active">
+        <li><a href="updateLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="adminConsole.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
+          </a>
+        </li>
+		    <li><a href="#">
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
       </ul>
     </div>
+
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
@@ -81,34 +76,15 @@ $obj = $resultLearner -> fetch_object();
         </div>
         
       </div class="container">
-      <div class="attendance-container">
-        <h1>Update Learners</h1>
-        <table>
-        <tr>
-            <td>Learner name</td>
-            <td>Apprenticeship</td>
-        </tr>
-        <?php while ($obj = $resultSessions -> fetch_object()){
-        $learnerID = $obj -> UniqueLearnerNumber;
-        echo"<tr>
-            <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
-            <td>
-                {$obj -> ApprenticeshipName}
-            </td>
-            <td>
-                <form action='updateLearnerDetails.php' name='uniqueLearnerNumber' method='post'>
-                <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='Update this learner's progress'>
-            </form>
-            </td>
-        </tr>";
-        }        ?>
-        </table>
+      <p>Choose whether you want to go to the register or to create a new session</p>
+      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='registerChoiceAdmin.php'> Register Attendance </a> </li>
+        <li> <a href='createSessionAdmin.php'> Create a new session </a> </li>
+      </ul>
 
-    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='tutor.php'> Back to tutor page </a> </li>
-    </ul>
-    </div>
+      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='admin.php'> To profile details </a> </li>
+      </ul>
     </div>
   </div>
 
@@ -120,5 +96,4 @@ $obj = $resultLearner -> fetch_object();
   </script>
 
 </body>
-
 </html>
