@@ -49,6 +49,13 @@ foreach ($tableColumnMapping as $table => $columns) {
                 $userID = $fetch->TutorID;
             }
             $_SESSION['userID'] = $userID;
+
+            $queryCheck = "SELECT * FROM admin WHERE TutorID = '$userID'";
+            $resultCheck = $mysqli->query($queryCheck);
+
+            if ($resultCheck->num_rows != 0){
+                $userRole = "Admin";
+            }
             break;
  
         }
