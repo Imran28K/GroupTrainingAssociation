@@ -135,7 +135,7 @@
   <meta charset="utf-8">
   <title>Learner Info</title>
   
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../css/learnerinfo.css">
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
