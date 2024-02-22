@@ -141,7 +141,7 @@
 
 <?php
 session_start();
-require_once '../db/dbconnection.php';
+require_once '../../../db/dbconnection.php';
 
 $learnerID = $_SESSION['userID'];
 

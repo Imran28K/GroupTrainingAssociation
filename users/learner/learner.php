@@ -183,7 +183,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../../learnerinfo/learnerinfo.php">
+        <li><a href="../../users/sharedfiles/learnerinfo/learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">User Information</span>
           </a>
