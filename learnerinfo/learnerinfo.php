@@ -84,7 +84,7 @@ mysqli_close($mysqli);
                         <tr>
                             <td>ULN</td>
                             <td>:</td>
-                            <td>1000000001-LVMSL3</td>
+                            <td><?php echo $learnerID; ?></td>
                         </tr>
                         <tr>
                             <td>Employer</td>
