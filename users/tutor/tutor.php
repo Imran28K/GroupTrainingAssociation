@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Side Navigation Bar</title>
+  <title>Tutor Home</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
-  <link rel="stylesheet" type="text/css" href="../../css/navbarStyling.css">
+  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -14,12 +14,12 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$learnerID = $_SESSION['userID'];
+$userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$learnerID'"; 
-$resultLearner = $mysqli->query($queryLearner);
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultDetails = $mysqli->query($queryDetails);
 
-$obj = $resultLearner -> fetch_object();
+$details = $resultDetails -> fetch_object();
 ?>
 
 <body>
@@ -29,14 +29,14 @@ $obj = $resultLearner -> fetch_object();
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
-        echo"<h3>{$obj->TutorFirstName} {$obj->TutorLastName}</h3>";
-        echo"<p>{$obj->Role}</p>";
+        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
         ?>
       </div>
       <ul>
         <li><a href="#" class="active">
             <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">View Progress</span>
+            <span class="item">Profile Details</span>
           </a>
         </li>
         <li><a href="attendanceLanding.php">
