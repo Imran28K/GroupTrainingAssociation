@@ -8,6 +8,37 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
+
+<?php
+
+session_start();
+require_once '../db/dbconnection.php';
+$learnerID =  $_SESSION['userID'];
+
+$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName FROM learner WHERE UniqueLearnerNumber = ? ";
+
+$stmt = mysqli_prepare($mysqli, $sql);
+
+mysqli_stmt_bind_param($stmt, "s", $learnerID);
+
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $AppreticeshipName);
+
+
+if (mysqli_stmt_fetch($stmt)) {
+    
+} else {
+    echo "0 results";
+}
+
+mysqli_stmt_close($stmt);
+
+mysqli_close($mysqli);
+
+?>
+
+
 <body>
     
     <div class="navbar-top">
@@ -48,12 +79,12 @@
                         <tr>
                             <td>Name</td>
                             <td>:</td>
-                            <td>Dave</td>
+                            <td><?php echo $LearnerFirstName ." " . $LearnerLastName; ?> </td>
                         </tr>
                         <tr>
                             <td>ULN</td>
                             <td>:</td>
-                            <td>1000000001-LVMSL3</td>
+                            <td><?php echo $learnerID; ?></td>
                         </tr>
                         <tr>
                             <td>Employer</td>
@@ -63,17 +94,17 @@
                         <tr>
                             <td>Email</td>
                             <td>:</td>
-                            <td>dave34@gmail.com</td>
+                            <td><?php echo $LearnerEmail; ?></td>
                         </tr>
                         <tr>
                             <td>Cohort</td>
                             <td>:</td>
-                            <td>Sheffield, UK</td>
+                            <td><?php echo  $Cohort; ?></td>
                         </tr>
                         <tr>
                             <td>Apprenticeship</td>
                             <td>:</td>
-                            <td>Light Vehicle L3</td>
+                            <td><?php echo $AppreticeshipName; ?></td>
                         </tr>
                         <tr>
                             <td>Start Date</td>

@@ -193,9 +193,9 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Reports</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="../../learnerinfo/learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
-            <span class="item">Settings</span>
+            <span class="item">User Information</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
