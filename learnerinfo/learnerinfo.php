@@ -8,6 +8,37 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
+
+<?php
+
+session_start();
+require_once '../db/dbconnection.php';
+$learnerID =  $_SESSION['userID'];
+
+$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName FROM learner WHERE UniqueLearnerNumber = ? ";
+
+$stmt = mysqli_prepare($mysqli, $sql);
+
+mysqli_stmt_bind_param($stmt, "s", $learnerID);
+
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $AppreticeshipName);
+
+
+if (mysqli_stmt_fetch($stmt)) {
+    
+} else {
+    echo "0 results";
+}
+
+mysqli_stmt_close($stmt);
+
+mysqli_close($mysqli);
+
+?>
+
+
 <body>
     
     <div class="navbar-top">
@@ -48,7 +79,7 @@
                         <tr>
                             <td>Name</td>
                             <td>:</td>
-                            <td>Dave</td>
+                            <td><?php echo $LearnerFirstName ." " . $LearnerLastName; ?> </td>
                         </tr>
                         <tr>
                             <td>ULN</td>
