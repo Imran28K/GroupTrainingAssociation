@@ -38,6 +38,7 @@ $resultSessions = $mysqli->query($querySessions);
                 <input type='submit' value='View progress'>
             </form>
             </td>
+            
         </tr>";
         }        ?>
         </table>
