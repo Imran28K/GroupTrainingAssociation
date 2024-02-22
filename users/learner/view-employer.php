@@ -15,7 +15,8 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$EmployerID = $_SESSION['userID'];
+$LearnerID = $_SESSION['UserID'];
+$
 $sql = "SELECT EmployerFirstName, EmployerLastName, EmployerEmail FROM employer WHERE EmployerID = ? ";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "s", $EmployerID);
