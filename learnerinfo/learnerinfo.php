@@ -10,17 +10,21 @@
 </head>
 
 <?php
-//fetching the stuff from database according to the user id that is logged in at the moment
+
 session_start();
 require_once '../db/dbconnection.php';
 $learnerID =  $_SESSION['userID'];
 
 $sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName FROM learner WHERE UniqueLearnerNumber = ? ";
+
 $stmt = mysqli_prepare($mysqli, $sql);
 
 mysqli_stmt_bind_param($stmt, "s", $learnerID);
+
 mysqli_stmt_execute($stmt);
+
 mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $AppreticeshipName);
+
 
 if (mysqli_stmt_fetch($stmt)) {
     
@@ -29,9 +33,11 @@ if (mysqli_stmt_fetch($stmt)) {
 }
 
 mysqli_stmt_close($stmt);
+
 mysqli_close($mysqli);
 
 ?>
+
 
 <body>
     
@@ -78,7 +84,7 @@ mysqli_close($mysqli);
                         <tr>
                             <td>ULN</td>
                             <td>:</td>
-                            <td>1000000001-LVMSL3</td>
+                            <td><?php echo $learnerID; ?></td>
                         </tr>
                         <tr>
                             <td>Employer</td>
