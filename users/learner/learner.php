@@ -214,7 +214,7 @@ $obj = $resultLearner -> fetch_object();
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+        <script src="../sharedfiles/learnerprogress/piechart.js"></script>
       </div>
     </div>
   </div>
