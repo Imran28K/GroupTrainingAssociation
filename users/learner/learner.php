@@ -163,7 +163,7 @@ $obj = $resultLearner -> fetch_object();
         <p>Learner</p>
       </div>
       <ul>
-        <li><a href="#" class="active">
+        <li><a href="learner.php" class="active">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
@@ -173,9 +173,9 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="C:\xampp\htdocs\GroupTrainingAssociation\users\sharedfiles\viewemployer\view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Employment Status</span>
+            <span class="item">View Employer</span>
           </a>
         </li>
         <li><a href="#">
@@ -183,17 +183,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-database"></i></span>
-            <span class="item">Development</span>
-          </a>
-        </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-chart-line"></i></span>
-            <span class="item">Reports</span>
-          </a>
-        </li>
-        <li><a href="../../learnerinfo/learnerinfo.php">
+        <li><a href="../../users/learner/learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">User Information</span>
           </a>
@@ -224,7 +214,7 @@ $obj = $resultLearner -> fetch_object();
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+        <script src="../sharedfiles/learnerprogress/main.js"></script>
       </div>
     </div>
   </div>
