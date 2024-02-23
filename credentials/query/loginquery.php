@@ -62,15 +62,7 @@ foreach ($tableColumnMapping as $table => $columns) {
                 $loginSuccessful = false;
             }
 
-            $_SESSION['userID'] = $userID;
-
-            $queryCheck = "SELECT * FROM tutor WHERE Role = 'Admin'";
-            $resultCheck = $mysqli->query($queryCheck);
-
-            if ($resultCheck->num_rows != 0){
-                $userRole = "admin";
-            }
-            $_SESSION['userRole'] = $userRole;
+            $_SESSION['userID'] = $userId;
             break;
         }
 
@@ -86,7 +78,7 @@ if ($loginSuccessful) {
         case 'learner':
             header('location:http://localhost/GroupTrainingAssociation/users/learner/learner.php');
             break;
-        case 'employer':
+        case 'Employer':
             header('location:http://localhost/GroupTrainingAssociation/users/employer/employer.php');
             break;
         case 'Tutor':
