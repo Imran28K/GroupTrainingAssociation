@@ -4,8 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Learner Info</title>
-
-  <link rel="stylesheet" href="../../css/learnerinfo.css">
+    <link rel="stylesheet" href="../../css/learnerinfo.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -109,10 +108,17 @@ mysqli_close($mysqli);
       <div class="container">
         <div class="main">
 
-          <div class="card">
-            <div class="card-body">
+            <div class="card">
 
-              <table class="info-table">
+          <?php if(isset($_GET['msg'])) { ?>
+                        <div class="alert alert-success alert-dismissible mt-4 mb-2 fade show" role="alert" style="background-color:#8d599f;  margin-right:15px;margin-left:15px;">
+                            <strong class=px-2 style="color:black; font-weight:Bold; margin-left:180px;">Success :</strong> <?php echo $_GET['msg']; ?>
+                            
+                        </div>
+                    <?php } ?>
+
+            <div class="card-body">
+                      <table class="info-table">
                 <tbody>
                   <tr>
                     <td>Name</td>
