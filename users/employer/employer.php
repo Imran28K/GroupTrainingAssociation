@@ -63,7 +63,10 @@ $details = $resultDetails -> fetch_object();
       </div>
       <div class="container">
         <h2>Your details</h2>
-        <p>This is where the details would go</p>
+        <ul>
+          <li>Your name is: <?php echo"{$details->EmployerFirstName} {$details->EmployerLastName}"; ?></li>
+          <li>Your email is: <?php echo"{$details->EmployerEmail}"; ?></li>
+        </ul>
       </div>
     </div>
   </div>
