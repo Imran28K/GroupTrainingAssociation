@@ -44,7 +44,7 @@ foreach ($tableColumnMapping as $table => $columns) {
             $loginSuccessful = true;
             $fetch = $result->fetch_object();
 
-            // Use the correct ID column based on the table
+            
             $userId = $fetch->{$columns['idColumn']};
 
             // If the table has a 'roleColumn', use it to determine the user's role
@@ -54,22 +54,7 @@ foreach ($tableColumnMapping as $table => $columns) {
                 $userRole = $table; // For tables without a role column, use the table name as the role
             }
 
-            $activeStatus = $fetch->Active;
-            if ($activeStatus == "Active"){
-                $loginSuccessful = true;
-            }
-            else if ($activeStatus == "Inactive"){
-                $loginSuccessful = false;
-            }
-
-            $_SESSION['userID'] = $userID;
-
-            $queryCheck = "SELECT * FROM tutor WHERE Role = 'Admin'";
-            $resultCheck = $mysqli->query($queryCheck);
-
-            if ($resultCheck->num_rows != 0){
-                $userRole = "admin";
-            }
+            $_SESSION['userID'] = $userId;
             $_SESSION['userRole'] = $userRole;
             break;
         }
@@ -105,5 +90,6 @@ if ($loginSuccessful) {
 }
 
 ?>
+
 
 
