@@ -16,7 +16,7 @@
 ?>
 
 <body>
-    <?php include '../include/navbar.php'; ?>
+    
     <div class="login-container">
         <h1>Sign In</h1>
         <form action="query/loginquery.php" method="post" class="login-form">
