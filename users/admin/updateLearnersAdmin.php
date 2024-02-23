@@ -15,7 +15,6 @@ $resultSessions = $mysqli->query($querySessions);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update learners</title>
-    <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>

@@ -2,6 +2,7 @@
 
 require_once '../../db/dbconnection.php';
 session_start();
+$_SESSION['userRole'] = "";
 $userEmail = $_POST['email'];
 $userPassword = $_POST['password'];
 
@@ -86,8 +87,11 @@ if ($loginSuccessful) {
         header('location:http://localhost/GroupTrainingAssociation/users/tutor/tutor.php');
     } 
     
-    else {
+    elseif($userRole == "admin") {
         header('location:http://localhost/GroupTrainingAssociation/users/admin/admin.php');
+    }
+    else{
+        echo "Login failed.";
     }
       
  

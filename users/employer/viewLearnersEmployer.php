@@ -15,7 +15,6 @@ $resultSessions = $mysqli->query($querySessions);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View learners employer</title>
-    <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
     <div class="attendance-container">

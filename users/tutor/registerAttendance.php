@@ -89,12 +89,12 @@ $details = $resultLearner -> fetch_object();
           </a>
         </li>
         <li><a href="#">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
