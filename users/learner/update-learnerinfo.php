@@ -26,8 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'], $_POST['learn
     } else {
         $_SESSION['error_message'] = 'Invalid email format.';
     }
-    mysqli_close($mysqli);
-    header("Location: learnerinfo.php"); // Redirect back to the learnerinfo page
-    exit();
+            //setting a success message.
+        $msg = "Email Changed Successfully";
+        header("location: learnerinfo.php?msg=$msg");
+    //mysqli_close($mysqli);
+    //header("Location: learnerinfo.php"); // Redirect back to the learnerinfo page
+    //exit();
 }
 ?>
