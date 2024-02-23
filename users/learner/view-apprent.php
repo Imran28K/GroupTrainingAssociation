@@ -78,17 +78,17 @@ mysqli_close($mysqli);
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php" class="active">
             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
+        <li><a href="learnerinfo.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
