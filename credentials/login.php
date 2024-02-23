@@ -24,8 +24,12 @@
                 <input type="email" id="email" name="email" required placeholder="Email">
             </div>
             <div class="input-group">
+                
+                <span class="input-icon">&#128274;</span> <!-- Unicode lock icon for password -->
                 <input type="password" id="password" name="password" required placeholder="Password">
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button> <!-- Unicode eye icon -->
             </div>
+
             <button type="submit" name="submit" class="login-button">Sign In</button>
             <div class="form-footer">
                 <a href="forgotpassword.php" class="link">Forgot Password?</a>
@@ -33,6 +37,24 @@
         </form>
     </div>
     <?php include '../include/footer.php'; ?>
+
+    <script>
+
+        function togglePasswordVisibility() 
+        {
+        var passwordInput = document.getElementById('password');
+        var toggleButton = document.querySelector('.toggle-password');
+        if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.innerHTML = '&#128065;'; // Change to an "open eye" icon if you wish
+        } else {
+
+            passwordInput.type = 'password';
+            toggleButton.innerHTML = '&#128065;'; // Change back to the original icon
+            }
+        }
+
+    </script>
 </body>
 
 </html>
