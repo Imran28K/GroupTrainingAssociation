@@ -49,7 +49,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Employer</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php">
             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
             <span class="item">Module Information</span>
           </a>

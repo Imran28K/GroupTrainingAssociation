@@ -22,7 +22,7 @@ $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
 
-$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
+$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName,  EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
 
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "s", $learnerID);
@@ -36,14 +36,14 @@ mysqli_stmt_close($stmt);
 
 $employerID = $EmployerID;
 
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName , EmployerEmail FROM employer WHERE EmployerID = ?";
+$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName FROM employer WHERE EmployerID = ?";
 $stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
 
 if ($stmtEmployer) {
 
   mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
   mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName , $EmployerEmail);
+  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName);
 
   if (!mysqli_stmt_fetch($stmtEmployer)) {
     echo "No employer found with the specified ID";
@@ -78,7 +78,7 @@ mysqli_close($mysqli);
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="view-employer.php" class="active">
+        <li><a href="#">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
@@ -88,7 +88,7 @@ mysqli_close($mysqli);
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php">
+        <li><a href="learnerinfo.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
@@ -115,16 +115,27 @@ mysqli_close($mysqli);
               <table class="info-table">
                 <tbody>
                   <tr>
-                    <td>Employer</td>
+                    <td>Learner Name</td>
                     <td>:</td>
-                    <td><?php echo $EmployerFirstName . " " . $EmployerLastName; ?></td>
+                    <td><?php echo $LearnerFirstName . " " . $LearnerLastName; ?> </td>
                   </tr>
                   <tr>
-                    <td>Employer's Email</td>
+                    <td>Apprenticeship</td>
                     <td>:</td>
-                    <td><?php echo $EmployerEmail; ?></td>
+                    <td><?php echo $ApprenticeshipName; ?></td>
                   </tr>
-                    </tbody>
+                  <tr>
+                    <td>Start Date</td>
+                    <td>:</td>
+                    <td>01/07/2022</td>
+                  </tr>
+                  <tr>
+                    <td>End Date</td>
+                    <td>:</td>
+                    <td>27/12/2023</td>
+                  </tr>
+
+                </tbody>
               </table>
             </div>
           </div>
