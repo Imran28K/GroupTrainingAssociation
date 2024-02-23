@@ -97,8 +97,7 @@ if ($loginSuccessful) {
  
     // once success it will let u know the role of the user
 } else {
-    echo "Login failed.";
-    
+    echo "Login failed.";  
 }
 
 ?>
