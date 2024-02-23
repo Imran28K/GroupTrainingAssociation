@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <?php include '../include/navbar.php'; ?>
 
     <div class="login-container">
         <h1>Email Verification</h1>
@@ -44,7 +43,6 @@
             <button type="submit" class="login-button">Submit</button>
         </form>
     </div>
-    <?php include '../include/footer.php'; ?>
 </body>
 
 <script>
