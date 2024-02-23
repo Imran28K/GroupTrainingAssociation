@@ -46,6 +46,24 @@
     background-color: #ddd;
 }
 
+.info-table input[type="email"], .info-table button {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.info-table button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.info-table button:hover {
+    background-color: #0056b3;
+}
+
 
 
 

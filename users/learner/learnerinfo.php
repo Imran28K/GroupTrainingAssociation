@@ -132,7 +132,13 @@ mysqli_close($mysqli);
                   <tr>
                     <td>Email</td>
                     <td>:</td>
-                    <td><?php echo $LearnerEmail; ?></td>
+                    <td>
+                      <form action="update-learnerinfo.php" method="post">
+                        <input type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
+                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
+                        <button type="submit">Update</button>
+                      </form>
+                    </td>
                   </tr>
                   <tr>
                     <td>Cohort</td>
