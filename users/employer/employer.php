@@ -1,119 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Name of Page</title>
-  <link rel="stylesheet" href="../../css/login.css">
-  <link rel="stylesheet" href="../../css/navfoot.css">
+  <meta charset="utf-8">
+  <title>Employer Home</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
+  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
+<?php
+session_start();
+require_once '../../db/dbconnection.php';
+
+$userID = $_SESSION['userID'];
+
+$queryDetails = "SELECT * FROM employer WHERE EmployerID = '$userID'"; 
+$resultDetails = $mysqli->query($queryDetails);
+
+$details = $resultDetails -> fetch_object();
+?>
+
 <body>
-  <?php include '../../include/navbar.php'; ?>
-  <!DOCTYPE html>
-  <html>
 
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      body {
-        font-family: "Lato", sans-serif;
-        transition: background-color .5s;
-      }
-
-      .sidenav {
-        height: 87.5%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-      }
-
-      .sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-
-      }
-
-      .sidenav a:hover {
-        color: #f1f1f1;
-      }
-
-      .sidenav .closebtn {
-        position: absolute;
-        top: -20;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-      }
-
-      #main {
-        transition: margin-left .5s;
-        padding: 16px;
-      }
-
-      @media screen and (max-height: 450px) {
-        .sidenav {
-          padding-top: 15px;
-        }
-
-        .sidenav a {
-          font-size: 18px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <br>
-      <br>
-      <br>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <?php 
+        echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
+        ?>
+      </div>
+      <ul>
+        <li><a href="#" class="active">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="item">Profile Details</span>
+          </a>
+        </li>
+        <li><a href="viewLearnersEmployer.php">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">View employees</span>
+          </a>
+        <li><a href="#">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Settings</span>
+          </a>
+        </li>
+        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+            <span class="icon"><i class="fas fa-door-open"></i></span>
+            <span class="item">Logout</span>
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <div id="main">
-      <h2>Welcome to Employer's Page</h2>
-      <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that we add a black see-through background-color to body when the sidenav is opened.</p>
-      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+    <div class="section">
+      <div class="top_navbar">
+        <div class="hamburger">
+          <a href="#"><i class="fas fa-bars"></i></a>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Your details</h2>
+        <ul>
+          <li>Your name is: <?php echo"{$details->EmployerFirstName} {$details->EmployerLastName}"; ?></li>
+          <li>Your email is: <?php echo"{$details->EmployerEmail}"; ?></li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <script>
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-      }
+  <script type="text/javascript">
+    var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function() {
+      document.querySelector("body").classList.toggle("active");
+    })
+  </script>
 
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-      }
-    </script>
-
-  </body>
-
-  </html>
-
-
-
-  <?php include '../../include/footer.php'; ?>
 </body>
 
 </html>

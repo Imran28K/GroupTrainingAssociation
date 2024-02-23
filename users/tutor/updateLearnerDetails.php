@@ -42,7 +42,7 @@ $details = $resultDetails -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="viewLearners.php">
+        <li><a href="viewLearnersTutor.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View learners</span>
           </a>

@@ -78,7 +78,7 @@ mysqli_close($mysqli);
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="view-employer.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
@@ -88,7 +88,7 @@ mysqli_close($mysqli);
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
+        <li><a href="learnerinfo.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>

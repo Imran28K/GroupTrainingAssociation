@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Side Navigation Bar</title>
+  <title>view learner details</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
@@ -14,12 +14,18 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$userID = $_SESSION['userID'];
+$employerID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'"; 
-$resultLearner = $mysqli->query($queryLearner);
+$queryDetails = "SELECT * FROM employer WHERE EmployerID = '$employerID'"; 
+$resultDetails= $mysqli->query($queryDetails);
 
-$obj = $resultLearner -> fetch_object();
+$details = $resultDetails -> fetch_object();
+
+$learnerID = $_POST['uniqueLearnerNumber'];
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultLearner= $mysqli->query($queryLearner);
+
+$learnerDetails = $resultLearner -> fetch_object();
 ?>
 
 <body>
@@ -29,34 +35,24 @@ $obj = $resultLearner -> fetch_object();
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
-        echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
+        echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
         ?>
-        <p>Learner</p>
       </div>
       <ul>
-        <li><a href="learner.php" class="active">
+        <li><a href="http://localhost/GroupTrainingAssociation/users/employer/employer.php">
             <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">View Progress</span>
+            <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="viewAttendance.php">
-            <span class="icon"><i class="fas fa-desktop"></i></span>
-            <span class="item">View Attendance</span>
-          </a>
-        </li>
-        <li><a href="view-employer.php">
+        <li><a href="viewLearnersEmployer.php"  class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View Employer</span>
+            <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php">
-            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-            <span class="item">Module Information</span>
-          </a>
-        </li>
-        <li><a href="learnerinfo.php">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
-            <span class="item">User Information</span>
+        <li><a href="#">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
@@ -66,14 +62,17 @@ $obj = $resultLearner -> fetch_object();
         </li>
       </ul>
     </div>
+
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
+
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
+        <?php echo"<h2>{$learnerDetails -> LearnerFirstName} {$learnerDetails -> LearnerLastName}'s progress</h2>"?>
+        <h3 class="chart-heading">Learner Progress</h3>
         <div class="programming-stats">
           <div class="chart-container">
             <canvas class="my-chart"></canvas>

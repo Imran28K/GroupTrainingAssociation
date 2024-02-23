@@ -73,8 +73,13 @@ $details = $resultDetails -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Your details</h2>
-        <p>This is where the details would go</p>
+        <h2>Your details</h2>
+        <ul>
+          <li>Your name is: <?php echo"{$details->TutorFirstName} {$details->TutorLastName}"; ?></li>
+          <li>Your email is: <?php echo"{$details->TutorEmail}"; ?></li>
+          <li>Your tutor code is: <?php echo"{$details->TutorCode}"; ?></li>
+          <li>Your role is: <?php echo"{$details->Role}"; ?></li>
+        </ul>
       </div>
     </div>
   </div>
