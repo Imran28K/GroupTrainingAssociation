@@ -25,8 +25,7 @@
             </div>
             <div class="input-group">
                 
-                <span class="input-icon">&#128274;</span> <!-- Unicode lock icon for password -->
-                <input type="password" id="password" name="password" required placeholder="Password">
+               <input type="password" id="password" name="password" required placeholder="Password">
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button> <!-- Unicode eye icon -->
             </div>
 
