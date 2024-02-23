@@ -15,22 +15,41 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$LearnerID = $_SESSION['UserID'];
-$
-$sql = "SELECT EmployerFirstName, EmployerLastName, EmployerEmail FROM employer WHERE EmployerID = ? ";
-$stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $EmployerID);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
-if (mysqli_stmt_fetch($stmt)) {
-    
-} else {
-    echo "0 results";
-}
+// Initialize variables
+$EmployerFirstName = "";
+$EmployerLastName = "";
+$EmployerEmail = "";
 
-mysqli_stmt_close($stmt);
-mysqli_close($mysqli);
+// Check if $_SESSION['UserID'] is set
+if(isset($_SESSION['UserID'])) {
+    $UniqueLearnerNumber = $_SESSION['UserID'];
+    
+    // Prepare and execute the SQL query to fetch employer details
+    $sql = "SELECT EmployerFirstName, EmployerLastName, EmployerEmail FROM employer WHERE EmployerID = ?";
+    $stmt = mysqli_prepare($mysqli, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $UniqueLearnerNumber);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
+
+    // Fetch data
+    if (mysqli_stmt_fetch($stmt)) {
+        // Data fetched successfully
+    } else {
+        echo "0 results";
+    }
+
+    // Close statement and connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($mysqli);
+} else {
+    // Handle the case where $_SESSION['UserID'] is not set
+    echo "Session UserID not set";
+}
 ?>
+
+<!-- Rest of your HTML code goes here -->
+
+
 
 <body>
 
@@ -38,10 +57,7 @@ mysqli_close($mysqli);
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php 
-        echo"<h3>{$EmployerFirstName} {$EmployerLastName}</h3>";
-        echo"<p>Employer</p>";
-        ?>
+       
       </div>
       <ul>
         <li><a href="learner.php">
