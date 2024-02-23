@@ -54,15 +54,18 @@
 }
 
 .info-table button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    background-color: #fff; 
+    color: #000;
+    border: 2px solid #fff; 
+    padding: 5px 10px; 
+    font-size: 14px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: border-color 0.3s; 
 }
 
 .info-table button:hover {
-    background-color: #0056b3;
+    border-color: #8d599f; 
 }
 
 @media (max-width: 600px) { /* Adjust the breakpoint as needed */
