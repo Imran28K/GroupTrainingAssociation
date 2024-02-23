@@ -100,9 +100,8 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        
-      </div class="container">
-      <div class="attendance-container">
+      </div>
+      <div class="container">
         <h1>View Learners</h1>
         <table>
         <tr>

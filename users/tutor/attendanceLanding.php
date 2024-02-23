@@ -69,8 +69,9 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
+      </div>
         
-      </div class="container">
+      <div class="container">
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
         <li> <a href='registerChoice.php'> Register Attendance </a> </li>

@@ -44,10 +44,18 @@ foreach ($tableColumnMapping as $table => $columns) {
             elseif($userRole == "tutor") {
                 $userID = $fetch->TutorID;
             } 
-            
             else {
                 $userID = $fetch->TutorID;
             }
+
+            $activeStatus = $fetch->Active;
+            if ($activeStatus == "Active"){
+                $loginSuccessful = true;
+            }
+            else if ($activeStatus == "Inactive"){
+                $loginSuccessful = false;
+            }
+
             $_SESSION['userID'] = $userID;
 
             $queryCheck = "SELECT * FROM admin WHERE TutorID = '$userID'";

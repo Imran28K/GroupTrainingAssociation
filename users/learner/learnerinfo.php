@@ -55,14 +55,14 @@ mysqli_close($mysqli);
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="viewAttendance.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
         <li><a href="#">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Employment Status</span>
+            <span class="item">View Employer</span>
           </a>
         </li>
         <li><a href="#">

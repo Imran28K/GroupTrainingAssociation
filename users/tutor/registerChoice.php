@@ -81,7 +81,7 @@ $details = $resultLearner -> fetch_object();
         </div>
       </div>
 
-    <div class="attendance-container">
+    <div class="container">
         <h1>Attendance</h1>
         <table>
         <tr>

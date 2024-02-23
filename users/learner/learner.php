@@ -168,7 +168,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="viewAttendance.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>

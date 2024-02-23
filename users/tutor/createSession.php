@@ -72,9 +72,9 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-      </div class="container">
+      </div>
 
-      <div class="attendance-container">
+      <div class="container">
         <h1>Create session</h1>
         <form action="../../credentials/query/createSession.php" method="post" class="login-form">
             <div class="input-group">

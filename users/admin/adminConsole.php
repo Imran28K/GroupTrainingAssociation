@@ -74,12 +74,12 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        
-      </div class="container">
+      </div>
+      <div class="container">
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
         <li> <a href='#'> Add KSB groups </a> </li>
-        <li> <a href='#'> De-activate accounts </a> </li>
+        <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
       </ul>
 
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
@@ -87,7 +87,7 @@ $details = $resultLearner -> fetch_object();
       </ul>
     </div>
   </div>
-
+</div>
   <script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", function() {

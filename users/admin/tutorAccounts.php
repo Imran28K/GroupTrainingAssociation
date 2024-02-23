@@ -3,33 +3,28 @@
 
 <?php 
 session_start();
-$_SESSION['sessionID'] = "";
-$sessionID = $_SESSION['sessionID'];
 require_once ("../../db/dbconnection.php");
-$queryRegisterList = "SELECT * FROM registersessions";
-$resultRegisterList = $mysqli->query($queryRegisterList); 
+
+$queryTutors = "SELECT * FROM tutor"; 
+$resultTutors= $mysqli->query($queryTutors); 
+
+$userID = $_SESSION['userID'];
+
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultDetails = $mysqli->query($queryDetails);
+
+$details = $resultDetails -> fetch_object();
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
-    <link rel="stylesheet" href="../css/attendance.css">
-    <link rel="stylesheet" href="../css/navfoot.css">
+    <title>Attendance Page</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
-<?php
-$userID = $_SESSION['userID'];
-
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultLearner = $mysqli->query($queryLearner);
-
-$details = $resultLearner -> fetch_object();
-?>
-
-  <body>
+<body>
 
   <div class="wrapper">
     <div class="sidebar">
@@ -46,7 +41,7 @@ $details = $resultLearner -> fetch_object();
             <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="attendanceLandingAdmin.php" class="active">
+        <li><a href="attendanceLandingAdmin.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
@@ -61,7 +56,7 @@ $details = $resultLearner -> fetch_object();
             <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="adminConsole.php">
+        <li><a href="adminConsole.php" class="active">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>
@@ -78,7 +73,6 @@ $details = $resultLearner -> fetch_object();
         </li>
       </ul>
     </div>
-
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
@@ -86,35 +80,64 @@ $details = $resultLearner -> fetch_object();
         </div>
       </div>
 
-    <div class="container">
-        <h1>Attendance</h1>
+
+      <div class="container">
+        <h1>Tutor accountss</h1>
         <table>
         <tr>
-            <td>Date</td>
-            <td>Time Start</td>
-            <td>Time End</td>
-            <td>Apprenticeship</td>
-            <td>Select</td>
+            <td>Learner name</td>
+            <td>Account status</td>
         </tr>
-        <?php while ($obj = $resultRegisterList -> fetch_object()){
-                    echo"
-                    <tr>
-                        <td>{$obj -> SessionDate}</td>
-                        <td>{$obj -> TimeStart}</td>
-                        <td>{$obj -> TimeEnd}</td>
-                        <td>{$obj -> apprenticeshipName}</td>
-                        <td>
-                    <form action='registerAttendanceAdmin.php' name='sessionID' method='post'>
-                    <input type='hidden' id='sessionID' name='sessionID' value={$obj -> SessionID}>
-                    <input type='submit' value='Select Date'>
-                    </form>
-                    </td></tr>";
-        }?>
+        <?php 
+        while ($obj = $resultTutors -> fetch_object()){
+        if ($obj -> Active == "Inactive"){
+        echo"<tr>
+            <td>{$obj -> TutorFirstName} {$obj -> TutorLastName}</td>
+            <td>
+                {$obj -> Active}
+            </td>
+            <td> 
+                <form action='../../credentials/query/activate.php' name='attendance' method='post'>
+                    <input type='hidden' id='userID' name='userID' value={$obj -> TutorID}>
+                    <input type='hidden' id='role' name='role' value=Tutor>
+                    <input type='submit' value='Reactivate Account'>
+                </form>
+            </td>
+        </tr>";
+        }
+        else if ($obj -> Active == "Active"){
+            echo"<tr>
+            <td>{$obj -> TutorFirstName} {$obj -> TutorLastName}</td>
+            <td>
+                {$obj -> Active}
+            </td>
+            <td> 
+                <form action='../../credentials/query/deactivate.php' name='attendance' method='post'>
+                    <input type='hidden' id='userID' name='userID' value={$obj -> TutorID}>
+                    <input type='hidden' id='role' name='role' value=Tutor>
+                    <input type='submit' value='Deactivate Account'>
+                </form>
+            </td>
+        </tr>"; 
+        }
+        }        ?>
         </table>
+
     <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='attendanceLandingAdmin.php'> Back to attendance </a> </li>
+        <li> <a href='accountManagement.php'> Back to account management </a> </li>
     </ul>
     </div>
+
+          <div class="details">
+            <ul></ul>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../../learnerprogress/main.js"></script>
+      </div>
+    </div>
+  </div>
 
   <script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");

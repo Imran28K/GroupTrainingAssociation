@@ -73,19 +73,8 @@ $details = $resultDetails -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
-
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+        <h2 class="chart-heading">Your details</h2>
+        <p>This is where the details would go</p>
       </div>
     </div>
   </div>
