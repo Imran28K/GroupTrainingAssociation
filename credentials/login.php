@@ -36,7 +36,7 @@
             </div>
         </form>
     </div>
-    <?php include '../include/footer.php'; ?>
+    
 
     <script>
 
