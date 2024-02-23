@@ -15,7 +15,6 @@ $resultSessions = $mysqli->query($querySessions);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update learners</title>
-    <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -63,12 +62,12 @@ $obj = $resultLearner -> fetch_object();
           </a>
         </li>
         <li><a href="#">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
@@ -79,9 +78,9 @@ $obj = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        
-      </div class="container">
-      <div class="attendance-container">
+      </div>
+
+      <div class="container">
         <h1>Update Learners</h1>
         <table>
         <tr>

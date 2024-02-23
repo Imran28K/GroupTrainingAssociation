@@ -55,12 +55,12 @@ $details = $resultDetails -> fetch_object();
           </a>
         </li>
         <li><a href="#">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
@@ -73,19 +73,8 @@ $details = $resultDetails -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
-
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+        <h2 class="chart-heading">Your details</h2>
+        <p>This is where the details would go</p>
       </div>
     </div>
   </div>

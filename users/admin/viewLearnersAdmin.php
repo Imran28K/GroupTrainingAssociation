@@ -15,7 +15,6 @@ $resultSessions = $mysqli->query($querySessions);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View learners tutor</title>
-    <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
@@ -31,7 +30,6 @@ $resultSessions = $mysqli->query($querySessions);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>view learners tutor</title>
-    <link rel="stylesheet" href="../css/attendance.css">
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -100,9 +98,8 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        
-      </div class="container">
-      <div class="attendance-container">
+      </div>
+      <div class="container">
         <h1>View Learners</h1>
         <table>
         <tr>

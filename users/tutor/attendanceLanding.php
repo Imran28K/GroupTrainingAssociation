@@ -52,12 +52,12 @@ $details = $resultLearner -> fetch_object();
           </a>
         </li>
         <li><a href="#">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
@@ -69,8 +69,9 @@ $details = $resultLearner -> fetch_object();
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        
-      </div class="container">
+      </div>
+
+      <div class="container">
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
         <li> <a href='registerChoice.php'> Register Attendance </a> </li>

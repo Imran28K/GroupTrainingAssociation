@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Side Navigation Bar</title>
@@ -18,8 +17,10 @@ $userID = $_SESSION['userID'];
 
 $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
-
 $obj = $resultLearner -> fetch_object();
+
+$queryAttendance = "SELECT * FROM attendance WHERE UniqueLearnerNumber = '$userID'"; 
+$resultAttendance = $mysqli->query($queryAttendance);
 ?>
 
 <body>
@@ -34,17 +35,17 @@ $obj = $resultLearner -> fetch_object();
         <p>Learner</p>
       </div>
       <ul>
-        <li><a href="learner.php" class="active">
+        <li><a href="learner.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="viewAttendance.php">
+        <li><a href="viewAttendance.php" class="active">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
+        <li><a href="C:\xampp\htdocs\GroupTrainingAssociation\users\sharedfiles\viewemployer\view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
@@ -73,20 +74,34 @@ $obj = $resultLearner -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
+        <h2>Your attendance</h2>
+        <table>
+        <tr>
+            <td>Session date</td>
+            <td>Session start time</td>
+            <td>Session end time</td>
+            <td>Present</td>
+        </tr>
+        <?php 
+        while ($attendanceDetails = $resultAttendance -> fetch_object()){
+            $sessionID = $attendanceDetails->SessionID;
+            $querySession = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
+            $resultSession = $mysqli->query($querySession);
+            $sessionDetails = $resultSession -> fetch_object();
+        echo"<tr>
+            <td>{$sessionDetails -> SessionDate}</td>
+            <td>{$sessionDetails -> TimeStart}</td>
+            <td>{$sessionDetails -> TimeEnd}</td>
+            <td>
+                {$attendanceDetails -> Present}
+            </td>
+        </tr>";       
+        }?>
+        </table>
 
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../sharedfiles/learnerprogress/piechart.js"></script>
-      </div>
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='learner.php'> To learner home </a> </li>
+    </ul>
     </div>
   </div>
 

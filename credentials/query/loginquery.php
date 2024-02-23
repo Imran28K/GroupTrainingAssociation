@@ -2,6 +2,7 @@
 
 require_once '../../db/dbconnection.php';
 session_start();
+$_SESSION['userRole'] = "";
 $userEmail = $_POST['email'];
 $userPassword = $_POST['password'];
 
@@ -44,10 +45,18 @@ foreach ($tableColumnMapping as $table => $columns) {
             elseif($userRole == "tutor") {
                 $userID = $fetch->TutorID;
             } 
-            
             else {
                 $userID = $fetch->TutorID;
             }
+
+            $activeStatus = $fetch->Active;
+            if ($activeStatus == "Active"){
+                $loginSuccessful = true;
+            }
+            else if ($activeStatus == "Inactive"){
+                $loginSuccessful = false;
+            }
+
             $_SESSION['userID'] = $userID;
 
             $queryCheck = "SELECT * FROM admin WHERE TutorID = '$userID'";
@@ -78,8 +87,11 @@ if ($loginSuccessful) {
         header('location:http://localhost/GroupTrainingAssociation/users/tutor/tutor.php');
     } 
     
-    else {
+    elseif($userRole == "admin") {
         header('location:http://localhost/GroupTrainingAssociation/users/admin/admin.php');
+    }
+    else{
+        echo "Login failed.";
     }
       
  

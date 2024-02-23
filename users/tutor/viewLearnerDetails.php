@@ -61,23 +61,25 @@ $learnerDetails = $resultLearner -> fetch_object();
           </a>
         </li>
         <li><a href="#">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
       </ul>
     </div>
+
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
+
       <div class="container">
         <?php echo"<h2>{$learnerDetails -> LearnerFirstName} {$learnerDetails -> LearnerLastName}'s progress</h2>"?>
         <h3 class="chart-heading">Learner Progress</h3>
@@ -92,7 +94,7 @@ $learnerDetails = $resultLearner -> fetch_object();
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+        <script src="../sharedfiles/learnerprogress/piechart.js"></script>
       </div>
     </div>
   </div>

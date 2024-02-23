@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Admin home</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>attendance landing page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  </head>
 
 <?php
 session_start();
@@ -14,25 +13,25 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultDetails = $mysqli->query($queryDetails);
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultLearner = $mysqli->query($queryLearner);
 
-$details = $resultDetails -> fetch_object();
+$details = $resultLearner -> fetch_object();
 ?>
 
 <body>
 
-  <div class="wrapper">
+<div class="wrapper">
     <div class="sidebar">
-      <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php 
-        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
-        echo"<p>{$details->Role}</p>";
-        ?>
-      </div>
+        <div class="profile">
+            <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+            <?php 
+            echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+            echo"<p>{$details->Role}</p>";
+            ?>
+        </div>
       <ul>
-        <li><a href="admin.php" class="active">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
@@ -52,7 +51,7 @@ $details = $resultDetails -> fetch_object();
             <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="adminConsole.php">
+        <li><a href="adminConsole.php" class="active">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>
@@ -69,18 +68,27 @@ $details = $resultDetails -> fetch_object();
         </li>
       </ul>
     </div>
+
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
-      <div class="container">
-        <h2 class="chart-heading">Your Details</h2>
-        <p>This is where your details would go</p>
-      </div>
-    </div>
+        <div class="container">
+            <p>Choose whether you want to go to the register or to create a new session</p>
+            <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+                <li> <a href='learnerAccounts.php'> learner accounts </a> </li>
+                <li> <a href='tutorAccounts.php'> tutor accounts </a> </li>
+                <li> <a href='employerAccounts.php'> employer accounts </a> </li>
+            </ul>
 
+            <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+                <li> <a href='admin.php'> To profile details </a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
   <script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", function() {
@@ -89,5 +97,4 @@ $details = $resultDetails -> fetch_object();
   </script>
 
 </body>
-
 </html>
