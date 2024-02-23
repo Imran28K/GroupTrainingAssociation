@@ -55,10 +55,23 @@ foreach ($tableColumnMapping as $table => $columns) {
             }
 
             $_SESSION['userID'] = $userId;
+
+            $queryFetch = "SELECT * FROM {$table} WHERE {$columns['emailColumn']} = '$userEmail' AND {$columns['passwordColumn']} = '$userPassword'";
+            $resultFetch = $mysqli->query($queryFetch);
+            $fetchActive = $resultFetch->fetch_object();
+            $activeStatus = $fetchActive->Active;
+            if ($activeStatus == "Active"){
+                $loginSuccessful = true;
+            }
+            else if ($activeStatus == "Inactive"){
+                $loginSuccessful = false;
+            }
+
+        $stmt->close();
             break;
         }
 
-        $stmt->close();
+        
     } else {
         echo "Error preparing statement for $table: " . $mysqli->error;
     }
@@ -70,7 +83,7 @@ if ($loginSuccessful) {
         case 'learner':
             header('location:http://localhost/GroupTrainingAssociation/users/learner/learner.php');
             break;
-        case 'Employer':
+        case 'employer':
             header('location:http://localhost/GroupTrainingAssociation/users/employer/employer.php');
             break;
         case 'Tutor':
