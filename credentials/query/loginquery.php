@@ -81,15 +81,19 @@ if ($loginSuccessful) {
     // Redirect based on the user role
     switch ($userRole) {
         case 'learner':
+            $_SESSION['userRole'] = "learner";
             header('location:http://localhost/GroupTrainingAssociation/users/learner/learner.php');
             break;
         case 'employer':
+            $_SESSION['userRole'] = "employer";
             header('location:http://localhost/GroupTrainingAssociation/users/employer/employer.php');
             break;
         case 'Tutor':
+            $_SESSION['userRole'] = "tutor";
             header('location:http://localhost/GroupTrainingAssociation/users/tutor/tutor.php');
             break;
         case 'Admin':
+            $_SESSION['userRole'] = "admin";
             header('location:http://localhost/GroupTrainingAssociation/users/admin/admin.php');
             break;
         default:
