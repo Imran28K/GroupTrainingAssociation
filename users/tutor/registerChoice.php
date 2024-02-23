@@ -100,7 +100,7 @@ $details = $resultLearner -> fetch_object();
                         <td>
                     <form action='registerAttendance.php' name='sessionID' method='post'>
                     <input type='hidden' id='sessionID' name='sessionID' value={$obj -> SessionID}>
-                    <input type='submit' value='Select Date'>
+                    <input type='submit' value='Select'>
                     </form>
                     </td></tr>";
         }?>
