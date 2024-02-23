@@ -59,7 +59,7 @@ foreach ($tableColumnMapping as $table => $columns) {
 
             $_SESSION['userID'] = $userID;
 
-            $queryCheck = "SELECT * FROM admin WHERE TutorID = '$userID'";
+            $queryCheck = "SELECT * FROM tutor WHERE Role = 'Admin'";
             $resultCheck = $mysqli->query($queryCheck);
 
             if ($resultCheck->num_rows != 0){
