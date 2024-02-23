@@ -11,7 +11,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
     margin: auto;
 }
 
@@ -46,33 +46,41 @@
     background-color: #ddd;
 }
 
-.info-table input[type="email"], .info-table button {
+.info-table input[type="email"] {
     margin-top: 5px;
     padding: 5px;
     font-size: 14px;
-    width: 300px;
+    width: 300px; /* Adjusted width for the input */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease; /* Animation effect for hover */
+}
+
+.info-table input[type="email"]:hover {
+    box-shadow: 0 0 8px #8d599f; /* Subtle shadow effect on hover */
 }
 
 .info-table button {
-    background-color: #fff; 
+    background-color: #fff;
     color: #000;
-    border: 2px solid #fff; 
-    padding: 5px 10px; 
-    font-size: 14px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: border-color 0.3s; 
+    border: 2px solid #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
 }
 
 .info-table button:hover {
-    border-color: #8d599f; 
+    border-color: #8d599f; /* Border color change on hover */
 }
 
-@media (max-width: 600px) { /* Adjust the breakpoint as needed */
+@media (max-width: 600px) {
     .info-table input[type="email"] {
         width: 95%; /* Increased width for smaller screens */
     }
 }
+
 
 
 
