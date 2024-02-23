@@ -136,7 +136,7 @@ mysqli_close($mysqli);
                       <form action="update-learnerinfo.php" method="post">
                         <input type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
                         <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Update</button>
+                        <button type="submit">Change</button>
                       </form>
                     </td>
                   </tr>

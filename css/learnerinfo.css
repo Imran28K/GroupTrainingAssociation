@@ -50,6 +50,7 @@
     margin-top: 5px;
     padding: 5px;
     font-size: 14px;
+    width: 300px;
 }
 
 .info-table button {
@@ -62,6 +63,12 @@
 
 .info-table button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 600px) { /* Adjust the breakpoint as needed */
+    .info-table input[type="email"] {
+        width: 95%; /* Increased width for smaller screens */
+    }
 }
 
 
