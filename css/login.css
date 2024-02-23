@@ -8,6 +8,27 @@
     --btn-hover-color: #5567bd; /* Darker shade for button hover state */
 }
 
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #757575; /* Adjust the color as needed */
+}
+
+.input-group input {
+    /* Your existing input styles */
+    padding-right: 40px; /* Increase right padding to accommodate the toggle button */
+}
+
+
 body, html {
     height: 100%;
     width: 100%;

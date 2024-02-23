@@ -93,7 +93,7 @@ $details = $resultEmployer -> fetch_object();
         </table>
 
     <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='employer.php'> Back to profile details </a> </li>
+        <li> <a href='employer.php'> To profile details </a> </li>
     </ul>
     </div>
     </div>
