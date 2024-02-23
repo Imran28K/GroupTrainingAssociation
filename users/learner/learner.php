@@ -44,7 +44,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
+        <li><a href="view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
@@ -54,7 +54,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="../../users/learner/learnerinfo.php">
+        <li><a href="learnerinfo.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">User Information</span>
           </a>

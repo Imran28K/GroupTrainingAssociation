@@ -65,12 +65,12 @@ if(isset($_SESSION['UserID'])) {
             <span class="item">View Progress</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="viewAttendance.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
+        <li><a href="view-employer.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">Your Employer</span>
           </a>
@@ -80,7 +80,7 @@ if(isset($_SESSION['UserID'])) {
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
+        <li><a href="learnerinfo.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
           </a>
