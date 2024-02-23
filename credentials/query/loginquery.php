@@ -44,7 +44,7 @@ foreach ($tableColumnMapping as $table => $columns) {
             $loginSuccessful = true;
             $fetch = $result->fetch_object();
 
-            // Use the correct ID column based on the table
+            
             $userId = $fetch->{$columns['idColumn']};
 
             // If the table has a 'roleColumn', use it to determine the user's role
@@ -52,14 +52,6 @@ foreach ($tableColumnMapping as $table => $columns) {
                 $userRole = $fetch->{$columns['roleColumn']}; // Use the role attribute to set the user role
             } else {
                 $userRole = $table; // For tables without a role column, use the table name as the role
-            }
-
-            $activeStatus = $fetch->Active;
-            if ($activeStatus == "Active"){
-                $loginSuccessful = true;
-            }
-            else if ($activeStatus == "Inactive"){
-                $loginSuccessful = false;
             }
 
             $_SESSION['userID'] = $userId;
@@ -97,5 +89,6 @@ if ($loginSuccessful) {
 }
 
 ?>
+
 
 
