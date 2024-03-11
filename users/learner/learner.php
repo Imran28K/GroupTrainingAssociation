@@ -16,10 +16,10 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'"; 
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
 
-$obj = $resultLearner -> fetch_object();
+$obj = $resultLearner->fetch_object();
 ?>
 
 <body>
@@ -28,8 +28,8 @@ $obj = $resultLearner -> fetch_object();
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php 
-        echo"<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
+        <?php
+        echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
         ?>
         <p>Learner</p>
       </div>
