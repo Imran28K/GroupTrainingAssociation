@@ -88,19 +88,16 @@ $obj = $resultLearner->fetch_object();
                     <tr>
                         <th>Units</th>
                         <th>Due</th>
-                        <th>Action</th>
                         <th>Status</th>
                     </tr>
                     <tr>
                         <td>Soft Skills and Behaviour</td>
                         <td>20/05/2026</td>
-                        <td>Upload</td>
                         <td>submitted</td>
                     </tr>
                     <tr>
                         <td>English</td>
                         <td>30/05/2026</td>
-                        <td>Upload</td>
                         <td>unsubmitted</td>
                     </tr>
                 </table>
