@@ -79,7 +79,9 @@ $obj = $resultLearner->fetch_object();
             </div>
 
             <div class="container">
-                
+                <?php
+                echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
+                ?>
             </div>
 
         </div>
