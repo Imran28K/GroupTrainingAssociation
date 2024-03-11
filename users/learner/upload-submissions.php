@@ -82,6 +82,7 @@ $obj = $resultLearner->fetch_object();
                 <?php
                 echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
                 ?>
+                
             </div>
 
         </div>
@@ -97,3 +98,41 @@ $obj = $resultLearner->fetch_object();
 </body>
 
 </html>
+<!--<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h2>Submission Progress</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Units</th>
+    <th>Due</th>
+    <th>Action</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Soft Skills and Behaviour</td>
+    <td>20/05/2026</td>
+    <td>Upload</td>
+    <td>submitted</td>
+  </tr>
+  <tr>
+    <td>English</td>
+    <td>30/05/2026</td>
+    <td>Upload</td>
+    <td>unsubmitted</td>
+  </tr>
+</table>
+
+<p>Please select the box carefully.</p>
+
+</body>
+</html>
+
+-->
