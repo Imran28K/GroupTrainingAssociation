@@ -54,6 +54,8 @@ if ($stmtLearningprogress) {
 }
 
 mysqli_close($mysqli);
+
+
 ?>
 
 <body>
