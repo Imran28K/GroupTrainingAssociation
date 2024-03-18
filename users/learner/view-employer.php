@@ -43,7 +43,7 @@ if ($stmtEmployer) {
 
   mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
   mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName , $EmployerEmail);
+  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
 
   if (!mysqli_stmt_fetch($stmtEmployer)) {
     echo "No employer found with the specified ID";
@@ -93,6 +93,11 @@ mysqli_close($mysqli);
             <span class="item">User Information</span>
           </a>
         </li>
+        <li><a href="upload-submissions.php">
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Submissions</span>
+          </a>
+        </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
@@ -124,7 +129,7 @@ mysqli_close($mysqli);
                     <td>:</td>
                     <td><?php echo $EmployerEmail; ?></td>
                   </tr>
-                    </tbody>
+                </tbody>
               </table>
             </div>
           </div>
