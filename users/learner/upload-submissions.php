@@ -14,6 +14,7 @@
 <?php
 session_start();
 require_once '../../db/dbconnection.php';
+require_once 'submission-details.php';
 
 $userID = $_SESSION['userID'];
 
