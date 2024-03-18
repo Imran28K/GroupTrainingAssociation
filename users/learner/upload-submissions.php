@@ -36,7 +36,7 @@ mysqli_stmt_close($stmt);
 
 $employerID = $EmployerID;
 
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName FROM employer WHERE EmployerID = ?";
+$sqlEmployer = "SELECT UnitID FROM employer WHERE ProgressID = ?";
 $stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
 
 if ($stmtEmployer) {
