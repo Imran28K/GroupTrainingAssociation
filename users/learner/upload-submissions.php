@@ -25,30 +25,30 @@ $obj = $resultLearner->fetch_object();
 $sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ? ";
 
 $stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $learnerID);
+mysqli_stmt_bind_param($stmt, "s", $userID);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $ApprenticeshipName, $EmployerID);
+mysqli_stmt_bind_result($stmt, $ProgressID);
 if (!mysqli_stmt_fetch($stmt)) {
   echo "0 results";
 }
 
 mysqli_stmt_close($stmt);
 
-$employerID = $EmployerID;
+$progressID = $ProgressID;
 
-$sqlEmployer = "SELECT UnitID FROM employer WHERE ProgressID = ?";
-$stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
+$sqlLearningprogress = "SELECT UnitID FROM learningprogress WHERE ProgressID = ?";
+$stmtLearningprogress = mysqli_prepare($mysqli, $sqlLearningprogress);
 
-if ($stmtEmployer) {
+if ($stmtLearningprogress) {
 
-  mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
-  mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName);
+  mysqli_stmt_bind_param($stmtLearningprogress, "i", $ProgressID);
+  mysqli_stmt_execute($stmtLearningprogress);
+  mysqli_stmt_bind_result($stmtLearningprogress, $ProgressID);
 
-  if (!mysqli_stmt_fetch($stmtEmployer)) {
-    echo "No employer found with the specified ID";
+  if (!mysqli_stmt_fetch($stmtLearningprogress)) {
+    echo "No progress found with the specified ID";
   }
-  mysqli_stmt_close($stmtEmployer);
+  mysqli_stmt_close($stmtLearningprogress);
 } else {
   echo "Failed to prepare the SQL statement";
 }
@@ -123,7 +123,7 @@ mysqli_close($mysqli);
                         <th>Status</th>
                     </tr>
                     <tr>
-                        <td>Soft Skills and Behaviour</td>
+                        <td><?php echo $ProgressID ?></td>
                         <td>20/05/2026</td>
                         <td>submitted</td>
                     </tr>
