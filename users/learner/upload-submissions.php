@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
