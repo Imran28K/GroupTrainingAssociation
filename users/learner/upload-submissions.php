@@ -22,39 +22,48 @@ $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
 
-$sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ? ";
+$tableRows = array();
 
-$stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $userID);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $ProgressID);
-if (!mysqli_stmt_fetch($stmt)) {
-  echo "0 results";
-}
+// Fetch ProgressID based on userID
+$sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ?";
+if ($stmt = mysqli_prepare($mysqli, $sql)) {
+    mysqli_stmt_bind_param($stmt, "s", $userID);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $ProgressID);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
 
-mysqli_stmt_close($stmt);
+    // Fetch UnitID based on ProgressID
+    $unitIDs = array();
+    $sqlLearningProgress = "SELECT UnitID FROM learningprogress WHERE ProgressID = ?";
+    if ($stmtLearningProgress = mysqli_prepare($mysqli, $sqlLearningProgress)) {
+        mysqli_stmt_bind_param($stmtLearningProgress, "i", $ProgressID);
+        mysqli_stmt_execute($stmtLearningProgress);
+        mysqli_stmt_bind_result($stmtLearningProgress, $UnitID);
+        while (mysqli_stmt_fetch($stmtLearningProgress)) {
+            $unitIDs[] = $UnitID;
+        }
+        mysqli_stmt_close($stmtLearningProgress);
+    }
 
-$progressID = $ProgressID;
+    // Fetch UnitName and SubmissionDate for each UnitID
+    foreach ($unitIDs as $UnitID) {
+        $sqlUnits = "SELECT UnitName, SubmissionDate, CurrentStatus FROM units WHERE UnitID = ?";
+        if ($stmtUnits = mysqli_prepare($mysqli, $sqlUnits)) {
+            mysqli_stmt_bind_param($stmtUnits, "i", $UnitID);
+            mysqli_stmt_execute($stmtUnits);
+            mysqli_stmt_bind_result($stmtUnits, $UnitName, $SubmissionDate, $CurrentStatus);
+            while (mysqli_stmt_fetch($stmtUnits)) {
+                //$status = 'unsubmitted'; testing
 
-$sqlLearningprogress = "SELECT UnitID FROM learningprogress WHERE ProgressID = ?";
-$stmtLearningprogress = mysqli_prepare($mysqli, $sqlLearningprogress);
-
-if ($stmtLearningprogress) {
-
-  mysqli_stmt_bind_param($stmtLearningprogress, "i", $ProgressID);
-  mysqli_stmt_execute($stmtLearningprogress);
-  mysqli_stmt_bind_result($stmtLearningprogress, $ProgressID);
-
-  if (!mysqli_stmt_fetch($stmtLearningprogress)) {
-    echo "No progress found with the specified ID";
-  }
-  mysqli_stmt_close($stmtLearningprogress);
-} else {
-  echo "Failed to prepare the SQL statement";
+                $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td>$CurrentStatus</td></tr>";
+            }
+            mysqli_stmt_close($stmtUnits);
+        }
+    }
 }
 
 mysqli_close($mysqli);
-
 
 ?>
 
@@ -119,21 +128,7 @@ mysqli_close($mysqli);
                 <h2>Submission Progress</h2>
 
                 <table style="width:100%">
-                    <tr>
-                        <th>Units</th>
-                        <th>Due</th>
-                        <th>Status</th>
-                    </tr>
-                    <tr>
-                        <td><?php echo $ProgressID ?></td>
-                        <td>20/05/2026</td>
-                        <td>submitted</td>
-                    </tr>
-                    <tr>
-                        <td>English</td>
-                        <td>30/05/2026</td>
-                        <td>unsubmitted</td>
-                    </tr>
+                    <?php foreach ($tableRows as $row) { echo $row; } ?>
                 </table>
             </div>
 
