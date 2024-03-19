@@ -21,9 +21,6 @@ $resultSessions = $mysqli->query($querySessions);
 <?php 
 $tutorID = $_SESSION['userID'];
 
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
-$resultSessions = $mysqli->query($querySessions); 
-
 ?>
 
 <head>
@@ -56,29 +53,24 @@ $details = $resultLearner -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="admin.php">
+        <li><a href="tutor.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="attendanceLandingAdmin.php">
+        <li><a href="attendanceLandingTutor.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="viewLearnersAdmin.php" class="active">
+        <li><a href="viewLearnersTutor.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="updateLearnersAdmin.php">
+        <li><a href="updateLearnersTutor.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">Update learners</span>
-          </a>
-        </li>
-        <li><a href="adminConsole.php">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
-            <span class="item">Admin Page</span>
           </a>
         </li>
 		<li><a href="#">
@@ -105,23 +97,53 @@ $details = $resultLearner -> fetch_object();
         <tr>
             <td>Learner name</td>
             <td>Apprenticeship</td>
+            <td>Training Center Hours</td>
+            <td>Employer Training Records</td>
+            <td>GTA Specialist Training</td>
+            <td>VLE Hours</td>
+            <td>Cumulative Hours</td>
         </tr>
         <?php while ($obj = $resultSessions -> fetch_object()){
-        $learnerID = $obj -> UniqueLearnerNumber;
-        echo"<tr>
+          $learnerID = $obj -> UniqueLearnerNumber;
+          $learnerIDString = sprintf($learnerID);
+
+          $queryOTJ = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerIDString'"; 
+          $resultOTJ = $mysqli->query($queryOTJ);
+
+          while($OTJobj = $resultOTJ -> fetch_object()) {
+
+          echo"<tr>
             <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
             <td>
                 {$obj -> ApprenticeshipName}
             </td>
             <td>
-                <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
-                <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='View learner'>
-            </form>
+            <form action='../OTJ/updateOffTheJobHours.php' method='post'>
+            <td>
+              <input type='text' name='TrainingCenterHours' value='{$OTJobj->TrainingCenterHours}' required />
             </td>
-        </tr>";
+            <td>
+              <input type='text' name='EmployerTrainingRecords' value='{$OTJobj->EmployerTrainingRecords}' required />
+            </td>
+            <td>
+              <input type='text' name='GTASpecialistTraining' value='{$OTJobj->GTASpecialistTraining}' required />
+            </td>
+            <td>
+              <input type='text' name='VLETraining' value='{$OTJobj->VLETraining}' required />
+              <input type='hidden' name='learnerID' value='$learnerIDString' /> 
+            </td>
+            <td>
+            <button type='submit'>Update Hours</button>
+            </td>
+            </form>
+          </tr>";
+          }
         }        ?>
         </table>
+
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='adminConsole.php'> Back </a> </li>
+    </ul>
     </div>
     </div>
   </div>
