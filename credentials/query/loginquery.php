@@ -43,7 +43,6 @@ foreach ($tableColumnMapping as $table => $columns) {
         if ($result->num_rows > 0) {
             $loginSuccessful = true;
             $fetch = $result->fetch_object();
-
             
             $userId = $fetch->{$columns['idColumn']};
 

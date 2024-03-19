@@ -13,10 +13,10 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultLearner = $mysqli->query($queryLearner);
+$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultTutor = $mysqli->query($queryTutor);
 
-$details = $resultLearner -> fetch_object();
+$details = $resultTutor -> fetch_object();
 ?>
 
   <body>
@@ -78,14 +78,12 @@ $details = $resultLearner -> fetch_object();
       <div class="container">
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='#'> Add KSB groups </a> </li>
+        <li> <a href='addKSBGroups.php'> Add KSB groups </a> </li>
         <li> <a href='http://localhost/GroupTrainingAssociation/users/admin/assign-tutor.php'> Assign a tutor to learners </a> </li>
         <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
+        <li> <a href='viewOTJAdmin.php'> View Off The Job hours </a> </li>
       </ul>
 
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='admin.php'> To profile details </a> </li>
-      </ul>
     </div>
   </div>
 </div>

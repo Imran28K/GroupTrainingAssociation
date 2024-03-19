@@ -33,7 +33,7 @@ $sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ?";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "s", $userID);
 mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt); // Fetch result
+$result = mysqli_stmt_get_result($stmt); 
 while ($row = $result->fetch_assoc()) {
     $ProgressID = $row['ProgressID'];
 
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
     $stmtProgressUnits = mysqli_prepare($mysqli, $sqlProgressUnits);
     mysqli_stmt_bind_param($stmtProgressUnits, "i", $ProgressID);
     mysqli_stmt_execute($stmtProgressUnits);
-    $resultProgressUnits = mysqli_stmt_get_result($stmtProgressUnits); // Fetch result
+    $resultProgressUnits = mysqli_stmt_get_result($stmtProgressUnits); 
     while ($rowPU = $resultProgressUnits->fetch_assoc()) {
         $progressDetails[] = $rowPU;
     }
@@ -50,7 +50,6 @@ while ($row = $result->fetch_assoc()) {
 }
 mysqli_stmt_close($stmt);
 
-// Process fetched data
 foreach ($progressDetails as $detail) {
     $UnitID = $detail['UnitID'];
     $CurrentStatus = $detail['CurrentStatus'];
@@ -60,7 +59,7 @@ foreach ($progressDetails as $detail) {
     $stmtUnits = mysqli_prepare($mysqli, $sqlUnits);
     mysqli_stmt_bind_param($stmtUnits, "i", $UnitID);
     mysqli_stmt_execute($stmtUnits);
-    $resultUnits = mysqli_stmt_get_result($stmtUnits); // Fetch result
+    $resultUnits = mysqli_stmt_get_result($stmtUnits); 
     while ($rowU = $resultUnits->fetch_assoc()) {
         $UnitName = $rowU['UnitName'];
         $SubmissionDate = $rowU['SubmissionDate'];
