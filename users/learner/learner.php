@@ -86,13 +86,8 @@ $obj = $resultLearner->fetch_object();
       </div>
       <div class="container">
         <h2 class="chart-heading">Learner Progress</h2>
-        
-        <br>
 
-        <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../sharedfiles/learnerprogress/piechart.js"></script>
+        <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div> 
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="../sharedfiles/learnerprogress/barchart.js"></script>
       </div>
