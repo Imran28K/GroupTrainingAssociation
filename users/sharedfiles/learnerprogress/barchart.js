@@ -10,11 +10,11 @@ function drawChart() {
 
   // Add rows to the DataTable. The third value in each row represents the color.
   data.addRows([
-    ['PROGRESS RAG', 50, null], // Color will be set based on value
-    ['OTJ', 49, null],          // Color will be set based on value
-    ['EMP', 44, null],          // Color will be set based on value
-    ['COMPLETED', 24, null],    // Color will be set based on value
-    ['IN-PROGRESS', 10, null]   // Color will be set based on value
+    ['PROGRESS RAG', 50, null],
+    ['OTJ', 49, null],
+    ['EMP', 44, null],
+    ['COMPLETED', 24, null],
+    ['IN-PROGRESS', 10, null]
   ]);
 
   // Function to determine the color based on the value
@@ -34,7 +34,10 @@ function drawChart() {
   // Chart options
   const options = {
     title: '',
-    legend: 'none', // Do not display a legend
+    legend: 'none',
+    hAxis: {
+      ticks: [0, 50, 100] // Specify explicit ticks for the horizontal axis
+    }
   };
 
   // Draw the chart
