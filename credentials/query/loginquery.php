@@ -85,7 +85,7 @@ if ($loginSuccessful) {
             header('location:http://localhost/GroupTrainingAssociation/users/learner/learner.php');
             break;
         case 'employer':
-            $_SESSION['userRole'] = "employer";
+            $_SESSION['userRole'] = "Employer";
             header('location:http://localhost/GroupTrainingAssociation/users/employer/employer.php');
             break;
         case 'Tutor':
@@ -97,7 +97,7 @@ if ($loginSuccessful) {
             header('location:http://localhost/GroupTrainingAssociation/users/admin/admin.php');
             break;
         default:
-            // Handle unexpected roles or add additional case statements for other roles if necessary
+            // Handsle unexpected roles or add additional case statements for other roles if necessary
             echo "Unexpected user role.";
             break;
     }
