@@ -60,6 +60,11 @@ $resultAttendance = $mysqli->query($queryAttendance);
             <span class="item">User Information</span>
           </a>
         </li>
+        <li><a href="upload-submissions.php">
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Submissions</span>
+          </a>
+        </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>

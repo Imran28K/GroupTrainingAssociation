@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Learner Info</title>
+
   <link rel="stylesheet" href="../../css/learnerinfo.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
@@ -35,14 +36,14 @@ mysqli_stmt_close($stmt);
 
 $employerID = $EmployerID;
 
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName FROM employer WHERE EmployerID = ?";
+$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName , EmployerEmail FROM employer WHERE EmployerID = ?";
 $stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
 
 if ($stmtEmployer) {
 
   mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
   mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName);
+  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName , $EmployerEmail);
 
   if (!mysqli_stmt_fetch($stmtEmployer)) {
     echo "No employer found with the specified ID";
@@ -61,10 +62,7 @@ mysqli_close($mysqli);
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php
-        echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
-        echo "<p>Learner</p>";
-        ?>
+       
       </div>
       <ul>
         <li><a href="learner.php">
@@ -77,7 +75,7 @@ mysqli_close($mysqli);
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="view-employer.php">
+        <li><a href="view-employer.php" class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
@@ -87,14 +85,9 @@ mysqli_close($mysqli);
             <span class="item">Module Information</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
+        <li><a href="learnerinfo.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">User Information</span>
-          </a>
-        </li>
-        <li><a href="upload-submissions.php">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
-            <span class="item">Submissions</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
@@ -114,65 +107,21 @@ mysqli_close($mysqli);
         <div class="main">
 
           <div class="card">
-
-            <?php if (isset($_GET['msg'])) { ?>
-              <div class="alert alert-success alert-dismissible mt-4 mb-2 fade show" role="alert" style="background-color:#8d599f;  margin-right:15px;margin-left:15px;">
-                <strong class=px-2 style="color:black; font-weight:Bold; margin-left:180px;">Success :</strong> <?php echo $_GET['msg']; ?>
-
-              </div>
-            <?php } ?>
-
             <div class="card-body">
+
               <table class="info-table">
                 <tbody>
-                  <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><?php echo $LearnerFirstName . " " . $LearnerLastName; ?> </td>
-                  </tr>
-                  <tr>
-                    <td>ULN</td>
-                    <td>:</td>
-                    <td><?php echo $learnerID; ?></td>
-                  </tr>
                   <tr>
                     <td>Employer</td>
                     <td>:</td>
                     <td><?php echo $EmployerFirstName . " " . $EmployerLastName; ?></td>
                   </tr>
                   <tr>
-                    <td>Email</td>
+                    <td>Employer's Email</td>
                     <td>:</td>
-                    <td>
-                      <form action="update-learnerinfo.php" method="post">
-                        <input type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Change</button>
-                      </form>
-                    </td>
+                    <td><?php echo $EmployerEmail; ?></td>
                   </tr>
-                  <tr>
-                    <td>Cohort</td>
-                    <td>:</td>
-                    <td><?php echo  $Cohort; ?></td>
-                  </tr>
-                  <tr>
-                    <td>Apprenticeship</td>
-                    <td>:</td>
-                    <td><?php echo $ApprenticeshipName; ?></td>
-                  </tr>
-                  <tr>
-                    <td>Start Date</td>
-                    <td>:</td>
-                    <td>01/07/2022</td>
-                  </tr>
-                  <tr>
-                    <td>End Date</td>
-                    <td>:</td>
-                    <td>27/12/2023</td>
-                  </tr>
-
-                </tbody>
+                    </tbody>
               </table>
             </div>
           </div>

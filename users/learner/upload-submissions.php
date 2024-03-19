@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -16,10 +17,60 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
-$resultLearner = $mysqli->query($queryLearner);
-
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = ?";
+$stmtLearner = mysqli_prepare($mysqli, $queryLearner);
+mysqli_stmt_bind_param($stmtLearner, "s", $userID);
+mysqli_stmt_execute($stmtLearner);
+$resultLearner = mysqli_stmt_get_result($stmtLearner);
 $obj = $resultLearner->fetch_object();
+mysqli_stmt_close($stmtLearner);
+
+$tableRows = array();
+$progressDetails = array();
+
+// Fetch ProgressID based on userID
+$sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ?";
+$stmt = mysqli_prepare($mysqli, $sql);
+mysqli_stmt_bind_param($stmt, "s", $userID);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt); // Fetch result
+while ($row = $result->fetch_assoc()) {
+    $ProgressID = $row['ProgressID'];
+
+    // Fetch UnitID and CurrentStatus based on ProgressID using the progressunits table
+    $sqlProgressUnits = "SELECT UnitID, CurrentStatus FROM progressunits WHERE ProgressID = ?";
+    $stmtProgressUnits = mysqli_prepare($mysqli, $sqlProgressUnits);
+    mysqli_stmt_bind_param($stmtProgressUnits, "i", $ProgressID);
+    mysqli_stmt_execute($stmtProgressUnits);
+    $resultProgressUnits = mysqli_stmt_get_result($stmtProgressUnits); // Fetch result
+    while ($rowPU = $resultProgressUnits->fetch_assoc()) {
+        $progressDetails[] = $rowPU;
+    }
+    mysqli_stmt_close($stmtProgressUnits);
+}
+mysqli_stmt_close($stmt);
+
+// Process fetched data
+foreach ($progressDetails as $detail) {
+    $UnitID = $detail['UnitID'];
+    $CurrentStatus = $detail['CurrentStatus'];
+
+    // Fetch UnitName and SubmissionDate for each UnitID
+    $sqlUnits = "SELECT UnitName, SubmissionDate FROM units WHERE UnitID = ?";
+    $stmtUnits = mysqli_prepare($mysqli, $sqlUnits);
+    mysqli_stmt_bind_param($stmtUnits, "i", $UnitID);
+    mysqli_stmt_execute($stmtUnits);
+    $resultUnits = mysqli_stmt_get_result($stmtUnits); // Fetch result
+    while ($rowU = $resultUnits->fetch_assoc()) {
+        $UnitName = $rowU['UnitName'];
+        $SubmissionDate = $rowU['SubmissionDate'];
+        $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td>$CurrentStatus</td></tr>";
+    }
+    mysqli_stmt_close($stmtUnits);
+}
+
+mysqli_close($mysqli);
+
 ?>
 
 <body>
@@ -79,27 +130,21 @@ $obj = $resultLearner->fetch_object();
             </div>
 
             <div class="container">
-                <?php
-                echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
-                ?>
+
                 <h2>Submission Progress</h2>
+                <br>
 
                 <table style="width:100%">
-                    <tr>
-                        <th>Units</th>
-                        <th>Due</th>
-                        <th>Status</th>
-                    </tr>
-                    <tr>
-                        <td>Soft Skills and Behaviour</td>
-                        <td>20/05/2026</td>
-                        <td>submitted</td>
-                    </tr>
-                    <tr>
-                        <td>English</td>
-                        <td>30/05/2026</td>
-                        <td>unsubmitted</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Units</th>
+                            <th>Due</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($tableRows as $row) {
+                        echo $row;
+                    } ?>
                 </table>
             </div>
 
@@ -116,41 +161,3 @@ $obj = $resultLearner->fetch_object();
 </body>
 
 </html>
-<!--<!DOCTYPE html>
-<html>
-<style>
-table, th, td {
-  border:1px solid black;
-}
-</style>
-<body>
-
-<h2>Submission Progress</h2>
-
-<table style="width:100%">
-  <tr>
-    <th>Units</th>
-    <th>Due</th>
-    <th>Action</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td>Soft Skills and Behaviour</td>
-    <td>20/05/2026</td>
-    <td>Upload</td>
-    <td>submitted</td>
-  </tr>
-  <tr>
-    <td>English</td>
-    <td>30/05/2026</td>
-    <td>Upload</td>
-    <td>unsubmitted</td>
-  </tr>
-</table>
-
-<p>Please select the box carefully.</p>
-
-</body>
-</html>
-
--->

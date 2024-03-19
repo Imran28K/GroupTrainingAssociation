@@ -79,7 +79,7 @@ $details = $resultTutor -> fetch_object();
       <p>Choose whether you want to go to the register or to create a new session</p>
       <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
         <li> <a href='addKSBGroups.php'> Add KSB groups </a> </li>
-        <li> <a href='#'> Assign a tutor to learners </a> </li>
+        <li> <a href='http://localhost/GroupTrainingAssociation/users/admin/assign-tutor.php'> Assign a tutor to learners </a> </li>
         <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
         <li> <a href='viewOTJAdmin.php'> View Off The Job hours </a> </li>
       </ul>
