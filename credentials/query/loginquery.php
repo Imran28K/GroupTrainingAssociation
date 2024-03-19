@@ -26,6 +26,7 @@ $tableColumnMapping = [
 ];
 
 $loginSuccessful = false;
+$isActive = true;
 $userRole = '';
 $userId = '';
 
@@ -59,10 +60,12 @@ foreach ($tableColumnMapping as $table => $columns) {
             $resultFetch = $mysqli->query($queryFetch);
             $fetchActive = $resultFetch->fetch_object();
             $activeStatus = $fetchActive->Active;
+
             if ($activeStatus == "Active"){
                 $loginSuccessful = true;
             }
             else if ($activeStatus == "Inactive"){
+                $isActive = false;
                 $loginSuccessful = false;
             }
 
@@ -100,8 +103,11 @@ if ($loginSuccessful) {
             echo "Unexpected user role.";
             break;
     }
-} else {
-    echo "Login failed.";
+} else if (!$loginSuccessful && !$isActive)  {
+    echo "Your account has been de-activated";
+}
+else if (!$loginSuccessful && $isActive) {
+    echo "The password or username you input is incorrect or there has been spelling mistake";
 }
 
 ?>

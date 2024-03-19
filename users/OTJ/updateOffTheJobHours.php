@@ -8,25 +8,32 @@ $resultTutor = $mysqli->query($queryTutor);
 
 $details = $resultTutor -> fetch_object();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['TrainingCenterHours'], $_POST['EmployerTrainingRecords'], $_POST['GTASpecialistTraining'], $_POST['VLETraining'], $_POST['learnerID'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ExpectedHours'], $_POST['TrainingCenterHours'], $_POST['EmployerTrainingRecords'], $_POST['GTASpecialistTraining'], $_POST['VLETraining'], $_POST['Password'], $_POST['learnerID'])) {
+    $expectedHours = $_POST['ExpectedHours'];
     $trainingCenterHours = $_POST['TrainingCenterHours'];
     $employerTrainingRecords = $_POST['EmployerTrainingRecords'];
     $GTASpecialistTraining = $_POST['GTASpecialistTraining'];
     $VLETraining = $_POST['VLETraining'];
+    $password = $_POST['Password'];
     $learnerID = $_POST['learnerID'];
 
-    $cumulativeHours = $trainingCenterHours + $employerTrainingRecords + $GTASpecialistTraining + $VLETraining;
+    $queryPasswordCheck = "SELECT * FROM tutor WHERE TutorPassword = '$password' AND TutorID = '$userID'"; 
+    $resultPasswordCheck = $mysqli->query($queryPasswordCheck);
+    $row_count = $resultPasswordCheck -> num_rows;
+
+    if ($row_count == 1) {
+        $cumulativeHours = $trainingCenterHours + $employerTrainingRecords + $GTASpecialistTraining + $VLETraining;
 
         $queryOTJ = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerID'"; 
         $resultOTJ = $mysqli->query($queryOTJ);
         $row_count = $resultOTJ -> num_rows;
 
         if ($row_count > 0){
-            $queryHours = "UPDATE otjhours SET TrainingCenterHours = $trainingCenterHours, EmployerTrainingRecords = $employerTrainingRecords, GTASpecialistTraining = $GTASpecialistTraining, VLETraining = $VLETraining, TotalHours = $cumulativeHours, CumulativeHours = $cumulativeHours WHERE UniqueLearnerNumber = '$learnerID'";
+            $queryHours = "UPDATE otjhours SET ExpectedHours = $expectedHours, TrainingCenterHours = $trainingCenterHours, EmployerTrainingRecords = $employerTrainingRecords, GTASpecialistTraining = $GTASpecialistTraining, VLETraining = $VLETraining, TotalHours = $cumulativeHours, CumulativeHours = $cumulativeHours WHERE UniqueLearnerNumber = '$learnerID'";
             $resultHours = $mysqli->query($queryHours);
         }
         else if ($row_count <= 0) {
-            $queryHours = "INSERT INTO otjhours (UniqueLearnerNumber, TrainingCenterHours, EmployerTrainingRecords, GTASpecialistTraining, VLETraining, TotalHours, CumulativeHours) VALUES ('$learnerID', $trainingCenterHours, $employerTrainingRecords, $GTASpecialistTraining, $VLETraining, $cumulativeHours, $cumulativeHours)";
+            $queryHours = "INSERT INTO otjhours (UniqueLearnerNumber, ExpectedHours, TrainingCenterHours, EmployerTrainingRecords, GTASpecialistTraining, VLETraining, TotalHours, CumulativeHours) VALUES ('$learnerID', $expectedHours, $trainingCenterHours, $employerTrainingRecords, $GTASpecialistTraining, $VLETraining, $cumulativeHours, $cumulativeHours)";
             $resultHours = $mysqli->query($queryHours);
         }
 
@@ -37,5 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['TrainingCenterHours'],
         else if ($details -> Role == "Tutor"){
             header("location: ../tutor/viewOTJTutor.php");
         }
+    }
+    else {
+        echo" the password you put in was incorrect";
+        echo"<ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='../admin/viewOTJAdmin.php'> Back </a> </li>
+        </ul>";
+    }
 }
 ?>

@@ -6,7 +6,7 @@ session_start();
 require_once ("../../db/dbconnection.php");
 $tutorID = $_SESSION['userID'];
 
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
+$querySessions = "SELECT * FROM learner"; 
 $resultSessions = $mysqli->query($querySessions); 
 
 ?>
@@ -102,10 +102,12 @@ $details = $resultTutor -> fetch_object();
         <tr>
             <td>Learner name</td>
             <td>Apprenticeship</td>
+            <td>Expected Hours</td>
             <td>Training Center Hours</td>
             <td>Employer Training Records</td>
             <td>GTA Specialist Training</td>
             <td>VLE Hours</td>
+            <td>Password</td>
         </tr>
         <?php while ($obj = $resultSessions -> fetch_object()){
           $learnerID = $obj -> UniqueLearnerNumber;
@@ -130,6 +132,9 @@ $details = $resultTutor -> fetch_object();
                 </td>
                 <form action='../OTJ/updateOffTheJobHours.php' method='post'>
                 <td>
+                  <input type='text' name='ExpectedHours' value='{$OTJobj->ExpectedHours}' required />
+                </td>
+                <td>
                   <input type='text' name='TrainingCenterHours' value='{$OTJobj->TrainingCenterHours}' required />
                 </td>
                 <td>
@@ -140,6 +145,9 @@ $details = $resultTutor -> fetch_object();
                 </td>
                 <td>
                   <input type='text' name='VLETraining' value='{$OTJobj->VLETraining}' required />
+                </td>
+                <td>
+                  <input type='text' name='Password' required />
                   <input type='hidden' name='learnerID' value='$learnerIDString' /> 
                 </td>
                 <td>
@@ -157,6 +165,9 @@ $details = $resultTutor -> fetch_object();
                 </td>
                 <form action='../OTJ/updateOffTheJobHours.php' method='post'>
                 <td>
+                  <input type='text' name='ExpectedHours' value='0' required />
+                </td>
+                <td>
                   <input type='text' name='TrainingCenterHours' value='0' required />
                 </td>
                 <td>
@@ -167,6 +178,9 @@ $details = $resultTutor -> fetch_object();
                 </td>
                 <td>
                   <input type='text' name='VLETraining' value='0' required />
+                </td>
+                <td>
+                  <input type='text' name='Password' required />
                   <input type='hidden' name='learnerID' value='$learnerIDString' /> 
                 </td>
                 <td>
