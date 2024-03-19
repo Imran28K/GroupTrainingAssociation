@@ -17,50 +17,56 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
-$resultLearner = $mysqli->query($queryLearner);
-
+$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = ?";
+$stmtLearner = mysqli_prepare($mysqli, $queryLearner);
+mysqli_stmt_bind_param($stmtLearner, "s", $userID);
+mysqli_stmt_execute($stmtLearner);
+$resultLearner = mysqli_stmt_get_result($stmtLearner);
 $obj = $resultLearner->fetch_object();
+mysqli_stmt_close($stmtLearner);
 
 $tableRows = array();
+$progressDetails = array();
 
 // Fetch ProgressID based on userID
 $sql = "SELECT ProgressID FROM learner WHERE UniqueLearnerNumber = ?";
-if ($stmt = mysqli_prepare($mysqli, $sql)) {
-    mysqli_stmt_bind_param($stmt, "s", $userID);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $ProgressID);
-    mysqli_stmt_fetch($stmt);
-    mysqli_stmt_close($stmt);
+$stmt = mysqli_prepare($mysqli, $sql);
+mysqli_stmt_bind_param($stmt, "s", $userID);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt); // Fetch result
+while ($row = $result->fetch_assoc()) {
+    $ProgressID = $row['ProgressID'];
 
-    // Fetch UnitID based on ProgressID
-    $unitIDs = array();
-    $sqlLearningProgress = "SELECT UnitID FROM learningprogress WHERE ProgressID = ?";
-    if ($stmtLearningProgress = mysqli_prepare($mysqli, $sqlLearningProgress)) {
-        mysqli_stmt_bind_param($stmtLearningProgress, "i", $ProgressID);
-        mysqli_stmt_execute($stmtLearningProgress);
-        mysqli_stmt_bind_result($stmtLearningProgress, $UnitID);
-        while (mysqli_stmt_fetch($stmtLearningProgress)) {
-            $unitIDs[] = $UnitID;
-        }
-        mysqli_stmt_close($stmtLearningProgress);
+    // Fetch UnitID and CurrentStatus based on ProgressID using the progressunits table
+    $sqlProgressUnits = "SELECT UnitID, CurrentStatus FROM progressunits WHERE ProgressID = ?";
+    $stmtProgressUnits = mysqli_prepare($mysqli, $sqlProgressUnits);
+    mysqli_stmt_bind_param($stmtProgressUnits, "i", $ProgressID);
+    mysqli_stmt_execute($stmtProgressUnits);
+    $resultProgressUnits = mysqli_stmt_get_result($stmtProgressUnits); // Fetch result
+    while ($rowPU = $resultProgressUnits->fetch_assoc()) {
+        $progressDetails[] = $rowPU;
     }
+    mysqli_stmt_close($stmtProgressUnits);
+}
+mysqli_stmt_close($stmt);
+
+// Process fetched data
+foreach ($progressDetails as $detail) {
+    $UnitID = $detail['UnitID'];
+    $CurrentStatus = $detail['CurrentStatus'];
 
     // Fetch UnitName and SubmissionDate for each UnitID
-    foreach ($unitIDs as $UnitID) {
-        $sqlUnits = "SELECT UnitName, SubmissionDate, CurrentStatus FROM units WHERE UnitID = ?";
-        if ($stmtUnits = mysqli_prepare($mysqli, $sqlUnits)) {
-            mysqli_stmt_bind_param($stmtUnits, "i", $UnitID);
-            mysqli_stmt_execute($stmtUnits);
-            mysqli_stmt_bind_result($stmtUnits, $UnitName, $SubmissionDate, $CurrentStatus);
-            while (mysqli_stmt_fetch($stmtUnits)) {
-                //$status = 'unsubmitted'; testing
-
-                $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td>$CurrentStatus</td></tr>";
-            }
-            mysqli_stmt_close($stmtUnits);
-        }
+    $sqlUnits = "SELECT UnitName, SubmissionDate FROM units WHERE UnitID = ?";
+    $stmtUnits = mysqli_prepare($mysqli, $sqlUnits);
+    mysqli_stmt_bind_param($stmtUnits, "i", $UnitID);
+    mysqli_stmt_execute($stmtUnits);
+    $resultUnits = mysqli_stmt_get_result($stmtUnits); // Fetch result
+    while ($rowU = $resultUnits->fetch_assoc()) {
+        $UnitName = $rowU['UnitName'];
+        $SubmissionDate = $rowU['SubmissionDate'];
+        $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td>$CurrentStatus</td></tr>";
     }
+    mysqli_stmt_close($stmtUnits);
 }
 
 mysqli_close($mysqli);
@@ -124,11 +130,20 @@ mysqli_close($mysqli);
             </div>
 
             <div class="container">
-                
+
                 <h2>Submission Progress</h2>
 
                 <table style="width:100%">
-                    <?php foreach ($tableRows as $row) { echo $row; } ?>
+                    <thead>
+                        <tr>
+                            <th>Units</th>
+                            <th>Due</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($tableRows as $row) {
+                        echo $row;
+                    } ?>
                 </table>
             </div>
 
@@ -145,4 +160,3 @@ mysqli_close($mysqli);
 </body>
 
 </html>
-
