@@ -24,6 +24,9 @@ $obj = $resultLearner->fetch_object();
 //checks the CurrentStatus of all units where $userID.
 //progress RAG will depend on Units completed / Total Units * 100%
 //0-39% = red   40-79% = amber   80-100% = green
+//the calculation will only be done once the submission date is passed
+
+
 ?>
 
 <body>
@@ -92,9 +95,14 @@ $obj = $resultLearner->fetch_object();
             <ul></ul>
           </div>
         </div>
+        <br>
+
+        <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../sharedfiles/learnerprogress/piechart.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="../sharedfiles/learnerprogress/barchart.js"></script>
       </div>
     </div>
   </div>
