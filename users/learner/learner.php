@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Side Navigation Bar</title>
+  <title>Learner Progress</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
