@@ -86,15 +86,7 @@ $obj = $resultLearner->fetch_object();
       </div>
       <div class="container">
         <h2 class="chart-heading">Learner Progress</h2>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
-
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
+        
         <br>
 
         <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div>
