@@ -1,0 +1,61 @@
+/* General body styling for a clean and modern look */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Container for the chart to center it and give it some breathing room */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling for a subtle, professional look */
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #444;
+}
+
+/* Ensure the chart is responsive */
+#myChart {
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Add some spacing and border to the bottom for a sectioned feel */
+.section {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Style for any buttons or links you might want to add */
+.button {
+    display: inline-block;
+    background: #0a84ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #005ecb;
+}
+
+/* Responsive text alignment */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 20px;
+    }
+}
