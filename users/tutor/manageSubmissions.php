@@ -34,7 +34,7 @@ $details = $resultDetails -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="#" class="active">
+        <li><a href="tutor.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
@@ -59,7 +59,7 @@ $details = $resultDetails -> fetch_object();
             <span class="item">Off The Job Hours</span>
           </a>
         </li>
-        <li><a href="manageSubmissions.php">
+        <li><a href="manageSubmissions.php" class="active">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Submissions</span>
           </a>
