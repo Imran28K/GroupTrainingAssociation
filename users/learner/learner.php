@@ -20,6 +20,10 @@ $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
+
+//checks the CurrentStatus of all units where $userID.
+//progress RAG will depend on Units completed / Total Units * 100%
+//0-39% = red   40-79% = amber   80-100% = green
 ?>
 
 <body>
