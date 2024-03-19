@@ -33,7 +33,7 @@ function drawChart() {
 
   // Chart options
   const options = {
-    title: 'Learner Progress',
+    title: '',
     legend: 'none', // Do not display a legend
   };
 
