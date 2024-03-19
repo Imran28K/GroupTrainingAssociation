@@ -132,6 +132,7 @@ mysqli_close($mysqli);
             <div class="container">
 
                 <h2>Submission Progress</h2>
+                <br>
 
                 <table style="width:100%">
                     <thead>
