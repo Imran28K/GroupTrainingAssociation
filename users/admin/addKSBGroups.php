@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>attendance landing page</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addKSBGroups</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-  </head>
+</head>
 
 <?php
 session_start();
@@ -13,10 +16,10 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultTutor = $mysqli->query($queryTutor);
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultLearner = $mysqli->query($queryLearner);
 
-$details = $resultTutor -> fetch_object();
+$details = $resultLearner -> fetch_object();
 ?>
 
   <body>
@@ -56,7 +59,7 @@ $details = $resultTutor -> fetch_object();
             <span class="item">Admin Page</span>
           </a>
         </li>
-		<li><a href="#">
+		    <li><a href="#">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
@@ -75,15 +78,23 @@ $details = $resultTutor -> fetch_object();
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
-      <div class="container">
-      <p>Choose whether you want to go to the register or to create a new session</p>
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='addKSBGroups.php'> Add KSB groups </a> </li>
-        <li> <a href='#'> Assign a tutor to learners </a> </li>
-        <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
-        <li> <a href='viewOTJAdmin.php'> View Off The Job hours </a> </li>
-      </ul>
 
+      <div class="container">
+        <h1>Add KSB Group</h1>
+        <form action="../../credentials/query/createGroup.php" method="post" class="login-form">
+            <div class="input-group">
+                <label for="unitName">Unit name </label>
+                <input type="text" id="unitName" name="unitName" required>
+            </div>
+            <div class="input-group">
+                <label for="date">submission date </label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <button type="submit" name="submit" class="create-group">Create Group</button>
+        </form>
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='adminConsole.php'> Back </a> </li>
+    </ul>
     </div>
   </div>
 </div>
@@ -95,4 +106,5 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+
 </html>

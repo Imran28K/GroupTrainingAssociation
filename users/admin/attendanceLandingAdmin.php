@@ -82,9 +82,6 @@ $details = $resultLearner -> fetch_object();
         <li> <a href='createSessionAdmin.php'> Create a new session </a> </li>
       </ul>
 
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='admin.php'> To profile details </a> </li>
-      </ul>
     </div>
   </div>
 </div>

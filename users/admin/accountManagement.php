@@ -84,7 +84,7 @@ $details = $resultLearner -> fetch_object();
             </ul>
 
             <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-                <li> <a href='admin.php'> To profile details </a> </li>
+                <li> <a href='adminConsole.php'> Back </a> </li>
             </ul>
         </div>
     </div>

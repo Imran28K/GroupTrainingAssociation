@@ -76,7 +76,14 @@ $details = $resultDetails -> fetch_object();
         <h2>Your details</h2>
         <ul>
           <li>Your name is: <?php echo"{$details->TutorFirstName} {$details->TutorLastName}"; ?></li>
-          <li>Your email is: <?php echo"{$details->TutorEmail}"; ?></li>
+          <li> 
+            <form action="updateTutorInfo.php" method="post">
+              <label> Your email is: </label>
+              <input type="email" name="email" value="<?php echo"{$details->TutorEmail}"; ?>" required />
+              <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
+              <button type="submit">Change email</button>
+            </form>
+          </li>
           <li>Your tutor code is: <?php echo"{$details->TutorCode}"; ?></li>
           <li>Your role is: <?php echo"{$details->Role}"; ?></li>
         </ul>
