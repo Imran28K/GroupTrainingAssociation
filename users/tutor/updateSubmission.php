@@ -21,6 +21,22 @@ $queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
 $resultDetails = $mysqli->query($queryDetails);
 
 $details = $resultDetails->fetch_object();
+
+if (isset($_POST['progressID'])) {
+    $progressID = $_POST['progressID'];
+} else {
+    
+    echo "Progress ID not provided.";
+    exit; 
+}
+
+
+$query = "SELECT pu.UnitID, u.SubmissionDate FROM progressunits pu INNER JOIN units u ON pu.UnitID = u.UnitID WHERE pu.ProgressID = ?";
+
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param("i", $progressID);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <body>
@@ -91,7 +107,20 @@ $details = $resultDetails->fetch_object();
                             <th>Action</th>
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        <?php
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                        <td>{$row['UnitID']}</td>
+                        <td>// You need to adjust the query if you want to display Unit Name</td>
+                        <td>{$row['SubmissionDate']}</td>
+                        <td>// Add your action buttons or links here</td>
+                      </tr>";
+                        }
+                        $stmt->close();
+                        ?>
+                    </tbody>
+
                 </table>
                 <a href="javascript:history.back()" class="back-button">&#8592; Back</a>
             </div>
