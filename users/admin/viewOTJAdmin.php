@@ -14,7 +14,7 @@ $resultSessions = $mysqli->query($querySessions);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View learners tutor</title>
+    <title>View Off The Job Admin</title>
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 

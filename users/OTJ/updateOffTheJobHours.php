@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ExpectedHours'], $_POS
         $row_count = $resultOTJ -> num_rows;
 
         if ($row_count > 0){
-            $queryHours = "UPDATE otjhours SET ExpectedHours = $expectedHours, TrainingCenterHours = $trainingCenterHours, EmployerTrainingRecords = $employerTrainingRecords, GTASpecialistTraining = $GTASpecialistTraining, VLETraining = $VLETraining, TotalHours = $cumulativeHours, CumulativeHours = $cumulativeHours WHERE UniqueLearnerNumber = '$learnerID'";
+            $queryHours = "UPDATE otjhours SET ExpectedHours = $expectedHours, TrainingCenterHours = $trainingCenterHours, EmployerTrainingRecords = $employerTrainingRecords, GTASpecialistTraining = $GTASpecialistTraining, VLETraining = $VLETraining, TotalHours = $cumulativeHours, CumulativeHours = $cumulativeHours, SignedOffBy = $userID WHERE UniqueLearnerNumber = '$learnerID'";
             $resultHours = $mysqli->query($queryHours);
         }
         else if ($row_count <= 0) {
-            $queryHours = "INSERT INTO otjhours (UniqueLearnerNumber, ExpectedHours, TrainingCenterHours, EmployerTrainingRecords, GTASpecialistTraining, VLETraining, TotalHours, CumulativeHours) VALUES ('$learnerID', $expectedHours, $trainingCenterHours, $employerTrainingRecords, $GTASpecialistTraining, $VLETraining, $cumulativeHours, $cumulativeHours)";
+            $queryHours = "INSERT INTO otjhours (UniqueLearnerNumber, ExpectedHours, TrainingCenterHours, EmployerTrainingRecords, GTASpecialistTraining, VLETraining, TotalHours, CumulativeHours, SignedOffBy) VALUES ('$learnerID', $expectedHours, $trainingCenterHours, $employerTrainingRecords, $GTASpecialistTraining, $VLETraining, $cumulativeHours, $cumulativeHours, $userID)";
             $resultHours = $mysqli->query($queryHours);
         }
 
