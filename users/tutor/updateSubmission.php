@@ -104,6 +104,7 @@ $result = $stmt->get_result();
                             <th>UnitID</th>
                             <th>Unit Name</th>
                             <th>Due Date</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -112,8 +113,8 @@ $result = $stmt->get_result();
                         if (isset($_POST['progressID'])) {
                             $progressID = $_POST['progressID'];
 
-
-                            $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate
+                            // Updated the SQL query to include CurrentStatus
+                            $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate, pu.CurrentStatus
                             FROM progressunits pu
                             INNER JOIN units u ON pu.UnitID = u.UnitID
                             WHERE pu.ProgressID = ?";
@@ -125,15 +126,16 @@ $result = $stmt->get_result();
 
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>
-                                     <td>{$row['UnitID']}</td>
-                                     <td>{$row['UnitName']}</td>
-                                     <td>{$row['SubmissionDate']}</td>
-                                     <td>// Action buttons here</td>
-                                     </tr>";
+                                      <td>{$row['UnitID']}</td>
+                                      <td>{$row['UnitName']}</td>
+                                      <td>{$row['SubmissionDate']}</td>
+                                      <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
+                                      <td>// checkbox and password to mark complete</td>
+                                      </tr>";
                             }
                             $stmt->close();
                         } else {
-                            echo "<tr><td colspan='4'>No progress ID provided.</td></tr>";
+                            echo "<tr><td colspan='5'>No progress ID provided.</td></tr>";
                         }
                         ?>
                     </tbody>
