@@ -54,9 +54,14 @@ $details = $resultDetails -> fetch_object();
             <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="#">
+        <li><a href="viewOTJTutor.php"> 
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">Off The Job Hours</span>
+          </a>
+        </li>
+        <li><a href="manageSubmissions.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Settings</span>
+            <span class="item">Submissions</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">

@@ -1,34 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<?php 
+session_start();
+require_once ("../../db/dbconnection.php");
+$tutorID = $_SESSION['userID'];
+
+$querySessions = "SELECT * FROM learner"; 
+$resultSessions = $mysqli->query($querySessions); 
+
+?>
 
 <head>
-  <meta charset="utf-8">
-  <title>Learner Progress</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
-  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
-  <link rel="stylesheet" type="text/css" href="../../css/learnerchart.css">
-
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view learners tutor</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <?php
-session_start();
-require_once '../../db/dbconnection.php';
-
 $userID = $_SESSION['userID'];
 
 $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
-
-//checks the CurrentStatus of all units where $userID.
-//progress RAG will depend on Units completed / Total Units * 100%
-//0-39% = red   40-79% = amber   80-100% = green
-//the calculation will only be done once the submission date is passed
-
-
 ?>
 
 <body>
@@ -43,7 +41,7 @@ $obj = $resultLearner->fetch_object();
         <p>Learner</p>
       </div>
       <ul>
-        <li><a href="learner.php" class="active">
+        <li><a href="learner.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">View Progress</span>
           </a>
@@ -53,7 +51,7 @@ $obj = $resultLearner->fetch_object();
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="viewOTJLearner.php">
+        <li><a href="viewOTJLearner.php" class="active">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View OTJ Hours</span>
           </a>
@@ -91,13 +89,53 @@ $obj = $resultLearner->fetch_object();
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
-      <div class="container">
-        <h2 class="chart-heading">Learner Progress</h2>
 
-        <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div> 
-        <script src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="../sharedfiles/learnerprogress/barchart.js"></script>
-      </div>
+      <div class="container">
+        <h1>Learner Off the job hours</h1>
+
+        
+        <?php 
+            $queryOTJ = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$userID'"; 
+            $resultOTJ = $mysqli->query($queryOTJ);
+            $row_count = $resultOTJ -> num_rows;
+            $OTJobj = $resultOTJ -> fetch_object();
+            $tutorID = $OTJobj -> SignedOffBy;
+
+            $querySigned = "SELECT * FROM tutor WHERE TutorID = '$tutorID'"; 
+            $resultSigned = $mysqli->query($querySigned);
+            $signedObj = $resultSigned -> fetch_object();
+
+            if ($row_count > 0){
+              echo"<table>
+              <tr>
+                  <td>Your Apprenticeship</td>
+                  <td>Expected Hours</td>
+                  <td>Training Center Hours</td>
+                  <td>Employer Training Records</td>
+                  <td>GTA Specialist Training</td>
+                  <td>VLE Hours</td>
+                  <td>Signed off by</td>
+              </tr>
+              <tr>
+                <td>{$obj -> ApprenticeshipName}</td>
+                <td>{$OTJobj->ExpectedHours}</td>
+                <td>{$OTJobj->TrainingCenterHours}</td>
+                <td>{$OTJobj->EmployerTrainingRecords}</td>
+                <td>{$OTJobj->GTASpecialistTraining}</td>
+                <td>{$OTJobj->VLETraining}</td>
+                <td>{$signedObj->TutorFirstName} {$signedObj->TutorLastName}</td>
+              </tr>";
+            }
+            else if ($row_count <= 0) {
+              echo"It looks like your hours haven't been entered yet";
+            }
+          ?>
+        </table>
+
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='adminConsole.php'> Back </a> </li>
+    </ul>
+    </div>
     </div>
   </div>
 

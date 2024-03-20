@@ -23,3 +23,28 @@ tr:hover {
   background-color: #e0e0e0; /* darker background color on hover */
 }
 
+.back-button {
+  text-decoration: none; /* Removes underline from the link */
+  color: #ffffff; /* Sets the text color */
+  background-color: #007bff; /* Sets the background color */
+  padding: 10px 20px; /* Adds padding around the text */
+  border-radius: 5px; /* Rounds the corners */
+  font-family: Arial, sans-serif; /* Sets the font */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Adds a subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.back-button:hover {
+  background-color: #0056b3; /* Changes background color on hover */
+}
+
+.task-completer {
+  margin: 20px;
+}
+
+#completeButton:disabled {
+  background-color: #ccc;
+}
+
+
+

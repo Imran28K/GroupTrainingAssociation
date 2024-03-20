@@ -4,29 +4,26 @@
 <?php 
 session_start();
 require_once ("../../db/dbconnection.php");
-$tutorID = $_SESSION['userID'];
-
-$querySessions = "SELECT * FROM learner"; 
-$resultSessions = $mysqli->query($querySessions); 
+$EmployerID = $_SESSION['userID'];
 
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Off The Job Admin</title>
+    <title>Assign Employer to a Learner</title>
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
 <?php 
-$tutorID = $_SESSION['userID'];
+$EmployerID = $_SESSION['userID'];
 
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view learners tutor</title>
+    <title>Assign Employer to a learner</title>
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -35,10 +32,10 @@ $tutorID = $_SESSION['userID'];
 <?php
 $userID = $_SESSION['userID'];
 
-$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultTutor = $mysqli->query($queryTutor);
+$queryEmployer = "SELECT * FROM employer WHERE EmployerID = '$userID'"; 
+$resultEmployer = $mysqli->query($queryEmployer);
 
-$details = $resultTutor -> fetch_object();
+$details = $resultEmployer -> fetch_object();
 ?>
 
   <body>
@@ -48,7 +45,7 @@ $details = $resultTutor -> fetch_object();
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
-        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
         echo"<p>{$details->Role}</p>";
         ?>
       </div>
@@ -97,99 +94,59 @@ $details = $resultTutor -> fetch_object();
         </div>
       </div>
       <div class="container">
-        <h1>Learner Off the job hours</h1>
+        <h1>Assign an Employer</h1>
         <table>
         <tr>
             <td>Learner name</td>
-            <td>Apprenticeship</td>
-            <td>Expected Hours</td>
-            <td>Training Center Hours</td>
-            <td>Employer Training Records</td>
-            <td>GTA Specialist Training</td>
-            <td>VLE Hours</td>
-            <td>Password</td>
+            <td>Employer</td>
         </tr>
-        <?php while ($obj = $resultSessions -> fetch_object()){
-          $learnerID = $obj -> UniqueLearnerNumber;
+        <?php
+        $queryGetLearners = "SELECT * FROM learner"; 
+        $resultGetLearners = $mysqli->query($queryGetLearners); 
+
+        while ($objLearner = $resultGetLearners -> fetch_object()){
+          $learnerID = $objLearner -> UniqueLearnerNumber;
           $learnerIDString = sprintf($learnerID);
 
-          $queryGetLearners = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerIDString'"; 
-          $resultGetLearners = $mysqli->query($queryGetLearners); 
-          $objLearner = $resultGetLearners -> fetch_object();
+          $EmployerID = $objLearner -> EmployerID;
 
-          $queryOTJ = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerIDString'"; 
-          $resultOTJ = $mysqli->query($queryOTJ);
+          $queryGetEmployer = "SELECT * FROM employer WHERE EmployerID = '$EmployerID'"; 
+          $resultGetEmployer = $mysqli->query($queryGetEmployer); 
+          $objEmployer = $resultGetEmployer -> fetch_object();
+
+          $querySessions = "SELECT * FROM learner WHERE EmployerID = $EmployerID"; 
+          $resultSessions = $mysqli->query($querySessions); 
           
-          $row_count = $resultOTJ -> num_rows;
+          $row_count = $resultSessions -> num_rows;
 
-          if ($row_count > 0) {
-            while($OTJobj = $resultOTJ -> fetch_object()) {
-
-              echo"<tr>
-                <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
+          if($row_count > 0) {
+            echo"<tr>
+                <td>{$objLearner -> LearnerFirstName} {$objLearner -> LearnerLastName}</td>
+                <form action='../../credentials/query/assign-emp-query.php' method='post'>
                 <td>
-                    {$obj -> ApprenticeshipName}
-                </td>
-                <form action='../OTJ/updateOffTheJobHours.php' method='post'>
-                <td>
-                  <input type='text' name='ExpectedHours' value='{$OTJobj->ExpectedHours}' required />
-                </td>
-                <td>
-                  <input type='text' name='TrainingCenterHours' value='{$OTJobj->TrainingCenterHours}' required />
-                </td>
-                <td>
-                  <input type='text' name='EmployerTrainingRecords' value='{$OTJobj->EmployerTrainingRecords}' required />
-                </td>
-                <td>
-                  <input type='text' name='GTASpecialistTraining' value='{$OTJobj->GTASpecialistTraining}' required />
-                </td>
-                <td>
-                  <input type='text' name='VLETraining' value='{$OTJobj->VLETraining}' required />
-                </td>
-                <td>
-                  <input type='text' name='Password' required />
+                  <input type='text' name='EmployerrName' value='{$objEmployer->EmployerFirstName} {$objEmployer->EmployerLastName}' required />
                   <input type='hidden' name='learnerID' value='$learnerIDString' /> 
                 </td>
                 <td>
-                <button type='submit'>Update Hours</button>
+                <button type='submit'>Assign Employer</button>
                 </td>
                 </form>
               </tr>";
-              }
           }
           else if ($row_count <= 0) {
             echo"<tr>
                 <td>{$objLearner -> LearnerFirstName} {$objLearner -> LearnerLastName}</td>
+                <form action='../../credentials/query/assign-emp-query.php' method='post'>
                 <td>
-                  {$objLearner -> ApprenticeshipName}
-                </td>
-                <form action='../OTJ/updateOffTheJobHours.php' method='post'>
-                <td>
-                  <input type='text' name='ExpectedHours' value='0' required />
-                </td>
-                <td>
-                  <input type='text' name='TrainingCenterHours' value='0' required />
-                </td>
-                <td>
-                  <input type='text' name='EmployerTrainingRecords' value='0' required />
-                </td>
-                <td>
-                  <input type='text' name='GTASpecialistTraining' value='0' required />
-                </td>
-                <td>
-                  <input type='text' name='VLETraining' value='0' required />
-                </td>
-                <td>
-                  <input type='text' name='Password' required />
+                  <input type='text' name='EmployerName' value='No Employer' required />
                   <input type='hidden' name='learnerID' value='$learnerIDString' /> 
                 </td>
                 <td>
-                <button type='submit'>Update Hours</button>
+                <button type='submit'>Assign Employer</button>
                 </td>
                 </form>
               </tr>";
           }
-
         }        ?>
         </table>
 
