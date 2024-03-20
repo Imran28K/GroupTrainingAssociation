@@ -130,7 +130,16 @@ $result = $stmt->get_result();
                                       <td>{$row['UnitName']}</td>
                                       <td>{$row['SubmissionDate']}</td>
                                       <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
-                                      <td>// checkbox and password to mark complete</td>
+                                      <td>
+                                        <div class='task-completer'>
+                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
+                                        <label for='taskCheckbox'></label>
+                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
+                                        <br>
+                                        <button id='completeButton'disabled>Complete Task</button>
+                                        </br>
+                                        </div>
+                                      </td>
                                       </tr>";
                             }
                             $stmt->close();
@@ -151,6 +160,22 @@ $result = $stmt->get_result();
         hamburger.addEventListener("click", function() {
             document.querySelector("body").classList.toggle("active");
         })
+    </script>
+    <script>
+        document.getElementById('taskCheckbox').addEventListener('change', function() {
+        document.getElementById('completeButton').disabled = !this.checked;
+        });
+
+        document.getElementById('completeButton').addEventListener('click', function() {
+        var password = document.getElementById('passwordInput').value;
+        var correctPassword = '123456'; 
+        if (password === correctPassword) {
+          alert('Task marked as complete!');
+    
+        } else {
+           alert('Incorrect password. Please try again.');
+        }
+        });
     </script>
 
 </body>
