@@ -38,4 +38,13 @@ tr:hover {
   background-color: #0056b3; /* Changes background color on hover */
 }
 
+.task-completer {
+  margin: 20px;
+}
+
+#completeButton:disabled {
+  background-color: #ccc;
+}
+
+
 

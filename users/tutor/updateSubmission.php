@@ -21,6 +21,22 @@ $queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
 $resultDetails = $mysqli->query($queryDetails);
 
 $details = $resultDetails->fetch_object();
+
+if (isset($_POST['progressID'])) {
+    $progressID = $_POST['progressID'];
+} else {
+
+    echo "Progress ID not provided.";
+    exit;
+}
+
+
+$query = "SELECT pu.UnitID, u.SubmissionDate FROM progressunits pu INNER JOIN units u ON pu.UnitID = u.UnitID WHERE pu.ProgressID = ?";
+
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param("i", $progressID);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <body>
@@ -88,10 +104,51 @@ $details = $resultDetails->fetch_object();
                             <th>UnitID</th>
                             <th>Unit Name</th>
                             <th>Due Date</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        <?php
+                        if (isset($_POST['progressID'])) {
+                            $progressID = $_POST['progressID'];
+
+                            // Updated the SQL query to include CurrentStatus
+                            $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate, pu.CurrentStatus
+                            FROM progressunits pu
+                            INNER JOIN units u ON pu.UnitID = u.UnitID
+                            WHERE pu.ProgressID = ?";
+
+                            $stmt = $mysqli->prepare($query);
+                            $stmt->bind_param("i", $progressID);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                      <td>{$row['UnitID']}</td>
+                                      <td>{$row['UnitName']}</td>
+                                      <td>{$row['SubmissionDate']}</td>
+                                      <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
+                                      <td>
+                                        <div class='task-completer'>
+                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
+                                        <label for='taskCheckbox'></label>
+                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
+                                        <br>
+                                        <button id='completeButton'disabled>Complete Task</button>
+                                        </br>
+                                        </div>
+                                      </td>
+                                      </tr>";
+                            }
+                            $stmt->close();
+                        } else {
+                            echo "<tr><td colspan='5'>No progress ID provided.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+
                 </table>
                 <a href="javascript:history.back()" class="back-button">&#8592; Back</a>
             </div>
@@ -103,6 +160,22 @@ $details = $resultDetails->fetch_object();
         hamburger.addEventListener("click", function() {
             document.querySelector("body").classList.toggle("active");
         })
+    </script>
+    <script>
+        document.getElementById('taskCheckbox').addEventListener('change', function() {
+        document.getElementById('completeButton').disabled = !this.checked;
+        });
+
+        document.getElementById('completeButton').addEventListener('click', function() {
+        var password = document.getElementById('passwordInput').value;
+        var correctPassword = '123456'; 
+        if (password === correctPassword) {
+          alert('Task marked as complete!');
+    
+        } else {
+           alert('Incorrect password. Please try again.');
+        }
+        });
     </script>
 
 </body>

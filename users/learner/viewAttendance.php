@@ -45,6 +45,11 @@ $resultAttendance = $mysqli->query($queryAttendance);
             <span class="item">View Attendance</span>
           </a>
         </li>
+        <li><a href="viewOTJLearner.php">
+            <span class="icon"><i class="fas fa-desktop"></i></span>
+            <span class="item">View OTJ Hours</span>
+          </a>
+        </li>
         <li><a href="view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
