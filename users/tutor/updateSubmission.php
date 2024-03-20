@@ -25,9 +25,9 @@ $details = $resultDetails->fetch_object();
 if (isset($_POST['progressID'])) {
     $progressID = $_POST['progressID'];
 } else {
-    
+
     echo "Progress ID not provided.";
-    exit; 
+    exit;
 }
 
 
@@ -109,15 +109,32 @@ $result = $stmt->get_result();
                     </thead>
                     <tbody>
                         <?php
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>
-                        <td>{$row['UnitID']}</td>
-                        <td>// You need to adjust the query if you want to display Unit Name</td>
-                        <td>{$row['SubmissionDate']}</td>
-                        <td>// Add your action buttons or links here</td>
-                      </tr>";
+                        if (isset($_POST['progressID'])) {
+                            $progressID = $_POST['progressID'];
+
+
+                            $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate
+                            FROM progressunits pu
+                            INNER JOIN units u ON pu.UnitID = u.UnitID
+                            WHERE pu.ProgressID = ?";
+
+                            $stmt = $mysqli->prepare($query);
+                            $stmt->bind_param("i", $progressID);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                     <td>{$row['UnitID']}</td>
+                                     <td>{$row['UnitName']}</td>
+                                     <td>{$row['SubmissionDate']}</td>
+                                     <td>// Action buttons here</td>
+                                     </tr>";
+                            }
+                            $stmt->close();
+                        } else {
+                            echo "<tr><td colspan='4'>No progress ID provided.</td></tr>";
                         }
-                        $stmt->close();
                         ?>
                     </tbody>
 
