@@ -11,65 +11,40 @@
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
-<?php
-session_start();
-require_once '../../db/dbconnection.php';
-
-$userID = $_SESSION['userID'];
-
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
-$resultDetails = $mysqli->query($queryDetails);
-
-$details = $resultDetails->fetch_object();
-?>
-
 <body>
+    <?php
+    session_start();
+    require_once '../../db/dbconnection.php';
+
+    $userID = $_SESSION['userID'];
+
+    $queryDetails = "SELECT * FROM tutor WHERE TutorID = ?";
+    $stmtDetails = $mysqli->prepare($queryDetails);
+    $stmtDetails->bind_param("i", $userID);
+    $stmtDetails->execute();
+    $resultDetails = $stmtDetails->get_result();
+    $details = $resultDetails->fetch_object();
+    ?>
 
     <div class="wrapper">
         <div class="sidebar">
             <div class="profile">
                 <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
                 <?php
-                echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
-                echo "<p>{$details->Role}</p>";
+                if ($details) {
+                    echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+                    echo "<p>{$details->Role}</p>";
+                }
                 ?>
             </div>
             <ul>
-                <li><a href="tutor.php">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item">Profile Details</span>
-                    </a>
-                </li>
-                <li><a href="attendanceLanding.php">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">View Attendance</span>
-                    </a>
-                </li>
-                <li><a href="viewLearnersTutor.php">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">View learners</span>
-                    </a>
-                </li>
-                <li><a href="updateLearners.php">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">Update learners</span>
-                    </a>
-                </li>
-                <li><a href="viewOTJTutor.php">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">Off The Job Hours</span>
-                    </a>
-                </li>
-                <li><a href="manageSubmissions.php" class="active">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Submissions</span>
-                    </a>
-                </li>
-                <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-                        <span class="icon"><i class="fas fa-door-open"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
-                </li>
+                <li><a href="tutor.php"><span class="icon"><i class="fas fa-home"></i></span><span class="item">Profile Details</span></a></li>
+                <li><a href="attendanceLanding.php"><span class="icon"><i class="fas fa-desktop"></i></span><span class="item">View Attendance</span></a></li>
+                <li><a href="viewLearnersTutor.php"><span class="icon"><i class="fas fa-user-friends"></i></span><span class="item">View Learners</span></a></li>
+                <li><a href="updateLearners.php"><span class="icon"><i class="fas fa-user-edit"></i></span><span class="item">Update Learners</span></a></li>
+                <li><a href="viewOTJTutor.php"><span class="icon"><i class="fas fa-business-time"></i></span><span class="item">Off The Job Hours</span></a></li>
+                <li><a href="manageSubmissions.php" class="active"><span class="icon"><i class="fas fa-upload"></i></span><span class="item">Submissions</span></a></li>
+                <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php"><span class="icon"><i class="fas fa-door-open"></i></span><span class="item">Logout</span></a></li>
             </ul>
         </div>
         <div class="section">
@@ -79,19 +54,54 @@ $details = $resultDetails->fetch_object();
                 </div>
             </div>
             <div class="container">
-                <h2>Submission Progress</h2>
+                <h2>Manage Learner Submissions</h2>
                 <br>
-
                 <table style="width:100%">
                     <thead>
                         <tr>
                             <th>ProgressID</th>
                             <th>Learner</th>
-                            <th>Curent Position</th>
+                            <th>Current Position</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        <?php
+                        $queryProgressIDs = "SELECT ProgressID FROM learner WHERE TutorID = ?";
+                        $stmt = $mysqli->prepare($queryProgressIDs);
+                        $stmt->bind_param("i", $userID);
+                        $stmt->execute();
+                        $resultProgressIDs = $stmt->get_result();
+
+                        while ($row = $resultProgressIDs->fetch_assoc()) {
+                            $progressID = $row['ProgressID'];
+
+                            $queryLearnerDetails = "SELECT LearnerFirstName, LearnerLastName, CurrentPosition FROM learningprogress WHERE ProgressID = ?";
+                            $stmtLearnerDetails = $mysqli->prepare($queryLearnerDetails);
+                            $stmtLearnerDetails->bind_param("i", $progressID);
+                            $stmtLearnerDetails->execute();
+                            $resultLearnerDetails = $stmtLearnerDetails->get_result();
+
+                            if ($details = $resultLearnerDetails->fetch_assoc()) {
+                                $learnerFullName = $details['LearnerFirstName'] . ' ' . $details['LearnerLastName'];
+                                $currentPosition = $details['CurrentPosition'];
+
+                                echo "<tr>
+                                        <td>{$progressID}</td>
+                                        <td>{$learnerFullName}</td>
+                                        <td>{$currentPosition}</td>
+                                        <td>//to updateSubmission page</td>
+                                      </tr>";
+                            }
+                            if ($stmtLearnerDetails) {
+                                $stmtLearnerDetails->close();
+                            }
+                        }
+                        if ($stmt) {
+                            $stmt->close();
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -101,7 +111,7 @@ $details = $resultDetails->fetch_object();
         var hamburger = document.querySelector(".hamburger");
         hamburger.addEventListener("click", function() {
             document.querySelector("body").classList.toggle("active");
-        })
+        });
     </script>
 
 </body>
