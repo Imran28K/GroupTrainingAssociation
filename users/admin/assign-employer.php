@@ -1,93 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<?php 
+session_start();
+require_once ("../../db/dbconnection.php");
+$EmployerID = $_SESSION['userID'];
+
+?>
 
 <head>
-  <meta charset="utf-8">
-  <title>Learner Info</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Employer to a Learner</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
+</head>
 
-  <link rel="stylesheet" href="../../css/learnerinfo.css">
-  <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
-  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<?php 
+$EmployerID = $_SESSION['userID'];
+
+?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Employer to a learner</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <?php
-session_start();
-require_once '../../db/dbconnection.php';
+$userID = $_SESSION['userID'];
 
-$learnerID = $_SESSION['userID'];
+$queryEmployer = "SELECT * FROM employer WHERE EmployerID = '$userID'"; 
+$resultEmployer = $mysqli->query($queryEmployer);
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
-$resultLearner = $mysqli->query($queryLearner);
-
-$obj = $resultLearner->fetch_object();
-
-$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
-
-$stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $learnerID);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $ApprenticeshipName, $EmployerID);
-if (!mysqli_stmt_fetch($stmt)) {
-  echo "0 results";
-}
-
-mysqli_stmt_close($stmt);
-
-$employerID = $EmployerID;
-
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName , EmployerEmail FROM employer WHERE EmployerID = ?";
-$stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
-
-if ($stmtEmployer) {
-
-  mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
-  mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName , $EmployerEmail);
-
-  if (!mysqli_stmt_fetch($stmtEmployer)) {
-    echo "No employer found with the specified ID";
-  }
-  mysqli_stmt_close($stmtEmployer);
-} else {
-  echo "Failed to prepare the SQL statement";
-}
-
-mysqli_close($mysqli);
+$details = $resultEmployer -> fetch_object();
 ?>
 
-<body>
+  <body>
 
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
         <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-       
+        <?php 
+        echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
+        ?>
       </div>
       <ul>
-        <li><a href="learner.php">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">View Progress</span>
+            <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="viewAttendance.php">
+        <li><a href="attendanceLandingAdmin.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="view-employer.php" class="active">
+        <li><a href="viewLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View Employer</span>
+            <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php">
-            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-            <span class="item">Module Information</span>
+        <li><a href="updateLearnersAdmin.php">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">Update learners</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">User Information</span>
+        <li><a href="adminConsole.php" class="active">
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
+          </a>
+        </li>
+		<li><a href="#">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Settings</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
@@ -104,39 +94,75 @@ mysqli_close($mysqli);
         </div>
       </div>
       <div class="container">
-        <div class="main">
+        <h1>Assign an Employer</h1>
+        <table>
+        <tr>
+            <td>Learner name</td>
+            <td>Employer</td>
+        </tr>
+        <?php
+        $queryGetLearners = "SELECT * FROM learner"; 
+        $resultGetLearners = $mysqli->query($queryGetLearners); 
 
-          <div class="card">
-            <div class="card-body">
+        while ($objLearner = $resultGetLearners -> fetch_object()){
+          $learnerID = $objLearner -> UniqueLearnerNumber;
+          $learnerIDString = sprintf($learnerID);
 
-              <table class="info-table">
-                <tbody>
-                  <tr>
-                    <td>Employer</td>
-                    <td>:</td>
-                    <td><?php echo $EmployerFirstName . " " . $EmployerLastName; ?></td>
-                  </tr>
-                  <tr>
-                    <td>Employer's Email</td>
-                    <td>:</td>
-                    <td><?php echo $EmployerEmail; ?></td>
-                  </tr>
-                    </tbody>
-              </table>
-            </div>
-          </div>
+          $EmployerID = $objLearner -> EmployerID;
 
+          $queryGetEmployer = "SELECT * FROM employer WHERE EmployerID = '$EmployerID'"; 
+          $resultGetEmployer = $mysqli->query($queryGetEmployer); 
+          $objEmployer = $resultGetEmployer -> fetch_object();
 
-        </div>
-      </div>
+          $querySessions = "SELECT * FROM learner WHERE EmployerID = $EmployerID"; 
+          $resultSessions = $mysqli->query($querySessions); 
+          
+          $row_count = $resultSessions -> num_rows;
+
+          if($row_count > 0) {
+            echo"<tr>
+                <td>{$objLearner -> LearnerFirstName} {$objLearner -> LearnerLastName}</td>
+                <form action='../../credentials/query/assign-emp-query.php' method='post'>
+                <td>
+                  <input type='text' name='EmployerrName' value='{$objEmployer->EmployerFirstName} {$objEmployer->EmployerLastName}' required />
+                  <input type='hidden' name='learnerID' value='$learnerIDString' /> 
+                </td>
+                <td>
+                <button type='submit'>Assign Employer</button>
+                </td>
+                </form>
+              </tr>";
+          }
+          else if ($row_count <= 0) {
+            echo"<tr>
+                <td>{$objLearner -> LearnerFirstName} {$objLearner -> LearnerLastName}</td>
+                <form action='../../credentials/query/assign-emp-query.php' method='post'>
+                <td>
+                  <input type='text' name='EmployerName' value='No Employer' required />
+                  <input type='hidden' name='learnerID' value='$learnerIDString' /> 
+                </td>
+                <td>
+                <button type='submit'>Assign Employer</button>
+                </td>
+                </form>
+              </tr>";
+          }
+        }        ?>
+        </table>
+
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='adminConsole.php'> Back </a> </li>
+    </ul>
     </div>
+    </div>
+  </div>
 
-    <script type="text/javascript">
-      var hamburger = document.querySelector(".hamburger");
-      hamburger.addEventListener("click", function() {
-        document.querySelector("body").classList.toggle("active");
-      })
-    </script>
+  <script type="text/javascript">
+    var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function() {
+      document.querySelector("body").classList.toggle("active");
+    })
+  </script>
 
 </body>
 
