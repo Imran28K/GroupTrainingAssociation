@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['EmployerName'], $_POST
         $check = $resultAssigningEmployer -> num_rows;
 
         if ($check > 0){
-            $queryAssignEmployer = "UPDATE employer SET EmployerID = $EmployerID WHERE UniqueLearnerNumber = '$learnerID'";
+            $queryAssignEmployer = "UPDATE learner SET EmployerID = $EmployerID WHERE UniqueLearnerNumber = '$learnerID'";
             $resultAssignEmployer = $mysqli->query($queryAssignEmployer);
             echo"successful";
     

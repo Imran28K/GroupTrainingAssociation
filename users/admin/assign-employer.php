@@ -124,7 +124,7 @@ $details = $resultEmployer -> fetch_object();
                 <td>{$objLearner -> LearnerFirstName} {$objLearner -> LearnerLastName}</td>
                 <form action='../../credentials/query/assign-emp-query.php' method='post'>
                 <td>
-                  <input type='text' name='EmployerrName' value='{$objEmployer->EmployerFirstName} {$objEmployer->EmployerLastName}' required />
+                  <input type='text' name='EmployerName' value='{$objEmployer->EmployerFirstName} {$objEmployer->EmployerLastName}' required />
                   <input type='hidden' name='learnerID' value='$learnerIDString' /> 
                 </td>
                 <td>
