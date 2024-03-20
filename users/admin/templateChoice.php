@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>attendance landing page</title>
-    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-  </head>
 
-<?php
+<?php 
 session_start();
-require_once '../../db/dbconnection.php';
+require_once ("../../db/dbconnection.php");
+
+$queryLearners = "SELECT * FROM learner"; 
+$resultLearners = $mysqli->query($queryLearners); 
 
 $userID = $_SESSION['userID'];
 
-$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultTutor = $mysqli->query($queryTutor);
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$resultDetails = $mysqli->query($queryDetails);
 
-$details = $resultTutor -> fetch_object();
+$details = $resultDetails -> fetch_object();
 ?>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Choice</title>
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+
+<body>
 
   <div class="wrapper">
     <div class="sidebar">
@@ -56,7 +61,7 @@ $details = $resultTutor -> fetch_object();
             <span class="item">Admin Page</span>
           </a>
         </li>
-		<li><a href="#">
+		    <li><a href="#">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Settings</span>
           </a>
@@ -68,27 +73,54 @@ $details = $resultTutor -> fetch_object();
         </li>
       </ul>
     </div>
-
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
-      <div class="container">
-      <p>Choose whether you want to go to the register or to create a new session</p>
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='addKSBGroups.php'> Add KSB groups </a> </li>
-        <li> <a href='assigningTutors.php'> Assign a tutor to learners </a> </li>
-        <li> <a href='assign-employer.php'> Assign an employer to learners </a> </li>
-        <li> <a href='templateChoice.php'> Changing apprenticeship templates </a> </li>
-        <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
-        <li> <a href='viewOTJAdmin.php'> View Off The Job hours </a> </li>
-      </ul>
 
+
+      <div class="container">
+        <h1>Learner accounts</h1>
+        <table>
+        <tr>
+            <td>Learner name</td>
+            <td>Apprenticeship</td>
+        </tr>
+        <?php 
+        while ($obj = $resultLearners -> fetch_object()){
+            echo"<tr>
+            <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
+            <td>
+                {$obj -> ApprenticeshipName}
+            </td>
+            <td> 
+                <form action='changeApprenticeshipTemplates.php' name='attendance' method='post'>
+                    <input type='hidden' id='learnerID' name='learnerID' value={$obj -> UniqueLearnerNumber}>
+                    <input type='submit' value='Edit Template'>
+                </form>
+            </td>
+        </tr>"; 
+        }        ?>
+        </table>
+
+    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
+        <li> <a href='adminConsole.php'> Back </a> </li>
+    </ul>
+    </div>
+
+          <div class="details">
+            <ul></ul>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../../learnerprogress/main.js"></script>
+      </div>
     </div>
   </div>
-</div>
+
   <script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", function() {
@@ -97,4 +129,5 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+
 </html>
