@@ -93,6 +93,7 @@ $details = $resultDetails->fetch_object();
                     </thead>
                     
                 </table>
+                <a href="javascript:history.back()" class="back-button">&#8592; Back</a>
             </div>
         </div>
     </div>
