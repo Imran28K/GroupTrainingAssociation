@@ -90,7 +90,12 @@
                                         <td>{$progressID}</td>
                                         <td>{$learnerFullName}</td>
                                         <td>{$currentPosition}</td>
-                                        <td>//to updateSubmission page</td>
+                                        <td>
+                                          <form action='updateSubmission.php' method='post'>
+                                            <input type='hidden' name='progressID' value='{$progressID}'>
+                                            <button type='submit'>View Units</button>
+                                           </form>
+                                        </td>
                                       </tr>";
                             }
                             if ($stmtLearnerDetails) {
