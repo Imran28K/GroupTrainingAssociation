@@ -108,7 +108,6 @@ $obj = $resultLearner->fetch_object();
             if ($row_count > 0){
               echo"<table>
               <tr>
-                  <td>Your name</td>
                   <td>Your Apprenticeship</td>
                   <td>Expected Hours</td>
                   <td>Training Center Hours</td>
@@ -118,7 +117,6 @@ $obj = $resultLearner->fetch_object();
                   <td>Signed off by</td>
               </tr>
               <tr>
-                <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
                 <td>{$obj -> ApprenticeshipName}</td>
                 <td>{$OTJobj->ExpectedHours}</td>
                 <td>{$OTJobj->TrainingCenterHours}</td>

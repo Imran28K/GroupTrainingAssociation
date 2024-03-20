@@ -2,12 +2,6 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$userID = $_SESSION['userID'];
-$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultTutor = $mysqli->query($queryTutor);
-
-$details = $resultTutor -> fetch_object();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['TutorName'], $_POST['learnerID'])) {
     $TutorName = $_POST['TutorName'];
     $learnerID = $_POST['learnerID'];
