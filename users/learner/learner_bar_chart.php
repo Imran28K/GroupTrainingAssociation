@@ -22,7 +22,7 @@ function drawChart() {
     ['OTJ', 49, null],          // Color will be set based on value
     ['EMP', 44, null],          // Color will be set based on value
     ['COMPLETED', 24, null],    // Color will be set based on value
-    ['IN-PROGRESS', 10, null]   // Color will be set based on value
+    ['IN-PROGRESS', 100, null]   // Color will be set based on value
   ]);
 
   // Function to determine the color based on the value
