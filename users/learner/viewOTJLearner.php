@@ -131,10 +131,6 @@ $obj = $resultLearner->fetch_object();
             }
           ?>
         </table>
-
-    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='adminConsole.php'> Back </a> </li>
-    </ul>
     </div>
     </div>
   </div>

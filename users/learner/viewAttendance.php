@@ -108,10 +108,6 @@ $resultAttendance = $mysqli->query($queryAttendance);
         </tr>";       
         }?>
         </table>
-
-    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='learner.php'> To learner home </a> </li>
-    </ul>
     </div>
   </div>
 
