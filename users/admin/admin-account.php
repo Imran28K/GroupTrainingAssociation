@@ -13,7 +13,7 @@ $userID = $_SESSION['userID'];
 $queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultDetails = $mysqli->query($queryDetails);
 
-$details = $resultDetails -> fetch_object();
+$details = $resultDetails->fetch_object();
 ?>
 
 <head>
@@ -21,57 +21,58 @@ $details = $resultDetails -> fetch_object();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activate/Deactivate Admin</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <body>
 
-  <div class="wrapper">
+<div class="wrapper">
     <div class="sidebar">
-      <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php 
-        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
-        echo"<p>{$details->Role}</p>";
-        ?>
-      </div>
-      <ul>
-        <li><a href="admin.php">
-            <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">Profile Details</span>
-          </a>
-        </li>
-        <li><a href="attendanceLandingAdmin.php">
-            <span class="icon"><i class="fas fa-desktop"></i></span>
-            <span class="item">View Attendance</span>
-          </a>
-        </li>
-        <li><a href="viewLearnersAdmin.php">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View learners</span>
-          </a>
-        </li>
-        <li><a href="updateLearnersAdmin.php">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Update learners</span>
-          </a>
-        </li>
-        <li><a href="adminConsole.php" class="active">
-            <span class="icon"><i class="fas fa-user-shield"></i></span>
-            <span class="item">Admin Page</span>
-          </a>
-        </li>
+        <div class="profile">
+            <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+            <?php 
+            echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+            echo "<p>{$details->Role}</p>";
+            ?>
+        </div>
+        <ul>
+            <li><a href="admin.php">
+                <span class="icon"><i class="fas fa-home"></i></span>
+                <span class="item">Profile Details</span>
+            </a>
+            </li>
+            <li><a href="attendanceLandingAdmin.php">
+                <span class="icon"><i class="fas fa-desktop"></i></span>
+                <span class="item">View Attendance</span>
+            </a>
+            </li>
+            <li><a href="viewLearnersAdmin.php">
+                <span class="icon"><i class="fas fa-user-friends"></i></span>
+                <span class="item">View learners</span>
+            </a>
+            </li>
+            <li><a href="updateLearnersAdmin.php">
+                <span class="icon"><i class="fas fa-user-friends"></i></span>
+                <span class="item">Update learners</span>
+            </a>
+            </li>
+            <li><a href="adminConsole.php" class="active">
+                <span class="icon"><i class="fas fa-user-shield"></i></span>
+                <span class="item">Admin Page</span>
+            </a>
+            </li>
 		    <li><a href="#">
-            <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Settings</span>
-          </a>
-        </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
-            <span class="icon"><i class="fas fa-door-open"></i></span>
-            <span class="item">Logout</span>
-          </a>
-        </li>
-      </ul>
+                <span class="icon"><i class="fas fa-cog"></i></span>
+                <span class="item">Settings</span>
+            </a>
+            </li>
+            <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+                <span class="icon"><i class="fas fa-door-open"></i></span>
+                <span class="item">Logout</span>
+            </a>
+            </li>
+        </ul>
     </div>
     <div class="section">
       <div class="top_navbar">
@@ -134,18 +135,50 @@ $details = $resultDetails -> fetch_object();
           </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
-      </div>
+        <div class="container">
+            <h1>Admin accounts</h1>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Admin name</th>
+                            <th>Account status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                    while ($obj = $resultTutors->fetch_object()) {
+                        $action = ($obj->Active == "Inactive") ? "Reactivate Account" : "Deactivate Account";
+                        $formAction = ($obj->Active == "Inactive") ? "activate.php" : "deactivate.php";
+                        echo "<tr>
+                                <td>{$obj->TutorFirstName} {$obj->TutorLastName}</td>
+                                <td>{$obj->Active}</td>
+                                <td>
+                                    <form action='../../credentials/query/{$formAction}' name='attendance' method='post'>
+                                        <input type='hidden' id='userID' name='userID' value='{$obj->TutorID}'>
+                                        <input type='hidden' id='role' name='role' value='Tutor'>
+                                        <input type='submit' class='btn btn-primary btn-sm' value='{$action}'>
+                                    </form>
+                                </td>
+                            </tr>";
+                    } ?>
+                    </tbody>
+                </table>
+            </div>
+            <ul class='nav nav-pills nav-stacked' role='tablist'>
+                <li><a href='accountManagement.php'> Back to account management </a> </li>
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
 
-  <script type="text/javascript">
+<script type="text/javascript">
     var hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", function() {
-      document.querySelector("body").classList.toggle("active");
+        document.querySelector("body").classList.toggle("active");
     })
-  </script>
+</script>
 
 </body>
 

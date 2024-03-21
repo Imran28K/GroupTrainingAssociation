@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
             // Loop through the file rows
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 // Prepare SQL query to insert data
-                $sql = "INSERT INTO tutors_data (ident, first_names, surname, site_code, site, programme) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO learner (ident, first_names, surname, site_code, site, programme) VALUES (?, ?, ?, ?, ?, ?)";
                 
                 // Prepare statement
                 if ($stmt = $conn->prepare($sql)) {
