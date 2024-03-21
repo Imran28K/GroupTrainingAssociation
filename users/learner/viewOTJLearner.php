@@ -114,6 +114,7 @@ $obj = $resultLearner->fetch_object();
                   <td>Employer Training Records</td>
                   <td>GTA Specialist Training</td>
                   <td>VLE Hours</td>
+                  <td>Cumulative Hours</td>
                   <td>Signed off by</td>
               </tr>
               <tr>
@@ -123,6 +124,7 @@ $obj = $resultLearner->fetch_object();
                 <td>{$OTJobj->EmployerTrainingRecords}</td>
                 <td>{$OTJobj->GTASpecialistTraining}</td>
                 <td>{$OTJobj->VLETraining}</td>
+                <td>{$OTJobj->CumulativeHours}</td>
                 <td>{$signedObj->TutorFirstName} {$signedObj->TutorLastName}</td>
               </tr>";
             }

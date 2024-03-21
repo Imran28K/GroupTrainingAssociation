@@ -57,9 +57,9 @@ $details = $resultDetails -> fetch_object();
             <span class="item">Admin Page</span>
           </a>
         </li>
-		<li><a href="#">
+		<li><a href="updateSubmissionAdmin">
             <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Settings</span>
+            <span class="item">Submissions</span>
           </a>
         </li>
         <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">

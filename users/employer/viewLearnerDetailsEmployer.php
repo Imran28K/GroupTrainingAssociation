@@ -40,22 +40,22 @@ $learnerDetails = $resultLearner -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/employer/employer.php">
+        <li><a href="employer.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
         </li>
         <li><a href="viewLearnersEmployer.php"  class="active">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View learners</span>
+            <span class="item">View employees</span>
           </a>
         </li>
-        <li><a href="#">
-            <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Settings</span>
+        <li><a href="chooseReport.php">
+            <span class="icon"><i class="fas fa-edit"></i></span>
+            <span class="item">Employer report</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>

@@ -5,7 +5,7 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 
-$queryTutors = "SELECT * FROM tutor"; 
+$queryTutors = "SELECT * FROM tutor WHERE Role = 'Admin'"; 
 $resultTutors= $mysqli->query($queryTutors); 
 
 $userID = $_SESSION['userID'];
@@ -82,7 +82,8 @@ $details = $resultDetails -> fetch_object();
 
 
       <div class="container">
-        <h1>Admin accountss</h1>
+        <h1>Admin accounts</h1>
+        <h2>Make sure not to accidentally de-activate your own account as another admin would have to let you back on</h2>
         <table>
         <tr>
             <td>Admin name</td>

@@ -44,12 +44,12 @@ $details = $resultEmployer -> fetch_object();
             <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="viewLearnersEmployer.php" class="active">
+        <li><a href="viewLearnersEmployer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View employees</span>
           </a>
         </li>
-        <li><a href="chooseReport.php">
+        <li><a href="chooseReport.php" class="active">
             <span class="icon"><i class="fas fa-edit"></i></span>
             <span class="item">Employer report</span>
           </a>
@@ -69,7 +69,7 @@ $details = $resultEmployer -> fetch_object();
       </div>
 
       <div class="container">
-        <h1>View Employees</h1>
+        <h1>Which employee would you like to write a report for?</h1>
         <table>
         <tr>
             <td>Employee name</td>
@@ -83,9 +83,9 @@ $details = $resultEmployer -> fetch_object();
                 {$obj -> ApprenticeshipName}
             </td>
             <td>
-                <form action='viewLearnerDetailsEmployer.php' name='uniqueLearnerNumber' method='post'>
+                <form action='employerRAG.php' name='uniqueLearnerNumber' method='post'>
                 <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='View employee'>
+                <input type='submit' value='Write report'>
             </form>
             </td>
         </tr>";

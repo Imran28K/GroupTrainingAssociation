@@ -36,14 +36,14 @@ mysqli_stmt_close($stmt);
 
 $employerID = $EmployerID;
 
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName , EmployerEmail FROM employer WHERE EmployerID = ?";
+$sqlEmployer = "SELECT EmploymentName, EmployerFirstName, EmployerLastName , EmployerEmail FROM employer WHERE EmployerID = ?";
 $stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
 
 if ($stmtEmployer) {
 
   mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
   mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
+  mysqli_stmt_bind_result($stmtEmployer, $EmploymentName, $EmployerFirstName, $EmployerLastName, $EmployerEmail);
 
   if (!mysqli_stmt_fetch($stmtEmployer)) {
     echo "No employer found with the specified ID";
@@ -125,7 +125,12 @@ mysqli_close($mysqli);
               <table class="info-table">
                 <tbody>
                   <tr>
-                    <td>Employer</td>
+                    <td>Place of Employment</td>
+                    <td>:</td>
+                    <td><?php echo $EmploymentName; ?></td>
+                  </tr>
+                  <tr>
+                    <td>Employer name</td>
                     <td>:</td>
                     <td><?php echo $EmployerFirstName . " " . $EmployerLastName; ?></td>
                   </tr>
