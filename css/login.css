@@ -34,7 +34,7 @@ body, html {
     width: 100%;
     margin: 0;
     font-family: var(--font-family);
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(#8d599f,white);
     display: flex;
     justify-content: center;
     align-items: center;

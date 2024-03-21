@@ -5,6 +5,14 @@
     <title>attendance landing page</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- CSS only -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JavaScript and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-fE3GAyYdAMWSR9EJp0IhPDiw6PRx41HjrFI12wPz/D9V9SgJb3cc7i2JhuSvmXPA" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+5KVcL1e/JTq8Ck+8M+eG2lPUfww/tq+X" crossorigin="anonymous"></script>
+
   </head>
 
 <?php
@@ -75,17 +83,66 @@ $details = $resultTutor -> fetch_object();
           <a href="#"><i class="fas fa-bars"></i></a>
         </div>
       </div>
-      <div class="container">
-      <p>Choose whether you want to go to the register or to create a new session</p>
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='addKSBGroups.php'> Add KSB groups </a> </li>
-        <li> <a href='assigningTutors.php'> Assign a tutor to learners </a> </li>
-        <li> <a href='assign-employer.php'> Assign an employer to learners </a> </li>
-        <li> <a href='templateChoice.php'> Changing apprenticeship templates </a> </li>
-        <li> <a href='accountManagement.php'> De-activate accounts </a> </li>
-        <li> <a href='viewOTJAdmin.php'> View Off The Job hours </a> </li>
-      </ul>
-
+      <div class="container mt-4">
+    <h2>Admin Functions</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Add KSB Groups</h5>
+                 
+                    <a href="addKSBGroups.php" class="btn btn-primary">Go to Add KSB Groups</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Assign a Tutor to Learners</h5>
+                  
+                    <a href="assigningTutors.php" class="btn btn-primary">Go to Assign Tutors</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Assign an Employer to Learners</h5>
+                    
+                    <a href="assign-employer.php" class="btn btn-primary">Go to Assign Employers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Changing Apprenticeship Templates</h5>
+                   
+                    <a href="templateChoice.php" class="btn btn-primary">Go to Change Templates</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">De-activate Accounts</h5>
+                   
+                    <a href="accountManagement.php" class="btn btn-primary">Go to Deactivate Accounts</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">View Off The Job Hours</h5>
+                   
+                    <a href="viewOTJAdmin.php" class="btn btn-primary">Go to View OTJ Hours</a>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 </div>
