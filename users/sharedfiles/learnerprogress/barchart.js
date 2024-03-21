@@ -14,7 +14,7 @@ function drawChart() {
     ['OTJ', 49, null],
     ['EMP', 44, null],
     ['COMPLETED', 24, null],
-    ['IN-PROGRESS', 10, null]
+    ['IN-PROGRESS', 100, null]
   ]);
 
   // Function to determine the color based on the value

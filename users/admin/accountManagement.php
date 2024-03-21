@@ -81,6 +81,7 @@ $details = $resultLearner -> fetch_object();
                 <li> <a href='learnerAccounts.php'> learner accounts </a> </li>
                 <li> <a href='tutorAccounts.php'> tutor accounts </a> </li>
                 <li> <a href='employerAccounts.php'> employer accounts </a> </li>
+                <li> <a href='admin-account.php'> Admin accounts </a> </li>
             </ul>
 
             <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
