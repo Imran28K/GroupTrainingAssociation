@@ -61,7 +61,7 @@
                         <tr>
                             <th>ProgressID</th>
                             <th>Learner</th>
-                            <th>Current Position</th>
+                            <th>Programme Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -76,7 +76,7 @@
                         while ($row = $resultProgressIDs->fetch_assoc()) {
                             $progressID = $row['ProgressID'];
 
-                            $queryLearnerDetails = "SELECT LearnerFirstName, LearnerLastName, CurrentPosition FROM learningprogress WHERE ProgressID = ?";
+                            $queryLearnerDetails = "SELECT LearnerFirstName, LearnerLastName, ProgrammeStatus FROM learningprogress WHERE ProgressID = ?";
                             $stmtLearnerDetails = $mysqli->prepare($queryLearnerDetails);
                             $stmtLearnerDetails->bind_param("i", $progressID);
                             $stmtLearnerDetails->execute();
@@ -84,12 +84,12 @@
 
                             if ($details = $resultLearnerDetails->fetch_assoc()) {
                                 $learnerFullName = $details['LearnerFirstName'] . ' ' . $details['LearnerLastName'];
-                                $currentPosition = $details['CurrentPosition'];
+                                $programmeStatus = $details['ProgrammeStatus'];
 
                                 echo "<tr>
                                         <td>{$progressID}</td>
                                         <td>{$learnerFullName}</td>
-                                        <td>{$currentPosition}</td>
+                                        <td>{$programmeStatus}</td>
                                         <td>
                                           <form action='updateSubmission.php' method='post'>
                                             <input type='hidden' name='progressID' value='{$progressID}'>
