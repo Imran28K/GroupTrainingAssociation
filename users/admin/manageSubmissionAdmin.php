@@ -53,11 +53,6 @@
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="updateLearnersAdmin.php">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Update learners</span>
-          </a>
-        </li>
         <li><a href="adminConsole.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
