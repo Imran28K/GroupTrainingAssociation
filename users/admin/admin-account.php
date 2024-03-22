@@ -65,7 +65,7 @@ $resultTutors = $mysqli->query($queryTutors);
                 <span class="item">Admin Page</span>
             </a>
             </li>
-            <li><a href="manageSubmissionsAdmin.php">
+		    <li><a href="manageSubmissionAdmin.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Submissions</span>
           </a>
