@@ -71,7 +71,7 @@ $result = $stmt->get_result();
                         <span class="item">Off The Job Hours</span>
                     </a>
                 </li>
-                <li><a href="manageSubmissions.php" class="active">
+                <li><a href="manageSubmissionsAdmin.php" class="active">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Submissions</span>
                     </a>
