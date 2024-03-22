@@ -25,7 +25,7 @@ $details = $resultDetails -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
+        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
         echo"<p>{$details->Role}</p>";
@@ -47,17 +47,22 @@ $details = $resultDetails -> fetch_object();
             <span class="item">View learners</span>
           </a>
         </li>
+        <li><a href="updateLearnersAdmin.php">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">Update learners</span>
+          </a>
+        </li>
         <li><a href="adminConsole.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>
         </li>
-		    <li><a href="manageSubmissionsAdmin.php">
+		<li><a href="manageSubmissionAdmin.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Submissions</span>
+            <span class="item">Submission</span>
           </a>
         </li>
-        <li><a href="../../credentials/login.php">
+        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>

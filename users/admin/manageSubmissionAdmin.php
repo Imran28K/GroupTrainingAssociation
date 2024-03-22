@@ -29,7 +29,7 @@
     <div class="wrapper">
         <div class="sidebar">
             <div class="profile">
-                <img src="../../images/logos/gtalogo.png" alt="profile_picture">
+                <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
                 <?php
                 if ($details) {
                     echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
@@ -37,7 +37,7 @@
                 }
                 ?>
             </div>
-      <ul>
+            <ul>
         <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
@@ -53,31 +53,36 @@
             <span class="item">View learners</span>
           </a>
         </li>
+        <li><a href="updateLearnersAdmin.php">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">Update learners</span>
+          </a>
+        </li>
         <li><a href="adminConsole.php">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>
         </li>
-		<li><a href="manageSubmissionsAdmin.php" class="active">
+		<li><a href="manageSubmissionAdmin.php" class="active">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="../../credentials/login.php">
+        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
         </li>
       </ul>
-    </div>
-    <div class="section">
-      <div class="top_navbar">
-        <div class="hamburger">
-          <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-      </div>
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#"><i class="fas fa-bars"></i></a>
+                </div>
+            </div>
             <div class="container">
-                <h2>Manage Learner Submissions</h2>
+                <h2>Manage Learner Submissions - Admin view</h2>
                 <br>
                 <table style="width:100%">
                     <thead>
@@ -90,9 +95,9 @@
                     </thead>
                     <tbody>
                         <?php
-                        $queryProgressIDs = "SELECT ProgressID FROM learner WHERE TutorID = ?";
+                        $queryProgressIDs = "SELECT ProgressID FROM learner";
                         $stmt = $mysqli->prepare($queryProgressIDs);
-                        $stmt->bind_param("i", $userID);
+
                         $stmt->execute();
                         $resultProgressIDs = $stmt->get_result();
 
