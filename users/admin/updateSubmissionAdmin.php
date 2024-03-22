@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -126,14 +127,14 @@ $result = $stmt->get_result();
                                       <td>{$row['SubmissionDate']}</td>
                                       <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
-                                        <div class='task-completer'>
-                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
-                                        <label for='taskCheckbox'></label>
-                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
-                                        <br>
-                                        <button id='completeButton'disabled>Complete Task</button>
-                                        </br>
-                                        </div>
+                                      <form method='POST' action='../query/updateSubmissionVerification.php'>
+                                      <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                      <input type='hidden' name='progressId' value='{$progressID}'>
+                                      <input type='checkbox' name='taskCheckbox' id='taskCheckbox-{$row['UnitID']}' onclick='this.form.submit()' >
+                                      <label for='taskCheckbox-{$row['UnitID']}'></label>
+                                      <input type='password' name='password' placeholder='Enter Password' required>
+                                      <input type='submit' value='Complete Task'>
+                                      </form>
                                       </td>
                                       </tr>";
                             }
@@ -156,22 +157,12 @@ $result = $stmt->get_result();
             document.querySelector("body").classList.toggle("active");
         })
     </script>
-    <script>
-        document.getElementById('taskCheckbox').addEventListener('change', function() {
-        document.getElementById('completeButton').disabled = !this.checked;
-        });
-
-        document.getElementById('completeButton').addEventListener('click', function() {
-        var password = document.getElementById('passwordInput').value;
-        var correctPassword = '123456'; 
-        if (password === correctPassword) {
-          alert('Task marked as complete!');
     
-        } else {
-           alert('Incorrect password. Please try again.');
-        }
-        });
-    </script>
+    
+
+
+
+
 
 </body>
 
