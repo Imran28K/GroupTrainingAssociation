@@ -20,6 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $queryActivated= "UPDATE Employer SET Active = 'Active' WHERE EmployerID = '$userIDString'";
         $resultActivated = $mysqli->query($queryActivated);
     }
-    header('location:http://localhost/GroupTrainingAssociation/users/admin/accountManagement.php');
+    header('location:../../users/admin/accountManagement.php');
 }
 ?>

@@ -12,10 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $queryAttended= "UPDATE attendance SET present = 'Yes' WHERE UniqueLearnerNumber = '$learnerIDString' AND sessionID = '$sessionIDString'";
     $resultAttended = $mysqli->query($queryAttended);
     if ($userRole == "tutor"){
-        header('location:http://localhost/GroupTrainingAssociation/users/tutor/registerAttendance.php');
+        header('location:../../users/tutor/registerAttendance.php');
     }
     else if ($userRole == "admin") {
-        header('location:http://localhost/GroupTrainingAssociation/users/admin/registerAttendanceAdmin.php');
+        header('location:../../users/admin/registerAttendanceAdmin.php');
     }
 }
 

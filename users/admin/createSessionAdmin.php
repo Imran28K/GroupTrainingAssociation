@@ -17,7 +17,7 @@
 <div class="wrapper">
     <div class="sidebar">
         <div class="profile">
-            <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+            <img src="../../images/logos/gtalogo.png" alt="profile_picture">
             <?php 
             session_start();
             require_once '../../db/dbconnection.php';
@@ -58,22 +58,18 @@
                 <span class="item">View learners</span>
             </a>
             </li>
-            <li><a href="updateLearnersAdmin.php">
-                <span class="icon"><i class="fas fa-user-friends"></i></span>
-                <span class="item">Update learners</span>
-            </a>
-            </li>
+
             <li><a href="adminConsole.php">
                 <span class="icon"><i class="fas fa-user-shield"></i></span>
                 <span class="item">Admin Page</span>
             </a>
             </li>
-            <li><a href="#">
-                <span class="icon"><i class="fas fa-cog"></i></span>
-                <span class="item">Settings</span>
-            </a>
-            </li>
-            <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+            <li><a href="manageSubmissionsAdmin.php">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Submissions</span>
+          </a>
+        </li>
+            <li><a href="../../credentials/login.php">
                 <span class="icon"><i class="fas fa-door-open"></i></span>
                 <span class="item">Logout</span>
             </a>

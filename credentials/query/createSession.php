@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $querySession = "INSERT INTO registerSessions (SessionDate, TimeStart, TimeEnd, apprenticeshipName) VALUES ('$date', '$timeStartString', '$timeEndString', '$apprenticeship')";
     $resultSession = $mysqli->query($querySession);
     if ($userRole == "tutor"){
-        header('location:http://localhost/GroupTrainingAssociation/users/tutor/attendanceLanding.php');
+        header('location:../../users/tutor/attendanceLanding.php');
     }
     else if ($userRole == "admin") {
-        header('location:http://localhost/GroupTrainingAssociation/users/admin/attendanceLandingAdmin.php');
+        header('location:../../users/admin/attendanceLandingAdmin.php');
     }
 }
 

@@ -34,14 +34,14 @@ $obj = $resultLearner -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$obj->TutorFirstName} {$obj->TutorLastName}</h3>";
         echo"<p>{$obj->Role}</p>";
         ?>
       </div>
       <ul>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/tutor/tutor.php">
+        <li><a href="../../users/tutor/tutor.php">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>
@@ -71,7 +71,7 @@ $obj = $resultLearner -> fetch_object();
             <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>

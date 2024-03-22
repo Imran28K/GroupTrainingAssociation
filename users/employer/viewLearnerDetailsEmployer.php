@@ -33,7 +33,7 @@ $learnerDetails = $resultLearner -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
         echo"<p>{$details->Role}</p>";

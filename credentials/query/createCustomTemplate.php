@@ -45,7 +45,7 @@ $details = $resultTutor -> fetch_object();
     $group34Name = $_POST['Group34'];  $group34SubmissionDate = $_POST['Group34Date'];
 
     //Group 1
-    $queryCheckUnit1 = "SELECT * FROM Units WHERE UnitName = '$group1Name' AND SubmissionDate = 'group1SubmissionDate'"; 
+    $queryCheckUnit1 = "SELECT * FROM Units WHERE UnitName = '$group1Name' AND SubmissionDate = '$group1SubmissionDate'"; 
     $resultCheckUnit1 = $mysqli->query($queryCheckUnit1); 
     $getUnit1 = $resultCheckUnit1 -> fetch_object();
     $getCheckUnit1 = $resultCheckUnit1 -> num_rows;
@@ -62,24 +62,24 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 2
-    $queryCheckUnit2 = "SELECT * FROM Units WHERE UnitName = '$group2Name' AND SubmissionDate = 'group2SubmissionDate'"; 
+    $queryCheckUnit2 = "SELECT * FROM Units WHERE UnitName = '$group2Name' AND SubmissionDate = '$group2SubmissionDate'"; 
     $resultCheckUnit2 = $mysqli->query($queryCheckUnit2); 
-    $unit2 = $resultCheckUnit2 -> fetch_object();
+    $getUnit2 = $resultCheckUnit2 -> fetch_object();
     $getCheckUnit2 = $resultCheckUnit2 -> num_rows;
     if ($getCheckUnit2 > 0){
-        $group2 = $unit2 -> UnitID;
+        $group2 = $getUnit2 -> UnitID;
     }
     else if ($getCheckUnit2 <= 0){
         $queryCreateUnit2 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group2Name', '$group2SubmissionDate')";
         $resultAssignTutor2 = $mysqli->query($queryCreateUnit2);
-        $queryGetUnit2 = "SELECT * FROM Units WHERE UnitName = '$group2Name' AND SubmissionDate = 'group2SubmissionDate'";
+        $queryGetUnit2 = "SELECT * FROM Units WHERE UnitName = '$group2Name' AND SubmissionDate = '$group2SubmissionDate'";
         $resultGetUnit2 = $mysqli->query($queryGetUnit2);
         $unit2 = $resultGetUnit2 -> fetch_object();
         $group2 = $unit2 -> UnitID;
     }
 
     //Group 3
-    $queryCheckUnit3 = "SELECT * FROM Units WHERE UnitName = '$group3Name' AND SubmissionDate = 'group3SubmissionDate'"; 
+    $queryCheckUnit3 = "SELECT * FROM Units WHERE UnitName = '$group3Name' AND SubmissionDate = '$group3SubmissionDate'"; 
     $resultCheckUnit3 = $mysqli->query($queryCheckUnit3); 
     $getUnit3 = $resultCheckUnit3 -> fetch_object();
     $getCheckUnit3 = $resultCheckUnit3 -> num_rows;
@@ -89,14 +89,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit3 <= 0){
         $queryCreateUnit3 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group3Name', '$group3SubmissionDate')";
         $resultAssignTutor3 = $mysqli->query($queryCreateUnit3);
-        $queryGetUnit3 = "SELECT * FROM Units WHERE UnitName = '$group3Name' AND SubmissionDate = 'group3SubmissionDate'";
+        $queryGetUnit3 = "SELECT * FROM Units WHERE UnitName = '$group3Name' AND SubmissionDate = '$group3SubmissionDate'";
         $resultGetUnit3 = $mysqli->query($queryGetUnit3);
         $unit3 = $resultGetUnit3 -> fetch_object();
         $group3 = $unit3 -> UnitID;
     }
 
     //Group 4
-    $queryCheckUnit4 = "SELECT * FROM Units WHERE UnitName = '$group4Name' AND SubmissionDate = 'group4SubmissionDate'"; 
+    $queryCheckUnit4 = "SELECT * FROM Units WHERE UnitName = '$group4Name' AND SubmissionDate = '$group4SubmissionDate'"; 
     $resultCheckUnit4 = $mysqli->query($queryCheckUnit4); 
     $getUnit4 = $resultCheckUnit4 -> fetch_object();
     $getCheckUnit4 = $resultCheckUnit4 -> num_rows;
@@ -106,14 +106,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit4 <= 0){
         $queryCreateUnit4 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group4Name', '$group4SubmissionDate')";
         $resultAssignTutor4 = $mysqli->query($queryCreateUnit4);
-        $queryGetUnit4 = "SELECT * FROM Units WHERE UnitName = '$group4Name' AND SubmissionDate = 'group4SubmissionDate'";
+        $queryGetUnit4 = "SELECT * FROM Units WHERE UnitName = '$group4Name' AND SubmissionDate = '$group4SubmissionDate'";
         $resultGetUnit4 = $mysqli->query($queryGetUnit4);
         $unit4 = $resultGetUnit4 -> fetch_object();
         $group4 = $unit4 -> UnitID;
     }
 
     //Group 5
-    $queryCheckUnit5 = "SELECT * FROM Units WHERE UnitName = '$group5Name' AND SubmissionDate = 'group5SubmissionDate'"; 
+    $queryCheckUnit5 = "SELECT * FROM Units WHERE UnitName = '$group5Name' AND SubmissionDate = '$group5SubmissionDate'"; 
     $resultCheckUnit5 = $mysqli->query($queryCheckUnit5); 
     $getUnit5 = $resultCheckUnit5 -> fetch_object();
     $getCheckUnit5 = $resultCheckUnit5 -> num_rows;
@@ -123,14 +123,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit5 <= 0){
         $queryCreateUnit5 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group5Name', '$group5SubmissionDate')";
         $resultAssignTutor5 = $mysqli->query($queryCreateUnit5);
-        $queryGetUnit5 = "SELECT * FROM Units WHERE UnitName = '$group5Name' AND SubmissionDate = 'group5SubmissionDate'";
+        $queryGetUnit5 = "SELECT * FROM Units WHERE UnitName = '$group5Name' AND SubmissionDate = '$group5SubmissionDate'";
         $resultGetUnit5 = $mysqli->query($queryGetUnit5);
         $unit5 = $resultGetUnit5 -> fetch_object();
         $group5 = $unit5 -> UnitID;
     }
 
     //Group 6
-    $queryCheckUnit6 = "SELECT * FROM Units WHERE UnitName = '$group6Name' AND SubmissionDate = 'group6SubmissionDate'"; 
+    $queryCheckUnit6 = "SELECT * FROM Units WHERE UnitName = '$group6Name' AND SubmissionDate = '$group6SubmissionDate'"; 
     $resultCheckUnit6 = $mysqli->query($queryCheckUnit6); 
     $getUnit6 = $resultCheckUnit6 -> fetch_object();
     $getCheckUnit6 = $resultCheckUnit6 -> num_rows;
@@ -140,14 +140,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit6 <= 0){
         $queryCreateUnit6 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group6Name', '$group6SubmissionDate')";
         $resultAssignTutor6 = $mysqli->query($queryCreateUnit6);
-        $queryGetUnit6 = "SELECT * FROM Units WHERE UnitName = '$group6Name' AND SubmissionDate = 'group6SubmissionDate'";
+        $queryGetUnit6 = "SELECT * FROM Units WHERE UnitName = '$group6Name' AND SubmissionDate = '$group6SubmissionDate'";
         $resultGetUnit6 = $mysqli->query($queryGetUnit6);
         $unit6 = $resultGetUnit6 -> fetch_object();
         $group6 = $unit6 -> UnitID;
     }
 
     //Group 7
-    $queryCheckUnit7 = "SELECT * FROM Units WHERE UnitName = '$group7Name' AND SubmissionDate = 'group7SubmissionDate'"; 
+    $queryCheckUnit7 = "SELECT * FROM Units WHERE UnitName = '$group7Name' AND SubmissionDate = '$group7SubmissionDate'"; 
     $resultCheckUnit7 = $mysqli->query($queryCheckUnit7); 
     $getUnit7 = $resultCheckUnit7 -> fetch_object();
     $getCheckUnit7 = $resultCheckUnit7 -> num_rows;
@@ -157,14 +157,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit7 <= 0){
         $queryCreateUnit7 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group7Name', '$group7SubmissionDate')";
         $resultAssignTutor7 = $mysqli->query($queryCreateUnit7);
-        $queryGetUnit7 = "SELECT * FROM Units WHERE UnitName = '$group7Name' AND SubmissionDate = 'group7SubmissionDate'";
+        $queryGetUnit7 = "SELECT * FROM Units WHERE UnitName = '$group7Name' AND SubmissionDate = '$group7SubmissionDate'";
         $resultGetUnit7 = $mysqli->query($queryGetUnit7);
         $unit7 = $resultGetUnit7 -> fetch_object();
         $group7 = $unit7 -> UnitID;
     }
 
     //Group 8
-    $queryCheckUnit8 = "SELECT * FROM Units WHERE UnitName = '$group8Name' AND SubmissionDate = 'group8SubmissionDate'"; 
+    $queryCheckUnit8 = "SELECT * FROM Units WHERE UnitName = '$group8Name' AND SubmissionDate = '$group8SubmissionDate'"; 
     $resultCheckUnit8 = $mysqli->query($queryCheckUnit8); 
     $getUnit8 = $resultCheckUnit8 -> fetch_object();
     $getCheckUnit8 = $resultCheckUnit8 -> num_rows;
@@ -174,14 +174,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit8 <= 0){
         $queryCreateUnit8 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group8Name', '$group8SubmissionDate')";
         $resultAssignTutor8 = $mysqli->query($queryCreateUnit8);
-        $queryGetUnit8 = "SELECT * FROM Units WHERE UnitName = '$group8Name' AND SubmissionDate = 'group8SubmissionDate'";
+        $queryGetUnit8 = "SELECT * FROM Units WHERE UnitName = '$group8Name' AND SubmissionDate = '$group8SubmissionDate'";
         $resultGetUnit8 = $mysqli->query($queryGetUnit8);
         $unit8 = $resultGetUnit8 -> fetch_object();
         $group8 = $unit8 -> UnitID;
     }
 
     //Group 9
-    $queryCheckUnit9 = "SELECT * FROM Units WHERE UnitName = '$group9Name' AND SubmissionDate = 'group9SubmissionDate'"; 
+    $queryCheckUnit9 = "SELECT * FROM Units WHERE UnitName = '$group9Name' AND SubmissionDate = '$group9SubmissionDate'"; 
     $resultCheckUnit9 = $mysqli->query($queryCheckUnit9); 
     $getUnit9 = $resultCheckUnit9 -> fetch_object();
     $getCheckUnit9 = $resultCheckUnit9 -> num_rows;
@@ -191,14 +191,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit9 <= 0){
         $queryCreateUnit9 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group9Name', '$group9SubmissionDate')";
         $resultAssignTutor9 = $mysqli->query($queryCreateUnit9);
-        $queryGetUnit9 = "SELECT * FROM Units WHERE UnitName = '$group9Name' AND SubmissionDate = 'group9SubmissionDate'";
+        $queryGetUnit9 = "SELECT * FROM Units WHERE UnitName = '$group9Name' AND SubmissionDate = '$group9SubmissionDate'";
         $resultGetUnit9 = $mysqli->query($queryGetUnit9);
         $unit9 = $resultGetUnit9 -> fetch_object();
         $group9 = $unit9 -> UnitID;
     }
 
     //Group 10
-    $queryCheckUnit10 = "SELECT * FROM Units WHERE UnitName = '$group10Name' AND SubmissionDate = 'group10SubmissionDate'"; 
+    $queryCheckUnit10 = "SELECT * FROM Units WHERE UnitName = '$group10Name' AND SubmissionDate = '$group10SubmissionDate'"; 
     $resultCheckUnit10 = $mysqli->query($queryCheckUnit10); 
     $getUnit10 = $resultCheckUnit10 -> fetch_object();
     $getCheckUnit10 = $resultCheckUnit10 -> num_rows;
@@ -215,7 +215,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 11
-    $queryCheckUnit11 = "SELECT * FROM Units WHERE UnitName = '$group11Name' AND SubmissionDate = 'group11SubmissionDate'"; 
+    $queryCheckUnit11 = "SELECT * FROM Units WHERE UnitName = '$group11Name' AND SubmissionDate = '$group11SubmissionDate'"; 
     $resultCheckUnit11 = $mysqli->query($queryCheckUnit11); 
     $getUnit11 = $resultCheckUnit11 -> fetch_object();
     $getCheckUnit11 = $resultCheckUnit11 -> num_rows;
@@ -232,7 +232,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 12
-    $queryCheckUnit12 = "SELECT * FROM Units WHERE UnitName = '$group12Name' AND SubmissionDate = 'group12SubmissionDate'"; 
+    $queryCheckUnit12 = "SELECT * FROM Units WHERE UnitName = '$group12Name' AND SubmissionDate = '$group12SubmissionDate'"; 
     $resultCheckUnit12 = $mysqli->query($queryCheckUnit12); 
     $getUnit12 = $resultCheckUnit12 -> fetch_object();
     $getCheckUnit12 = $resultCheckUnit12 -> num_rows;
@@ -249,7 +249,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 13
-    $queryCheckUnit13 = "SELECT * FROM Units WHERE UnitName = '$group13Name' AND SubmissionDate = 'group13SubmissionDate'"; 
+    $queryCheckUnit13 = "SELECT * FROM Units WHERE UnitName = '$group13Name' AND SubmissionDate = '$group13SubmissionDate'"; 
     $resultCheckUnit13 = $mysqli->query($queryCheckUnit13); 
     $getUnit13 = $resultCheckUnit13 -> fetch_object();
     $getCheckUnit13 = $resultCheckUnit13 -> num_rows;
@@ -266,7 +266,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 14
-    $queryCheckUnit14 = "SELECT * FROM Units WHERE UnitName = '$group14Name' AND SubmissionDate = 'group14SubmissionDate'"; 
+    $queryCheckUnit14 = "SELECT * FROM Units WHERE UnitName = '$group14Name' AND SubmissionDate = '$group14SubmissionDate'"; 
     $resultCheckUnit14 = $mysqli->query($queryCheckUnit14); 
     $getUnit14 = $resultCheckUnit14 -> fetch_object();
     $getCheckUnit14 = $resultCheckUnit14 -> num_rows;
@@ -283,7 +283,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 15
-    $queryCheckUnit15 = "SELECT * FROM Units WHERE UnitName = '$group15Name' AND SubmissionDate = 'group15SubmissionDate'"; 
+    $queryCheckUnit15 = "SELECT * FROM Units WHERE UnitName = '$group15Name' AND SubmissionDate = '$group15SubmissionDate'"; 
     $resultCheckUnit15 = $mysqli->query($queryCheckUnit15); 
     $getUnit15 = $resultCheckUnit15 -> fetch_object();
     $getCheckUnit15 = $resultCheckUnit15 -> num_rows;
@@ -300,7 +300,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 16
-    $queryCheckUnit16 = "SELECT * FROM Units WHERE UnitName = '$group16Name' AND SubmissionDate = 'group16SubmissionDate'"; 
+    $queryCheckUnit16 = "SELECT * FROM Units WHERE UnitName = '$group16Name' AND SubmissionDate = '$group16SubmissionDate'"; 
     $resultCheckUnit16 = $mysqli->query($queryCheckUnit16); 
     $getUnit16 = $resultCheckUnit16 -> fetch_object();
     $getCheckUnit16 = $resultCheckUnit16 -> num_rows;
@@ -317,7 +317,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 17
-    $queryCheckUnit17 = "SELECT * FROM Units WHERE UnitName = '$group17Name' AND SubmissionDate = 'group17SubmissionDate'"; 
+    $queryCheckUnit17 = "SELECT * FROM Units WHERE UnitName = '$group17Name' AND SubmissionDate = '$group17SubmissionDate'"; 
     $resultCheckUnit17 = $mysqli->query($queryCheckUnit17); 
     $getUnit17 = $resultCheckUnit1 -> fetch_object();
     $getCheckUnit17 = $resultCheckUnit1 -> num_rows;
@@ -334,7 +334,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 18
-    $queryCheckUnit18 = "SELECT * FROM Units WHERE UnitName = '$group18Name' AND SubmissionDate = 'group18SubmissionDate'"; 
+    $queryCheckUnit18 = "SELECT * FROM Units WHERE UnitName = '$group18Name' AND SubmissionDate = '$group18SubmissionDate'"; 
     $resultCheckUnit18 = $mysqli->query($queryCheckUnit18); 
     $getUnit18 = $resultCheckUnit18 -> fetch_object();
     $getCheckUnit18 = $resultCheckUnit18 -> num_rows;
@@ -351,7 +351,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 19
-    $queryCheckUnit19 = "SELECT * FROM Units WHERE UnitName = '$group19Name' AND SubmissionDate = 'group19SubmissionDate'"; 
+    $queryCheckUnit19 = "SELECT * FROM Units WHERE UnitName = '$group19Name' AND SubmissionDate = '$group19SubmissionDate'"; 
     $resultCheckUnit19 = $mysqli->query($queryCheckUnit19); 
     $getUnit19 = $resultCheckUnit19 -> fetch_object();
     $getCheckUnit19 = $resultCheckUnit19 -> num_rows;
@@ -368,7 +368,7 @@ $details = $resultTutor -> fetch_object();
     }
 
     //Group 20
-    $queryCheckUnit20 = "SELECT * FROM Units WHERE UnitName = '$group20Name' AND SubmissionDate = 'group20SubmissionDate'"; 
+    $queryCheckUnit20 = "SELECT * FROM Units WHERE UnitName = '$group20Name' AND SubmissionDate = '$group20SubmissionDate'"; 
     $resultCheckUnit20 = $mysqli->query($queryCheckUnit20); 
     $getUnit20 = $resultCheckUnit20 -> fetch_object();
     $getCheckUnit20 = $resultCheckUnit20 -> num_rows;
@@ -378,14 +378,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit20 <= 0){
         $queryCreateUnit20 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group20Name', '$group20SubmissionDate')";
         $resultAssignTutor20 = $mysqli->query($queryCreateUnit20);
-        $queryGetUnit20 = "SELECT * FROM Units WHERE UnitName = '$group20Name' AND SubmissionDate = 'group20SubmissionDate'";
+        $queryGetUnit20 = "SELECT * FROM Units WHERE UnitName = '$group20Name' AND SubmissionDate = '$group20SubmissionDate'";
         $resultGetUnit20 = $mysqli->query($queryGetUnit20);
         $unit20 = $resultGetUnit20 -> fetch_object();
         $group20 = $unit20 -> UnitID;
     }
 
     //Group 21
-    $queryCheckUnit21 = "SELECT * FROM Units WHERE UnitName = '$group21Name' AND SubmissionDate = 'group21SubmissionDate'"; 
+    $queryCheckUnit21 = "SELECT * FROM Units WHERE UnitName = '$group21Name' AND SubmissionDate = '$group21SubmissionDate'"; 
     $resultCheckUnit21 = $mysqli->query($queryCheckUnit21); 
     $getUnit21 = $resultCheckUnit21 -> fetch_object();
     $getCheckUnit21 = $resultCheckUnit21 -> num_rows;
@@ -395,14 +395,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit21 <= 0){
         $queryCreateUnit21 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group21Name', '$group21SubmissionDate')";
         $resultAssignTutor21 = $mysqli->query($queryCreateUnit21);
-        $queryGetUnit21 = "SELECT * FROM Units WHERE UnitName = '$group21Name' AND SubmissionDate = 'group21SubmissionDate'";
+        $queryGetUnit21 = "SELECT * FROM Units WHERE UnitName = '$group21Name' AND SubmissionDate = '$group21SubmissionDate'";
         $resultGetUnit21 = $mysqli->query($queryGetUnit21);
         $unit21 = $resultGetUnit21 -> fetch_object();
         $group21 = $unit21 -> UnitID;
     }
 
     //Group 22
-    $queryCheckUnit22 = "SELECT * FROM Units WHERE UnitName = '$group22Name' AND SubmissionDate = 'group22SubmissionDate'"; 
+    $queryCheckUnit22 = "SELECT * FROM Units WHERE UnitName = '$group22Name' AND SubmissionDate = '$group22SubmissionDate'"; 
     $resultCheckUnit22 = $mysqli->query($queryCheckUnit22); 
     $getUnit22 = $resultCheckUnit22 -> fetch_object();
     $getCheckUnit22 = $resultCheckUnit22 -> num_rows;
@@ -412,14 +412,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit22 <= 0){
         $queryCreateUnit22 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group22Name', '$group22SubmissionDate')";
         $resultAssignTutor22 = $mysqli->query($queryCreateUnit22);
-        $queryGetUnit22 = "SELECT * FROM Units WHERE UnitName = '$group22Name' AND SubmissionDate = 'group22SubmissionDate'";
+        $queryGetUnit22 = "SELECT * FROM Units WHERE UnitName = '$group22Name' AND SubmissionDate = '$group22SubmissionDate'";
         $resultGetUnit22 = $mysqli->query($queryGetUnit22);
         $unit22 = $resultGetUnit22 -> fetch_object();
         $group22 = $unit22 -> UnitID;
     }
 
     //Group 23
-    $queryCheckUnit23 = "SELECT * FROM Units WHERE UnitName = '$group23Name' AND SubmissionDate = 'group23SubmissionDate'"; 
+    $queryCheckUnit23 = "SELECT * FROM Units WHERE UnitName = '$group23Name' AND SubmissionDate = '$group23SubmissionDate'"; 
     $resultCheckUnit23 = $mysqli->query($queryCheckUnit23); 
     $getUnit23 = $resultCheckUnit23 -> fetch_object();
     $getCheckUnit23 = $resultCheckUnit23 -> num_rows;
@@ -429,14 +429,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit23 <= 0){
         $queryCreateUnit23 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group23Name', '$group23SubmissionDate')";
         $resultAssignTutor23 = $mysqli->query($queryCreateUnit23);
-        $queryGetUnit23 = "SELECT * FROM Units WHERE UnitName = '$group23Name' AND SubmissionDate = 'group23SubmissionDate'";
+        $queryGetUnit23 = "SELECT * FROM Units WHERE UnitName = '$group23Name' AND SubmissionDate = '$group23SubmissionDate'";
         $resultGetUnit23 = $mysqli->query($queryGetUnit23);
         $unit23 = $resultGetUnit23 -> fetch_object();
         $group23 = $unit23 -> UnitID;
     }
 
     //Group 24
-    $queryCheckUnit24 = "SELECT * FROM Units WHERE UnitName = '$group24Name' AND SubmissionDate = 'group24SubmissionDate'"; 
+    $queryCheckUnit24 = "SELECT * FROM Units WHERE UnitName = '$group24Name' AND SubmissionDate = '$group24SubmissionDate'"; 
     $resultCheckUnit24 = $mysqli->query($queryCheckUnit24); 
     $getUnit24 = $resultCheckUnit24 -> fetch_object();
     $getCheckUnit24 = $resultCheckUnit24 -> num_rows;
@@ -446,14 +446,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit24 <= 0){
         $queryCreateUnit24 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group24Name', '$group24SubmissionDate')";
         $resultAssignTutor24 = $mysqli->query($queryCreateUnit24);
-        $queryGetUnit24 = "SELECT * FROM Units WHERE UnitName = '$group24Name' AND SubmissionDate = 'group24SubmissionDate'";
+        $queryGetUnit24 = "SELECT * FROM Units WHERE UnitName = '$group24Name' AND SubmissionDate = '$group24SubmissionDate'";
         $resultGetUnit24 = $mysqli->query($queryGetUnit24);
         $unit24 = $resultGetUnit24 -> fetch_object();
         $group24 = $unit24 -> UnitID;
     }
 
     //Group 25
-    $queryCheckUnit25 = "SELECT * FROM Units WHERE UnitName = '$group25Name' AND SubmissionDate = 'group25SubmissionDate'"; 
+    $queryCheckUnit25 = "SELECT * FROM Units WHERE UnitName = '$group25Name' AND SubmissionDate = '$group25SubmissionDate'"; 
     $resultCheckUnit25 = $mysqli->query($queryCheckUnit25); 
     $getUnit25 = $resultCheckUnit25 -> fetch_object();
     $getCheckUnit25 = $resultCheckUnit25 -> num_rows;
@@ -463,14 +463,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit25 <= 0){
         $queryCreateUnit25 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group25Name', '$group25SubmissionDate')";
         $resultAssignTutor25 = $mysqli->query($queryCreateUnit25);
-        $queryGetUnit25 = "SELECT * FROM Units WHERE UnitName = '$group25Name' AND SubmissionDate = 'group25SubmissionDate'";
+        $queryGetUnit25 = "SELECT * FROM Units WHERE UnitName = '$group25Name' AND SubmissionDate = '$group25SubmissionDate'";
         $resultGetUnit25 = $mysqli->query($queryGetUnit25);
         $unit25 = $resultGetUnit25 -> fetch_object();
         $group25 = $unit25 -> UnitID;
     }
 
     //Group 26
-    $queryCheckUnit26 = "SELECT * FROM Units WHERE UnitName = '$group26Name' AND SubmissionDate = 'group26SubmissionDate'"; 
+    $queryCheckUnit26 = "SELECT * FROM Units WHERE UnitName = '$group26Name' AND SubmissionDate = '$group26SubmissionDate'"; 
     $resultCheckUnit26 = $mysqli->query($queryCheckUnit26); 
     $getUnit26 = $resultCheckUnit26 -> fetch_object();
     $getCheckUnit26 = $resultCheckUnit26 -> num_rows;
@@ -480,14 +480,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit26 <= 0){
         $queryCreateUnit26 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group26Name', '$group26SubmissionDate')";
         $resultAssignTutor26 = $mysqli->query($queryCreateUnit26);
-        $queryGetUnit26 = "SELECT * FROM Units WHERE UnitName = '$group26Name' AND SubmissionDate = 'group26SubmissionDate'";
+        $queryGetUnit26 = "SELECT * FROM Units WHERE UnitName = '$group26Name' AND SubmissionDate = '$group26SubmissionDate'";
         $resultGetUnit26 = $mysqli->query($queryGetUnit26);
         $unit26 = $resultGetUnit26 -> fetch_object();
         $group26 = $unit26 -> UnitID;
     }
 
     //Group 27
-    $queryCheckUnit27 = "SELECT * FROM Units WHERE UnitName = '$group27Name' AND SubmissionDate = 'group27SubmissionDate'"; 
+    $queryCheckUnit27 = "SELECT * FROM Units WHERE UnitName = '$group27Name' AND SubmissionDate = '$group27SubmissionDate'"; 
     $resultCheckUnit27 = $mysqli->query($queryCheckUnit27); 
     $getUnit27 = $resultCheckUnit27 -> fetch_object();
     $getCheckUnit27 = $resultCheckUnit27 -> num_rows;
@@ -497,14 +497,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit27 <= 0){
         $queryCreateUnit27 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group27Name', '$group27SubmissionDate')";
         $resultAssignTutor27 = $mysqli->query($queryCreateUnit27);
-        $queryGetUnit27 = "SELECT * FROM Units WHERE UnitName = '$group27Name' AND SubmissionDate = 'group27SubmissionDate'";
+        $queryGetUnit27 = "SELECT * FROM Units WHERE UnitName = '$group27Name' AND SubmissionDate = '$group27SubmissionDate'";
         $resultGetUnit27 = $mysqli->query($queryGetUnit27);
         $unit27 = $resultGetUnit27 -> fetch_object();
         $group27 = $unit27 -> UnitID;
     }
 
     //Group 28
-    $queryCheckUnit28 = "SELECT * FROM Units WHERE UnitName = '$group28Name' AND SubmissionDate = 'group28SubmissionDate'"; 
+    $queryCheckUnit28 = "SELECT * FROM Units WHERE UnitName = '$group28Name' AND SubmissionDate = '$group28SubmissionDate'"; 
     $resultCheckUnit28 = $mysqli->query($queryCheckUnit28); 
     $getUnit28 = $resultCheckUnit28 -> fetch_object();
     $getCheckUnit28 = $resultCheckUnit28 -> num_rows;
@@ -514,14 +514,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit28 <= 0){
         $queryCreateUnit28 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group28Name', '$group28SubmissionDate')";
         $resultAssignTutor28 = $mysqli->query($queryCreateUnit28);
-        $queryGetUnit28 = "SELECT * FROM Units WHERE UnitName = '$group28Name' AND SubmissionDate = 'group28SubmissionDate'";
+        $queryGetUnit28 = "SELECT * FROM Units WHERE UnitName = '$group28Name' AND SubmissionDate = '$group28SubmissionDate'";
         $resultGetUnit28 = $mysqli->query($queryGetUnit28);
         $unit28 = $resultGetUnit28 -> fetch_object();
         $group28 = $unit28 -> UnitID;
     }
 
     //Group 29
-    $queryCheckUnit29 = "SELECT * FROM Units WHERE UnitName = '$group29Name' AND SubmissionDate = 'group29SubmissionDate'"; 
+    $queryCheckUnit29 = "SELECT * FROM Units WHERE UnitName = '$group29Name' AND SubmissionDate = '$group29SubmissionDate'"; 
     $resultCheckUnit29 = $mysqli->query($queryCheckUnit29); 
     $getUnit29 = $resultCheckUnit29 -> fetch_object();
     $getCheckUnit29 = $resultCheckUnit29 -> num_rows;
@@ -531,14 +531,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit29 <= 0){
         $queryCreateUnit29 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group29Name', '$group29SubmissionDate')";
         $resultAssignTutor29 = $mysqli->query($queryCreateUnit29);
-        $queryGetUnit29 = "SELECT * FROM Units WHERE UnitName = '$group29Name' AND SubmissionDate = 'group29SubmissionDate'";
+        $queryGetUnit29 = "SELECT * FROM Units WHERE UnitName = '$group29Name' AND SubmissionDate = '$group29SubmissionDate'";
         $resultGetUnit29 = $mysqli->query($queryGetUnit29);
         $unit29 = $resultGetUnit29 -> fetch_object();
         $group29 = $unit29 -> UnitID;
     }
 
     //Group 30
-    $queryCheckUnit30 = "SELECT * FROM Units WHERE UnitName = '$group30Name' AND SubmissionDate = 'group30SubmissionDate'"; 
+    $queryCheckUnit30 = "SELECT * FROM Units WHERE UnitName = '$group30Name' AND SubmissionDate = '$group30SubmissionDate'"; 
     $resultCheckUnit30 = $mysqli->query($queryCheckUnit30); 
     $getUnit30 = $resultCheckUnit30 -> fetch_object();
     $getCheckUnit30 = $resultCheckUnit30 -> num_rows;
@@ -548,14 +548,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit30 <= 0){
         $queryCreateUnit30 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group30Name', '$group30SubmissionDate')";
         $resultAssignTutor30 = $mysqli->query($queryCreateUnit30);
-        $queryGetUnit30 = "SELECT * FROM Units WHERE UnitName = '$group30Name' AND SubmissionDate = 'group30SubmissionDate'";
+        $queryGetUnit30 = "SELECT * FROM Units WHERE UnitName = '$group30Name' AND SubmissionDate = '$group30SubmissionDate'";
         $resultGetUnit30 = $mysqli->query($queryGetUnit30);
         $unit30 = $resultGetUnit30 -> fetch_object();
         $group30 = $unit30 -> UnitID;
     }
 
     //Group 31
-    $queryCheckUnit31 = "SELECT * FROM Units WHERE UnitName = '$group31Name' AND SubmissionDate = 'group31SubmissionDate'"; 
+    $queryCheckUnit31 = "SELECT * FROM Units WHERE UnitName = '$group31Name' AND SubmissionDate = '$group31SubmissionDate'"; 
     $resultCheckUnit31 = $mysqli->query($queryCheckUnit31); 
     $getUnit31 = $resultCheckUnit31 -> fetch_object();
     $getCheckUnit31 = $resultCheckUnit31 -> num_rows;
@@ -565,14 +565,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit31 <= 0){
         $queryCreateUnit31 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group31Name', '$group31SubmissionDate')";
         $resultAssignTutor31 = $mysqli->query($queryCreateUnit31);
-        $queryGetUnit31 = "SELECT * FROM Units WHERE UnitName = '$group31Name' AND SubmissionDate = 'group31SubmissionDate'";
+        $queryGetUnit31 = "SELECT * FROM Units WHERE UnitName = '$group31Name' AND SubmissionDate = '$group31SubmissionDate'";
         $resultGetUnit31 = $mysqli->query($queryGetUnit31);
         $unit31 = $resultGetUnit31 -> fetch_object();
         $group31 = $unit31 -> UnitID;
     }
 
     //Group 32
-    $queryCheckUnit32 = "SELECT * FROM Units WHERE UnitName = '$group32Name' AND SubmissionDate = 'group32SubmissionDate'"; 
+    $queryCheckUnit32 = "SELECT * FROM Units WHERE UnitName = '$group32Name' AND SubmissionDate = '$group32SubmissionDate'"; 
     $resultCheckUnit32 = $mysqli->query($queryCheckUnit32); 
     $getUnit32 = $resultCheckUnit32 -> fetch_object();
     $getCheckUnit32 = $resultCheckUnit32 -> num_rows;
@@ -582,14 +582,14 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit32 <= 0){
         $queryCreateUnit32 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group32Name', '$group32SubmissionDate')";
         $resultAssignTutor32 = $mysqli->query($queryCreateUnit32);
-        $queryGetUnit32 = "SELECT * FROM Units WHERE UnitName = '$group32Name' AND SubmissionDate = 'group32SubmissionDate'";
+        $queryGetUnit32 = "SELECT * FROM Units WHERE UnitName = '$group32Name' AND SubmissionDate = '$group32SubmissionDate'";
         $resultGetUnit32 = $mysqli->query($queryGetUnit32);
         $unit32 = $resultGetUnit32 -> fetch_object();
         $group32 = $unit32 -> UnitID;
     }
 
      //Group 33
-     $queryCheckUnit33 = "SELECT * FROM Units WHERE UnitName = '$group33Name' AND SubmissionDate = 'group33SubmissionDate'"; 
+     $queryCheckUnit33 = "SELECT * FROM Units WHERE UnitName = '$group33Name' AND SubmissionDate = '$group33SubmissionDate'"; 
      $resultCheckUnit33 = $mysqli->query($queryCheckUnit33); 
      $getUnit33 = $resultCheckUnit33 -> fetch_object();
      $getCheckUnit33 = $resultCheckUnit33 -> num_rows;
@@ -599,14 +599,14 @@ $details = $resultTutor -> fetch_object();
      else if ($getCheckUnit33 <= 0){
          $queryCreateUnit33 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group33Name', '$group33SubmissionDate')";
          $resultAssignTutor33 = $mysqli->query($queryCreateUnit33);
-         $queryGetUnit33 = "SELECT * FROM Units WHERE UnitName = '$group33Name' AND SubmissionDate = 'group33SubmissionDate'";
+         $queryGetUnit33 = "SELECT * FROM Units WHERE UnitName = '$group33Name' AND SubmissionDate = '$group33SubmissionDate'";
          $resultGetUnit33 = $mysqli->query($queryGetUnit33);
          $unit33 = $resultGetUnit33 -> fetch_object();
          $group33 = $unit33 -> UnitID;
      }
 
       //Group 34
-    $queryCheckUnit34 = "SELECT * FROM Units WHERE UnitName = '$group34Name' AND SubmissionDate = 'group34SubmissionDate'"; 
+    $queryCheckUnit34 = "SELECT * FROM Units WHERE UnitName = '$group34Name' AND SubmissionDate = '$group34SubmissionDate'"; 
     $resultCheckUnit34 = $mysqli->query($queryCheckUnit34); 
     $getUnit34 = $resultCheckUnit34 -> fetch_object();
     $getCheckUnit34 = $resultCheckUnit34 -> num_rows;
@@ -616,23 +616,26 @@ $details = $resultTutor -> fetch_object();
     else if ($getCheckUnit34 <= 0){
         $queryCreateUnit34 = "INSERT INTO units (UnitName, SubmissionDate) VALUES ('$group34Name', '$group34SubmissionDate')";
         $resultAssignTutor34 = $mysqli->query($queryCreateUnit34);
-        $queryGetUnit34 = "SELECT * FROM Units WHERE UnitName = '$group34Name' AND SubmissionDate = 'group34SubmissionDate'";
+        $queryGetUnit34 = "SELECT * FROM Units WHERE UnitName = '$group34Name' AND SubmissionDate = '$group34SubmissionDate'";
         $resultGetUnit34 = $mysqli->query($queryGetUnit34);
         $unit34 = $resultGetUnit34 -> fetch_object();
         $group34 = $unit34 -> UnitID;
     }
 
-    $queryCreateTemplate = "INSERT INTO units (ApprenticeshipName, NumberOfYears, Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9, Group10, Group11, Group12, Group13, Group14, Group15, Group16, Group17, Group18, Group19, Group20, Group21, Group22, Group23, Group24, Group25, Group26, Group27, Group28, Group29, Group30, Group31, Group32, Group33, Group34) VALUES ('$apprenticeshipName', '$numberOfYears', '$group1', '$group2', '$group3', '$group4', '$group5', '$group6', '$group7', '$group8', '$group9', '$group10', '$group11', '$group12', '$group13', '$group14', '$group15', '$group16', '$group17', '$group18', '$group19', '$group20', '$group21', '$group22', '$group23', '$group24', '$group25', '$group26', '$group27', '$group28', '$group29', '$group30', '$group31', '$group32', '$group33', '$group34')";
+    $queryCreateTemplate = "INSERT INTO apprenticeshiptemplates (apprenticeshipName, NumberOfYears, Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9, Group10, Group11, Group12, Group13, Group14, Group15, Group16, Group17, Group18, Group19, Group20, Group21, Group22, Group23, Group24, Group25, Group26, Group27, Group28, Group29, Group30, Group31, Group32, Group33, Group34) VALUES ('$apprenticeshipName', '$numberOfYears', '$group1', '$group2', '$group3', '$group4', '$group5', '$group6', '$group7', '$group8', '$group9', '$group10', '$group11', '$group12', '$group13', '$group14', '$group15', '$group16', '$group17', '$group18', '$group19', '$group20', '$group21', '$group22', '$group23', '$group24', '$group25', '$group26', '$group27', '$group28', '$group29', '$group30', '$group31', '$group32', '$group33', '$group34')";
     $resultCreateTemplate = $mysqli->query($queryCreateTemplate);
 
-    $queryGetTemplates = "SELECT * FROM apprenticeshiptemplates WHERE ApprenticeshipName = '$apprenticeshipName', NumberOfYears = '$numberOfYears', Group1 = '$group1', Group2 = '$group2', Group3 = '$group3', Group4 = '$group3', Group5 = '$group3', Group6 = '$group3', Group7 = '$group3', Group8 = '$group3', Group9 = '$group3', Group10 = '$group10', Group11  = '$group11', Group12  = '$group12', Group13  = '$group13', Group14  = '$group14', Group15  = '$group15', Group16  = '$group16', Group17  = '$group17', Group18  = '$group18', Group19  = '$group19', Group20  = '$group20', Group21  = '$group21', Group22  = '$group22', Group23  = '$group23', Group24  = '$group24', Group25  = '$group25', Group26  = '$group26', Group27  = '$group27', Group28  = '$group28', Group29  = '$group29', Group30  = '$group30', Group31  = '$group31', Group32  = '$group32', Group33  = '$group33', Group34  = '$group34'";
+    $queryGetTemplates = "SELECT * FROM apprenticeshiptemplates WHERE apprenticeshipName = '$apprenticeshipName' AND NumberOfYears = '$numberOfYears' AND Group1 = '$group1' AND Group2 = '$group2' AND Group3 = '$group3' AND Group4 = '$group4' AND Group5 = '$group5' AND Group6 = '$group6' AND Group7 = '$group7' AND Group8 = '$group8' AND Group9 = '$group9' AND Group10 = '$group10' AND Group11  = '$group11' AND Group12  = '$group12' AND Group13  = '$group13' AND Group14  = '$group14' AND Group15  = '$group15' AND Group16  = '$group16' AND Group17  = '$group17' AND Group18  = '$group18' AND Group19  = '$group19' AND Group20  = '$group20' AND Group21  = '$group21' AND Group22  = '$group22' AND Group23  = '$group23' AND Group24  = '$group24' AND Group25  = '$group25' AND Group26  = '$group26' AND Group27  = '$group27' AND Group28  = '$group28' AND Group29  = '$group29' AND Group30  = '$group30' AND Group31  = '$group31' AND Group32  = '$group32' AND Group33  = '$group33' AND Group34  = '$group34'";
     $resultGetTemplates = $mysqli->query($queryGetTemplates);
-    $getTemplateID = $resultGetTemplates -> fetch_object;
+    $getTemplateID = $resultGetTemplates -> fetch_object();
+    $existsCheck = $resultGetTemplates -> num_rows;
     $templateID = $getTemplateID -> ApprenticeshipTemplateID;
+
+    echo"Any rows? $existsCheck";
 
     $queryCreateTemplate = "UPDATE learner SET TemplateID = $templateID WHERE UniqueLearnerNumber = '$learnerID'";
     $resultCreateTemplate = $mysqli->query($queryCreateTemplate);
 
-    $msg = "Tutor assigned";
+    $msg = "Template updated";
     header("location: ../../users/admin/templateChoice.php");
 ?>

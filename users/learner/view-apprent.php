@@ -61,7 +61,7 @@ mysqli_close($mysqli);
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php
         echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
         echo "<p>Learner</p>";
@@ -83,12 +83,12 @@ mysqli_close($mysqli);
             <span class="item">View OTJ Hours</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-employer.php">
+        <li><a href="../../users/learner/view-employer.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
             <span class="item">View Employer</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php" class="active">
+        <li><a href="../../users/learner/view-apprent.php" class="active">
             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
             <span class="item">Module Information</span>
           </a>
@@ -103,7 +103,7 @@ mysqli_close($mysqli);
             <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>

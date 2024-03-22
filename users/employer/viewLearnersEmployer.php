@@ -32,7 +32,7 @@ $details = $resultEmployer -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$details->EmployerFirstName} {$details->EmployerLastName}</h3>";
         echo"<p>{$details->Role}</p>";
@@ -54,7 +54,7 @@ $details = $resultEmployer -> fetch_object();
             <span class="item">Employer report</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>

@@ -5,6 +5,24 @@
 <body>
 <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
 
+<?php 
+  $userID = $_SESSION['userID'];
+  $queryLearner = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
+  $resultLearner = $mysqli->query($queryLearner);
+  $getEmployerRAG = $resultLearner -> fetch_object();
+  $employerRAG = $getEmployerRAG -> EmploymentRAG;
+
+  if ($employerRAG == "Green"){
+    $valueEMP = 100;
+  }
+  else if ($employerRAG == "Amber"){
+    $valueEmp = 50;
+  }
+  else if ($employerRAG == "Red"){
+    $valueEmp = 10;
+  }
+?>
+
 <script>
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
@@ -20,7 +38,7 @@ function drawChart() {
   data.addRows([
     ['PROGRESS RAG', 100, null], // Color will be set based on value
     ['OTJ', 49, null],          // Color will be set based on value
-    ['EMP', 44, null],          // Color will be set based on value
+    ['EMP', <?php $valueEmp ?>, null],          // Color will be set based on value
     ['COMPLETED', 24, null],    // Color will be set based on value
     ['IN-PROGRESS', 100, null]   // Color will be set based on value
   ]);

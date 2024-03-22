@@ -35,7 +35,7 @@ $details = $resultTutor -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
         echo"<p>{$details->Role}</p>";
@@ -57,22 +57,17 @@ $details = $resultTutor -> fetch_object();
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="updateLearnersAdmin.php">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">Update learners</span>
-          </a>
-        </li>
         <li><a href="adminConsole.php" class="active">
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>
         </li>
-		<li><a href="#">
+		<li><a href="manageSubmissionsAdmin.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
-            <span class="item">Settings</span>
+            <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
@@ -248,7 +243,7 @@ $details = $resultTutor -> fetch_object();
             </tr>
             <tr>
                 <td><label for='ApprenticeshipName'>Apprenticeship: </label></td>
-                <td><input type='text' name='ApprenticeshipName' value='{$objLearner->ApprenticeshipName}' required /></br></td>
+                <td><input type='text' name='ApprenticeshipName' value='{$objTemplate->apprenticeshipName}' required /></br></td>
             </tr>
             <tr>
                 <td><label for='NumberOfYears'>Number of Years: </label></td>
@@ -494,7 +489,7 @@ $details = $resultTutor -> fetch_object();
             </tr>
             <tr>
                 <input type='hidden' name='learnerID' value='$learnerIDString' /> 
-                <td><button type='submit'>Edit Template</button></td>
+                <td><button type='submit'>Save Template</button></td>
             </tr>
             </form>
             </table>";       
