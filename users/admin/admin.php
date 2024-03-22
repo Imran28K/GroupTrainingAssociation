@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Admin home</title>
@@ -14,10 +15,10 @@ require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
 
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
 $resultDetails = $mysqli->query($queryDetails);
 
-$details = $resultDetails -> fetch_object();
+$details = $resultDetails->fetch_object();
 ?>
 
 <body>
@@ -25,10 +26,20 @@ $details = $resultDetails -> fetch_object();
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
+        <?php
+        echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo "<p>{$details->Role}</p>";
+=======
+>>>>>>> Stashed changes
         <img src="../../images/logos/gtalogo.png" alt="profile_picture">
         <?php 
         echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
         echo"<p>{$details->Role}</p>";
+>>>>>>> 2ab94d179247754eeaf37647877f513caa6c6ca2
         ?>
       </div>
       <ul>
@@ -52,7 +63,15 @@ $details = $resultDetails -> fetch_object();
             <span class="item">Admin Page</span>
           </a>
         </li>
+<<<<<<< Updated upstream
 		    <li><a href="manageSubmissionsAdmin.php">
+=======
+<<<<<<< HEAD
+        <li><a href="manageSubmissionAdmin.php">
+=======
+		    <li><a href="manageSubmissionsAdmin.php">
+>>>>>>> 2ab94d179247754eeaf37647877f513caa6c6ca2
+>>>>>>> Stashed changes
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Submissions</span>
           </a>
@@ -73,27 +92,27 @@ $details = $resultDetails -> fetch_object();
       <div class="container">
         <h2>Your Details</h2>
         <ul>
-          <li>Your name is: <?php echo"{$details->TutorFirstName} {$details->TutorLastName}"; ?></li>
-          <li> 
+          <li>Your name is: <?php echo "{$details->TutorFirstName} {$details->TutorLastName}"; ?></li>
+          <li>
             <form action="updateAdminInfo.php" method="post">
               <label> Your email is: </label>
-              <input type="email" name="email" value="<?php echo"{$details->TutorEmail}"; ?>" required />
+              <input type="email" name="email" value="<?php echo "{$details->TutorEmail}"; ?>" required />
               <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
               <button type="submit">Change email</button>
             </form>
           </li>
-          <li>Your tutor code is: <?php echo"{$details->TutorCode}"; ?></li>
-          <li>Your role is: <?php echo"{$details->Role}"; ?></li>
+          <li>Your tutor code is: <?php echo "{$details->TutorCode}"; ?></li>
+          <li>Your role is: <?php echo "{$details->Role}"; ?></li>
         </ul>
       </div>
     </div>
 
-  <script type="text/javascript">
-    var hamburger = document.querySelector(".hamburger");
-    hamburger.addEventListener("click", function() {
-      document.querySelector("body").classList.toggle("active");
-    })
-  </script>
+    <script type="text/javascript">
+      var hamburger = document.querySelector(".hamburger");
+      hamburger.addEventListener("click", function() {
+        document.querySelector("body").classList.toggle("active");
+      })
+    </script>
 
 </body>
 
