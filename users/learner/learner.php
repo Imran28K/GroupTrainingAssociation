@@ -22,14 +22,61 @@ $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
+$progressID = $obj -> ProgressID;
+
+  $queryProgressRAG = "SELECT * FROM progressunits WHERE ProgressID = '$progressID'"; 
+  $resultProgressRAG = $mysqli -> query($queryProgressRAG);
+  $getProgressRAG = $resultProgressRAG -> num_rows;
+
+  $queryProgressRAGCompleted = "SELECT * FROM progressunits WHERE ProgressID = '$progressID' AND CurrentStatus = 'Completed'"; 
+  $resultProgressRAGCompleted = $mysqli -> query($queryProgressRAGCompleted);
+  $getProgressRAGCompleted = $resultProgressRAGCompleted -> num_rows;
+
+  $valueProgress = (($getProgressRAGCompleted/$getProgressRAG)*100 );
+
+  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$userID'"; 
+  $resultOTJRAG = $mysqli -> query($queryOTJRAG);
+  $getOTJRAG = $resultOTJRAG -> fetch_object();
+  $ExpectedHours = $getOTJRAG -> ExpectedHours;
+  $OverallHours = $getOTJRAG -> CumulativeHours;
+
+  if ($OverallHours >= $ExpectedHours){
+    $valueOTJ = 100;
+  }
+  else if ($OverallHours >= ($ExpectedHours-10)){
+    $valueOTJ = 50;
+  }
+  else if ($OverallHours < ($ExpectedHours-10)){
+    $valueOTJ = 10;
+  }
+
+  $queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
+  $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
+  $getEmployerRAG = $resultEmployerRAG -> fetch_object();
+  $employerRAG = $getEmployerRAG -> EmploymentRAG;
+
+  if ($employerRAG == "Green"){
+    $valueEMP = 100;
+  }
+  else if ($employerRAG == "Amber"){
+    $valueEMP = 50;
+  }
+  else if ($employerRAG == "Red"){
+    $valueEMP = 10;
+  }
+
 
 //checks the CurrentStatus of all units where $userID.
 //progress RAG will depend on Units completed / Total Units * 100%
 //0-39% = red   40-79% = amber   80-100% = green
 //the calculation will only be done once the submission date is passed
-
-
 ?>
+<script> 
+  let Progressvalue = parseInt('<?php echo $valueProgress ?>')
+  console.log(Progressvalue)
+  let OTJvalue = parseInt('<?php echo $valueOTJ; ?>')
+  let EMPvalue = parseInt('<?php echo $valueEMP; ?>')
+</script>
 
 <body>
 
