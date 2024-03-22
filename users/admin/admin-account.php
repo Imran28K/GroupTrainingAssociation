@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <?php 
 session_start();
 require_once ("../../db/dbconnection.php");
 
-$queryTutors = "SELECT * FROM tutor WHERE Role = 'Admin'"; 
-$resultTutors= $mysqli->query($queryTutors); 
-
 $userID = $_SESSION['userID'];
 
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
-$resultDetails = $mysqli->query($queryDetails);
-
+$queryDetails = "SELECT * FROM tutor WHERE TutorID = ?"; 
+$stmt = $mysqli->prepare($queryDetails);
+$stmt->bind_param('i', $userID);
+$stmt->execute();
+$resultDetails = $stmt->get_result();
 $details = $resultDetails->fetch_object();
+$stmt->close();
+
+$queryTutors = "SELECT * FROM tutor WHERE Role = 'Admin'"; 
+$resultTutors = $mysqli->query($queryTutors); 
 ?>
 
 <head>
@@ -24,6 +26,12 @@ $details = $resultDetails->fetch_object();
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
+<style>
+    /* Add your custom CSS here */
+    .sidebar ul li a:hover {
+        text-decoration: none;
+    }
+</style>
 
 <body>
 
@@ -57,7 +65,7 @@ $details = $resultDetails->fetch_object();
                 <span class="item">Admin Page</span>
             </a>
             </li>
-		    <li><a href="manageSubmissionsAdmin.php">
+            <li><a href="manageSubmissionsAdmin.php">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="item">Submissions</span>
           </a>
@@ -69,6 +77,7 @@ $details = $resultDetails->fetch_object();
             </li>
         </ul>
     </div>
+
     <div class="section">
       <div class="top_navbar">
         <div class="hamburger">
@@ -76,95 +85,39 @@ $details = $resultDetails->fetch_object();
         </div>
       </div>
 
-
       <div class="container">
         <h1>Admin accounts</h1>
         <h2>Make sure not to accidentally de-activate your own account as another admin would have to let you back on</h2>
-        <table>
-        <tr>
-            <td>Admin name</td>
-            <td>Account status</td>
-        </tr>
-        <?php 
-        while ($obj = $resultTutors -> fetch_object()){
-        if ($obj -> Active == "Inactive"){
-        echo"<tr>
-            <td>{$obj -> TutorFirstName} {$obj -> TutorLastName}</td>
-            <td>
-                {$obj -> Active}
-            </td>
-            <td> 
-                <form action='../../credentials/query/activate.php' name='attendance' method='post'>
-                    <input type='hidden' id='userID' name='userID' value={$obj -> TutorID}>
-                    <input type='hidden' id='role' name='role' value=Tutor>
-                    <input type='submit' value='Reactivate Account'>
-                </form>
-            </td>
-        </tr>";
-        }
-        else if ($obj -> Active == "Active"){
-            echo"<tr>
-            <td>{$obj -> TutorFirstName} {$obj -> TutorLastName}</td>
-            <td>
-                {$obj -> Active}
-            </td>
-            <td> 
-                <form action='../../credentials/query/deactivate.php' name='attendance' method='post'>
-                    <input type='hidden' id='userID' name='userID' value={$obj -> TutorID}>
-                    <input type='hidden' id='role' name='role' value=Tutor>
-                    <input type='submit' value='Deactivate Account'>
-                </form>
-            </td>
-        </tr>"; 
-        }
-        }        ?>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Admin name</th>
+              <th>Account status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php while ($obj = $resultTutors->fetch_object()) {
+              $action = ($obj->Active == "Inactive") ? "Reactivate Account" : "Deactivate Account";
+              $formAction = ($obj->Active == "Inactive") ? "activate.php" : "deactivate.php";
+              echo "<tr>
+                      <td>{$obj->TutorFirstName} {$obj->TutorLastName}</td>
+                      <td>{$obj->Active}</td>
+                      <td>
+                          <form id='deactivateForm{$obj->TutorID}' action='../../credentials/query/{$formAction}' name='attendance' method='post'>
+                              <input type='hidden' name='userID' value='{$obj->TutorID}'>
+                              <input type='hidden' name='role' value='Tutor'>
+                              <button class='btn btn-primary btn-sm' onclick='confirmDeactivation({$obj->TutorID})'>{$action}</button>
+                          </form>
+                      </td>
+                  </tr>";
+            } ?>
+          </tbody>
         </table>
-
-    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='accountManagement.php'> Back to account management </a> </li>
-    </ul>
-    </div>
-
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <div class="container">
-            <h1>Admin accounts</h1>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th>Admin name</th>
-                            <th>Account status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                    while ($obj = $resultTutors->fetch_object()) {
-                        $action = ($obj->Active == "Inactive") ? "Reactivate Account" : "Deactivate Account";
-                        $formAction = ($obj->Active == "Inactive") ? "activate.php" : "deactivate.php";
-                        echo "<tr>
-                                <td>{$obj->TutorFirstName} {$obj->TutorLastName}</td>
-                                <td>{$obj->Active}</td>
-                                <td>
-                                    <form action='../../credentials/query/{$formAction}' name='attendance' method='post'>
-                                        <input type='hidden' id='userID' name='userID' value='{$obj->TutorID}'>
-                                        <input type='hidden' id='role' name='role' value='Tutor'>
-                                        <input type='submit' class='btn btn-primary btn-sm' value='{$action}'>
-                                    </form>
-                                </td>
-                            </tr>";
-                    } ?>
-                    </tbody>
-                </table>
-            </div>
-            <ul class='nav nav-pills nav-stacked' role='tablist'>
-                <li><a href='accountManagement.php'> Back to account management </a> </li>
-            </ul>
-        </div>
+        <ul class='nav nav-pills nav-stacked' role='tablist'>
+          <li><a href='accountManagement.php'>Back to account management</a></li>
+        </ul>
+      </div>
     </div>
 </div>
 
@@ -173,8 +126,19 @@ $details = $resultDetails->fetch_object();
     hamburger.addEventListener("click", function() {
         document.querySelector("body").classList.toggle("active");
     })
+
+    function confirmDeactivation(adminID) {
+        var confirmation = confirm("Are you sure you want to deactivate this account?");
+        if (confirmation) {
+            document.getElementById("deactivateForm" + adminID).submit();
+        }
+    }
+
+    function cancelDeactivation() {
+        window.location.href = 'admin-account.php'; // Redirect to admin-account.php if cancel is clicked
+    }
 </script>
 
-</body>
 
+</body>
 </html>
