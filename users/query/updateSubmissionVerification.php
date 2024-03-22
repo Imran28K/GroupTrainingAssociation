@@ -2,39 +2,43 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-if (isset($_POST['unitId'], $_POST['password'], $_POST['userId'])) {
+if (isset($_POST['unitId'], $_POST['password'], $_POST['progressId'])) {
     $unitId = $_POST['unitId'];
     $password = $_POST['password'];
-    $userId = $_POST['userId'];
-
+    $progressId = $_POST['progressId'];
+    $userId = $_SESSION['userID'];
+    
     
     $stmt = $mysqli->prepare("SELECT TutorPassword FROM tutor WHERE TutorID = ?");
     $stmt->bind_param("s", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         $tutor = $result->fetch_assoc();
         
-        
         if ($password === $tutor['TutorPassword']) {
-            
+            // Update the CurrentStatus to 'Completed'
             $updateStmt = $mysqli->prepare("UPDATE progressunits SET CurrentStatus = 'Completed' WHERE UnitID = ? AND ProgressID = ?");
-            $updateStmt->bind_param("si", $unitId, $progressID);
-            
+            $updateStmt->bind_param("si", $unitId, $progressId);
             if ($updateStmt->execute()) {
-                echo "Task marked as completed.";
+                $_SESSION['message'] = "Task marked as completed.";
             } else {
-                echo "Failed to update task status.";
+                $_SESSION['error'] = "Failed to update task status.";
             }
         } else {
-            echo "Incorrect password. Please try again.";
+            $_SESSION['error'] = "Incorrect password. Please try again.";
         }
     } else {
-        echo "Tutor not found.";
+        $_SESSION['error'] = "Tutor not found.";
     }
     $stmt->close();
+    header("Location: ../admin/manageSubmissionAdmin.php"); 
+    exit();
 } else {
-    echo "Required parameters are missing.";
+    $_SESSION['error'] = "Required parameters are missing.";
+    header("Location: ../admin/manageSubmissionAdmin.php"); 
+    exit();
 }
 ?>
+

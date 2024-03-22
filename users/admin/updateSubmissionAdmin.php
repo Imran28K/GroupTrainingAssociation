@@ -127,14 +127,14 @@ $result = $stmt->get_result();
                                       <td>{$row['SubmissionDate']}</td>
                                       <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
-                                        <div class='task-completer'>
-                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
-                                        <label for='taskCheckbox'></label>
-                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
-                                        <br>
-                                        <button id='completeButton'disabled>Complete Task</button>
-                                        </br>
-                                        </div>
+                                      <form method='POST' action='../query/updateSubmissionVerification.php'>
+                                      <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                      <input type='hidden' name='progressId' value='{$progressID}'>
+                                      <input type='checkbox' name='taskCheckbox' id='taskCheckbox-{$row['UnitID']}' onclick='this.form.submit()' >
+                                      <label for='taskCheckbox-{$row['UnitID']}'></label>
+                                      <input type='password' name='password' placeholder='Enter Password' required>
+                                      <input type='submit' value='Complete Task'>
+                                      </form>
                                       </td>
                                       </tr>";
                             }
@@ -157,44 +157,9 @@ $result = $stmt->get_result();
             document.querySelector("body").classList.toggle("active");
         })
     </script>
-    <script>
-        document.getElementById('taskCheckbox').addEventListener('change', function() {
-            document.getElementById('completeButton').disabled = !this.checked;
-        });
+    
+    
 
-        document.getElementById('completeButton').addEventListener('click', function() {
-            var password = document.getElementById('passwordInput').value;
-            var correctPassword = '123456';
-            if (password === correctPassword) {
-                alert('Task marked as complete!');
-
-            } else {
-                alert('Incorrect password. Please try again.');
-            }
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input[type="checkbox"]').change(function() {
-                var unitId = $(this).attr('id').split('-')[1];
-                $('#passwordInput-' + unitId).prop('disabled', !this.checked);
-                $('.completeButton[data-unitid="' + unitId + '"]').prop('disabled', !this.checked);
-            });
-
-            $('.completeButton').click(function() {
-                var unitId = $(this).data('unitid');
-                var password = $('#passwordInput-' + unitId).val();
-
-                $.post('../updateSubmissionVerification.php', {
-                    unitId: unitId,
-                    password: password,
-                    userId: '<?php echo $userID; ?>'
-                }, function(response) {
-                    alert(response);
-                });
-            });
-        });
-    </script>
 
 
 
