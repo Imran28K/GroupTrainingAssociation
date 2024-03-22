@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -158,20 +159,45 @@ $result = $stmt->get_result();
     </script>
     <script>
         document.getElementById('taskCheckbox').addEventListener('change', function() {
-        document.getElementById('completeButton').disabled = !this.checked;
+            document.getElementById('completeButton').disabled = !this.checked;
         });
 
         document.getElementById('completeButton').addEventListener('click', function() {
-        var password = document.getElementById('passwordInput').value;
-        var correctPassword = '123456'; 
-        if (password === correctPassword) {
-          alert('Task marked as complete!');
-    
-        } else {
-           alert('Incorrect password. Please try again.');
-        }
+            var password = document.getElementById('passwordInput').value;
+            var correctPassword = '123456';
+            if (password === correctPassword) {
+                alert('Task marked as complete!');
+
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input[type="checkbox"]').change(function() {
+                var unitId = $(this).attr('id').split('-')[1];
+                $('#passwordInput-' + unitId).prop('disabled', !this.checked);
+                $('.completeButton[data-unitid="' + unitId + '"]').prop('disabled', !this.checked);
+            });
+
+            $('.completeButton').click(function() {
+                var unitId = $(this).data('unitid');
+                var password = $('#passwordInput-' + unitId).val();
+
+                $.post('verifyAndUpdateStatus.php', {
+                    unitId: unitId,
+                    password: password,
+                    userId: '<?php echo $userID; ?>'
+                }, function(response) {
+                    alert(response);
+                });
+            });
+        });
+    </script>
+
+
+
 
 </body>
 
