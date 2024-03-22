@@ -114,7 +114,7 @@
                                         <td>{$learnerFullName}</td>
                                         <td>{$programmeStatus}</td>
                                         <td>
-                                          <form action='updateSubmission.php' method='post'>
+                                          <form action='updateSubmissionAdmin.php' method='post'>
                                             <input type='hidden' name='progressID' value='{$progressID}'>
                                             <button type='submit'>View Units</button>
                                            </form>

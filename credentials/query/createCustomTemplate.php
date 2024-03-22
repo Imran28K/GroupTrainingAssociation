@@ -319,8 +319,8 @@ $details = $resultTutor -> fetch_object();
     //Group 17
     $queryCheckUnit17 = "SELECT * FROM Units WHERE UnitName = '$group17Name' AND SubmissionDate = '$group17SubmissionDate'"; 
     $resultCheckUnit17 = $mysqli->query($queryCheckUnit17); 
-    $getUnit17 = $resultCheckUnit1 -> fetch_object();
-    $getCheckUnit17 = $resultCheckUnit1 -> num_rows;
+    $getUnit17 = $resultCheckUnit17 -> fetch_object();
+    $getCheckUnit17 = $resultCheckUnit17 -> num_rows;
     if ($getCheckUnit17 > 0){
         $group17 = $getUnit17 -> UnitID;
     }
@@ -635,6 +635,218 @@ $details = $resultTutor -> fetch_object();
 
     $queryCreateTemplate = "UPDATE learner SET TemplateID = $templateID WHERE UniqueLearnerNumber = '$learnerID'";
     $resultCreateTemplate = $mysqli->query($queryCreateTemplate);
+
+    $queryGetLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
+    $resultGetLearner = $mysqli->query($queryGetLearner);
+    $getLearnerProgressID = $resultGetLearner -> fetch_object();
+    $progressID = $getLearnerProgressID -> ProgressID;
+
+    $queryClearProgress = "DELETE FROM progressunits WHERE ProgressID = '$progressID'";
+    $resultClearProgress = $mysqli->query($queryClearProgress);
+
+    if ($group1 == 1){
+    } else {
+        $queryGroup1Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group1', 'Uncompleted')";
+    $resultGroup1Progress = $mysqli->query($queryGroup1Progress);
+    }
+
+    if ($group2 == 1){
+    } else {
+        $queryGroup2Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group2', 'Uncompleted')";
+        $resultGroup2Progress = $mysqli->query($queryGroup2Progress);
+    }
+
+    if ($group3 == 1){
+    } else {
+        $queryGroup3Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group3', 'Uncompleted')";
+        $resultGroup3Progress = $mysqli->query($queryGroup3Progress);
+    }
+
+    if ($group4 == 1){
+    } else {
+        $queryGroup4Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group4', 'Uncompleted')";
+        $resultGroup4Progress = $mysqli->query($queryGroup4Progress);
+    }
+
+    if ($group5 == 1){
+    } else {
+        $queryGroup5Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group5', 'Uncompleted')";
+        $resultGroup5Progress = $mysqli->query($queryGroup5Progress);
+    }
+
+    if ($group6 == 1){
+    } else {
+        $queryGroup6Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group6', 'Uncompleted')";
+    $resultGroup6Progress = $mysqli->query($queryGroup6Progress);
+    }
+    
+    if ($group7 == 1){
+    } else {
+        $queryGroup7Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group7', 'Uncompleted')";
+    $resultGroup7Progress = $mysqli->query($queryGroup7Progress);
+    }
+    
+    if ($group8 == 1){
+    } else {
+        $queryGroup8Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group8', 'Uncompleted')";
+        $resultGroup8Progress = $mysqli->query($queryGroup8Progress);
+    }
+   
+    if ($group9 == 1){
+    } else {
+        $queryGroup9Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group9', 'Uncompleted')";
+        $resultGroup9Progress = $mysqli->query($queryGroup9Progress);
+    }
+    
+    if ($group10 == 1){
+    } else {
+        $queryGroup10Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group10', 'Uncompleted')";
+    $resultGroup10Progress = $mysqli->query($queryGroup10Progress);
+    }
+    
+    if ($group11 == 1){
+    } else {
+        $queryGroup11Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group11', 'Uncompleted')";
+    $resultGroup11Progress = $mysqli->query($queryGroup11Progress);
+    }
+    
+    if ($group12 == 1){
+    } else {
+        $queryGroup12Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group12', 'Uncompleted')";
+    $resultGroup12Progress = $mysqli->query($queryGroup12Progress);
+    }
+
+    if ($group13 == 1){
+    } else {
+        $queryGroup13Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group13', 'Uncompleted')";
+    $resultGroup13Progress = $mysqli->query($queryGroup13Progress);
+    }
+    
+    if ($group14 == 1){
+    } else {
+        $queryGroup14Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group14', 'Uncompleted')";
+    $resultGroup14Progress = $mysqli->query($queryGroup14Progress);
+    }
+
+    if ($group15 == 1){
+    } else {
+        $queryGroup15Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group15', 'Uncompleted')";
+        $resultGroup15Progress = $mysqli->query($queryGroup15Progress);
+    }
+    
+    if ($group16 == 1){
+    } else {
+        $queryGroup16Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group16', 'Uncompleted')";
+    $resultGroup16Progress = $mysqli->query($queryGroup16Progress);
+    }
+
+    if ($group17 == 1){
+    } else {
+        $queryGroup17Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group17', 'Uncompleted')";
+    $resultGroup17Progress = $mysqli->query($queryGroup17Progress);
+    }
+
+    if ($group18 == 1){
+    } else {
+        $queryGroup18Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group18', 'Uncompleted')";
+    $resultGroup18Progress = $mysqli->query($queryGroup18Progress);
+    }
+
+    if ($group19 == 1){
+    } else {
+        $queryGroup19Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group19', 'Uncompleted')";
+    $resultGroup19Progress = $mysqli->query($queryGroup19Progress);
+    }
+
+    if ($group20 == 1){
+    } else {
+        $queryGroup20Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group20', 'Uncompleted')";
+    $resultGroup20Progress = $mysqli->query($queryGroup20Progress);
+    }
+
+    if ($group21 == 1){
+    } else {
+        $queryGroup21Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group21', 'Uncompleted')";
+    $resultGroup21Progress = $mysqli->query($queryGroup21Progress);
+    }
+
+    if ($group22 == 1){
+    } else {
+        $queryGroup22Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group22', 'Uncompleted')";
+    $resultGroup22Progress = $mysqli->query($queryGroup22Progress);
+    }
+
+    if ($group23 == 1){
+    } else {
+        $queryGroup23Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group23', 'Uncompleted')";
+        $resultGroup23Progress = $mysqli->query($queryGroup23Progress);
+    }
+
+    if ($group24 == 1){
+    } else {
+        $queryGroup24Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group24', 'Uncompleted')";
+    $resultGroup24Progress = $mysqli->query($queryGroup24Progress);
+    }
+
+    if ($group25 == 1){
+    } else {
+        $queryGroup25Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group25', 'Uncompleted')";
+    $resultGroup25Progress = $mysqli->query($queryGroup25Progress);
+    }
+
+    if ($group26 == 1){
+    } else {
+        $queryGroup26Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group26', 'Uncompleted')";
+    $resultGroup26Progress = $mysqli->query($queryGroup26Progress);
+    }
+
+    if ($group27 == 1){
+    } else {
+        $queryGroup27Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group27', 'Uncompleted')";
+    $resultGroup27Progress = $mysqli->query($queryGroup27Progress);
+    }
+
+    if ($group28 == 1){
+    } else {
+        $queryGroup28Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group28', 'Uncompleted')";
+    $resultGroup28Progress = $mysqli->query($queryGroup28Progress);
+    }
+
+    if ($group29 == 1){
+    } else {
+        $queryGroup29Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group29', 'Uncompleted')";
+    $resultGroup29Progress = $mysqli->query($queryGroup29Progress);
+    }
+
+    if ($group30 == 1){
+    } else {
+        $queryGroup30Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group30', 'Uncompleted')";
+    $resultGroup30Progress = $mysqli->query($queryGroup30Progress);
+    }
+
+    if ($group31 == 1){
+    } else {
+        $queryGroup31Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group31', 'Uncompleted')";
+    $resultGroup31Progress = $mysqli->query($queryGroup31Progress);
+    }
+
+    if ($group32 == 1){
+    } else {
+        $queryGroup32Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group32', 'Uncompleted')";
+    $resultGroup32Progress = $mysqli->query($queryGroup32Progress);
+    }
+
+    if ($group33 == 1){
+    } else {
+        $queryGroup33Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group33', 'Uncompleted')";
+    $resultGroup33Progress = $mysqli->query($queryGroup33Progress);
+    }
+
+    if ($group34 == 1){
+    } else {
+        $queryGroup34Progress = "INSERT INTO progressunits (ProgressID, UnitID, CurrentStatus) VALUES ('$progressID', '$group34', 'Uncompleted')";
+    $resultGroup34Progress = $mysqli->query($queryGroup34Progress);
+    }
 
     $msg = "Template updated";
     header("location: ../../users/admin/templateChoice.php");
