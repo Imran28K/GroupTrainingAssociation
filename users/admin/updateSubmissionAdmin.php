@@ -185,7 +185,7 @@ $result = $stmt->get_result();
                 var unitId = $(this).data('unitid');
                 var password = $('#passwordInput-' + unitId).val();
 
-                $.post('verifyAndUpdateStatus.php', {
+                $.post('../updateSubmissionVerification.php', {
                     unitId: unitId,
                     password: password,
                     userId: '<?php echo $userID; ?>'
