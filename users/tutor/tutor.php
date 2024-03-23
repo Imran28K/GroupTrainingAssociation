@@ -34,7 +34,7 @@ $details = $resultDetails -> fetch_object();
         ?>
       </div>
       <ul>
-        <li><a href="#" class="active">
+        <li><a href="tutor.php" class="active">
             <span class="icon"><i class="fas fa-home"></i></span>
             <span class="item">Profile Details</span>
           </a>

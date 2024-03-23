@@ -45,16 +45,6 @@ $progressID = $obj -> ProgressID;
     $valueOTJ = 100;
   }
 
-  /*if ($OverallHours >= $ExpectedHours){
-    $valueOTJ = 100;
-  }
-  else if ($OverallHours >= ($ExpectedHours-10)){
-    $valueOTJ = 50;
-  }
-  else if ($OverallHours < ($ExpectedHours-10)){
-    $valueOTJ = 10;
-  }*/
-
   $queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
   $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
   $getEmployerRAG = $resultEmployerRAG -> fetch_object();

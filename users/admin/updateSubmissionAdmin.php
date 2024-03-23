@@ -130,7 +130,6 @@ $result = $stmt->get_result();
                                       <form method='POST' action='../query/updateSubmissionVerification.php'>
                                       <input type='hidden' name='unitId' value='{$row['UnitID']}'>
                                       <input type='hidden' name='progressId' value='{$progressID}'>
-                                      <input type='checkbox' name='taskCheckbox' id='taskCheckbox-{$row['UnitID']}' onclick='this.form.submit()' >
                                       <label for='taskCheckbox-{$row['UnitID']}'></label>
                                       <input type='password' name='password' placeholder='Enter Password' required>
                                       <input type='submit' value='Complete Task'>

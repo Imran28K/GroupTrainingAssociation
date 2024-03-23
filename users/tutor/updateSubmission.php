@@ -90,7 +90,7 @@ $result = $stmt->get_result();
                 </div>
             </div>
             <div class="container">
-                <h2>Learner Units</h2>
+            <h2>Learner Units</h2>
                 <br>
 
                 <table style="width:100%">
@@ -126,14 +126,13 @@ $result = $stmt->get_result();
                                       <td>{$row['SubmissionDate']}</td>
                                       <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
-                                        <div class='task-completer'>
-                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
-                                        <label for='taskCheckbox'></label>
-                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
-                                        <br>
-                                        <button id='completeButton'disabled>Complete Task</button>
-                                        </br>
-                                        </div>
+                                      <form method='POST' action='../query/updateSubmissionVerification.php'>
+                                      <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                      <input type='hidden' name='progressId' value='{$progressID}'>
+                                      <label for='taskCheckbox-{$row['UnitID']}'></label>
+                                      <input type='password' name='password' placeholder='Enter Password' required>
+                                      <input type='submit' value='Complete Task'>
+                                      </form>
                                       </td>
                                       </tr>";
                             }
@@ -155,22 +154,6 @@ $result = $stmt->get_result();
         hamburger.addEventListener("click", function() {
             document.querySelector("body").classList.toggle("active");
         })
-    </script>
-    <script>
-        document.getElementById('taskCheckbox').addEventListener('change', function() {
-        document.getElementById('completeButton').disabled = !this.checked;
-        });
-
-        document.getElementById('completeButton').addEventListener('click', function() {
-        var password = document.getElementById('passwordInput').value;
-        var correctPassword = '123456'; 
-        if (password === correctPassword) {
-          alert('Task marked as complete!');
-    
-        } else {
-           alert('Incorrect password. Please try again.');
-        }
-        });
     </script>
 
 </body>
