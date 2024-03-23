@@ -32,24 +32,37 @@ $progressID = $obj -> ProgressID;
   $resultProgressRAGCompleted = $mysqli -> query($queryProgressRAGCompleted);
   $getProgressRAGCompleted = $resultProgressRAGCompleted -> num_rows;
 
+  if ($getProgressRAG <= 0){
+    $getProgressRAG = 1;
+  }
   $valueProgress = (($getProgressRAGCompleted/$getProgressRAG)*100 );
 
-  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$userID'"; 
-  $resultOTJRAG = $mysqli -> query($queryOTJRAG);
-  $getOTJRAG = $resultOTJRAG -> fetch_object();
-  $ExpectedHours = $getOTJRAG -> ExpectedHours;
-  $OverallHours = $getOTJRAG -> CumulativeHours;
+  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultOTJRAG = $mysqli -> query($queryOTJRAG);
+$OTJRAGCheck = $resultOTJRAG -> num_rows;
+if ($OTJRAGCheck > 0) {
+$getOTJRAG = $resultOTJRAG -> fetch_object();
+$ExpectedHours = $getOTJRAG -> ExpectedHours;
+$OverallHours = $getOTJRAG -> CumulativeHours;
 
-  $valueOTJ = (($OverallHours/$ExpectedHours)*100);
-  if ($valueOTJ > 100){
-    $valueOTJ = 100;
-  }
+if ($ExpectedHours <= 0){
+  $ExpectedHours = 1;
+}
+$valueOTJ = (($OverallHours/$ExpectedHours)*100);
+if ($valueOTJ > 100){
+  $valueOTJ = 100;
+}
+}
+else {
+  $valueOTJ = 0;
+}
 
   $queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
   $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
+  $EmployerRAGCheck = $resultEmployerRAG -> num_rows;
+if ($EmployerRAGCheck > 0) {
   $getEmployerRAG = $resultEmployerRAG -> fetch_object();
   $employerRAG = $getEmployerRAG -> EmploymentRAG;
-
   if ($employerRAG == "Green"){
     $valueEMP = 100;
   }
@@ -59,6 +72,10 @@ $progressID = $obj -> ProgressID;
   else if ($employerRAG == "Red"){
     $valueEMP = 10;
   }
+}
+else {
+  $valueEMP = 0;
+}
 
 
 //checks the CurrentStatus of all units where $userID.

@@ -7,7 +7,7 @@ if (isset($_POST['unitId'], $_POST['password'], $_POST['progressId'])) {
     $password = $_POST['password'];
     $progressId = $_POST['progressId'];
     $userId = $_SESSION['userID'];
-    
+    $role = $_SESSION['userRole'];
     
     $stmt = $mysqli->prepare("SELECT TutorPassword FROM tutor WHERE TutorID = ?");
     $stmt->bind_param("s", $userId);
@@ -33,11 +33,21 @@ if (isset($_POST['unitId'], $_POST['password'], $_POST['progressId'])) {
         $_SESSION['error'] = "Tutor not found.";
     }
     $stmt->close();
-    header("Location: ../admin/manageSubmissionAdmin.php"); 
+    if ($role == 'admin'){
+        header("Location: ../../users/admin/manageSubmissionAdmin.php");
+    } 
+    else if ($role == 'tutor'){
+        header("Location: ../../users/Tutor/manageSubmissions.php");
+    } 
     exit();
 } else {
     $_SESSION['error'] = "Required parameters are missing.";
-    header("Location: ../admin/manageSubmissionAdmin.php"); 
+    if ($role == 'admin'){
+        header("Location: ../../users/admin/manageSubmissionAdmin.php");
+    } 
+    else if ($role == 'tutor'){
+        header("Location: ../../users/Tutor/manageSubmissions.php");
+    } 
     exit();
 }
 ?>

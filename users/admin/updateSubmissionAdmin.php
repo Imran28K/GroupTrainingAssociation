@@ -127,7 +127,7 @@ $result = $stmt->get_result();
                                       <td>{$row['SubmissionDate']}</td>
                                       <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
-                                      <form method='POST' action='../query/updateSubmissionVerification.php'>
+                                      <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
                                       <input type='hidden' name='unitId' value='{$row['UnitID']}'>
                                       <input type='hidden' name='progressId' value='{$progressID}'>
                                       <label for='taskCheckbox-{$row['UnitID']}'></label>
