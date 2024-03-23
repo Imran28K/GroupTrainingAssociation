@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+  <link rel="stylesheet" type="text/css" href="../../css/learnerchart.css">
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -23,10 +24,63 @@ $details = $resultDetails -> fetch_object();
 
 $learnerID = $_POST['uniqueLearnerNumber'];
 $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'"; 
-$resultLearner= $mysqli->query($queryLearner);
+$resultLearner = $mysqli->query($queryLearner);
+$getLearnerDetails = $resultLearner -> fetch_object();
+$progressID = $getLearnerDetails -> ProgressID;
 
-$learnerDetails = $resultLearner -> fetch_object();
+$queryProgressRAG = "SELECT * FROM progressunits WHERE ProgressID = '$progressID'"; 
+$resultProgressRAG = $mysqli -> query($queryProgressRAG);
+$getProgressRAG = $resultProgressRAG -> num_rows;
+
+$queryProgressRAGCompleted = "SELECT * FROM progressunits WHERE ProgressID = '$progressID' AND CurrentStatus = 'Completed'"; 
+$resultProgressRAGCompleted = $mysqli -> query($queryProgressRAGCompleted);
+$getProgressRAGCompleted = $resultProgressRAGCompleted -> num_rows;
+
+if ($getProgressRAGCompleted <= 0){
+  $getProgressRAGCompleted = 1;
+}
+if ($getProgressRAG <= 0){
+  $getProgressRAG = 1;
+}
+$valueProgress = (($getProgressRAGCompleted/$getProgressRAG)*100 );
+
+$queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultOTJRAG = $mysqli -> query($queryOTJRAG);
+$getOTJRAG = $resultOTJRAG -> fetch_object();
+$ExpectedHours = $getOTJRAG -> ExpectedHours;
+$OverallHours = $getOTJRAG -> CumulativeHours;
+
+if ($ExpectedHours <= 0){
+  $ExpectedHours = 1;
+}
+if ($OverallHours <= 0){
+  $OverallHours = 1;
+}
+$valueOTJ = (($OverallHours/$ExpectedHours)*100);
+if ($valueOTJ > 100){
+  $valueOTJ = 100;
+}
+
+$queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$learnerID'"; 
+$resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
+$getEmployerRAG = $resultEmployerRAG -> fetch_object();
+$employerRAG = $getEmployerRAG -> EmploymentRAG;
+
+if ($employerRAG == "Green"){
+  $valueEMP = 100;
+}
+else if ($employerRAG == "Amber"){
+  $valueEMP = 50;
+}
+else if ($employerRAG == "Red"){
+  $valueEMP = 10;
+}
 ?>
+<script> 
+  let Progressvalue = parseInt('<?php echo $valueProgress ?>')
+  let OTJvalue = parseInt('<?php echo $valueOTJ; ?>')
+  let EMPvalue = parseInt('<?php echo $valueEMP; ?>')
+</script>
 
 <body>
 
@@ -71,20 +125,16 @@ $learnerDetails = $resultLearner -> fetch_object();
       </div>
 
       <div class="container">
-        <?php echo"<h2>{$learnerDetails -> LearnerFirstName} {$learnerDetails -> LearnerLastName}'s progress</h2>"?>
+        <?php echo"<h2>{$getLearnerDetails -> LearnerFirstName} {$getLearnerDetails -> LearnerLastName}'s progress</h2>"?>
         <h3 class="chart-heading">Learner Progress</h3>
-        <div class="programming-stats">
-          <div class="chart-container">
-            <canvas class="my-chart"></canvas>
-          </div>
 
+        <div id="myChart" style="width:100%; max-width:600px; height:500px; margin:auto;"></div> 
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="../sharedfiles/learnerprogress/barchart.js"></script>
           <div class="details">
             <ul></ul>
           </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../sharedfiles/learnerprogress/piechart.js"></script>
       </div>
     </div>
   </div>

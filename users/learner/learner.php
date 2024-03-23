@@ -40,7 +40,12 @@ $progressID = $obj -> ProgressID;
   $ExpectedHours = $getOTJRAG -> ExpectedHours;
   $OverallHours = $getOTJRAG -> CumulativeHours;
 
-  if ($OverallHours >= $ExpectedHours){
+  $valueOTJ = (($OverallHours/$ExpectedHours)*100);
+  if ($valueOTJ > 100){
+    $valueOTJ = 100;
+  }
+
+  /*if ($OverallHours >= $ExpectedHours){
     $valueOTJ = 100;
   }
   else if ($OverallHours >= ($ExpectedHours-10)){
@@ -48,7 +53,7 @@ $progressID = $obj -> ProgressID;
   }
   else if ($OverallHours < ($ExpectedHours-10)){
     $valueOTJ = 10;
-  }
+  }*/
 
   $queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
   $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
@@ -73,8 +78,8 @@ $progressID = $obj -> ProgressID;
 ?>
 <script> 
   let Progressvalue = parseInt('<?php echo $valueProgress ?>')
-  console.log(Progressvalue)
   let OTJvalue = parseInt('<?php echo $valueOTJ; ?>')
+  console.log(OTJvalue)
   let EMPvalue = parseInt('<?php echo $valueEMP; ?>')
 </script>
 
