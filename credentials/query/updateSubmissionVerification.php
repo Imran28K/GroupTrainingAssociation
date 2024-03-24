@@ -37,7 +37,7 @@ if (isset($_POST['unitId'], $_POST['password'], $_POST['progressId'])) {
         header("Location: ../../users/admin/manageSubmissionAdmin.php");
     } 
     else if ($role == 'tutor'){
-        header("Location: ../../users/Tutor/manageSubmissions.php");
+        header("Location: ../../users/tutor/manageSubmissions.php");
     } 
     exit();
 } else {
@@ -46,7 +46,7 @@ if (isset($_POST['unitId'], $_POST['password'], $_POST['progressId'])) {
         header("Location: ../../users/admin/manageSubmissionAdmin.php");
     } 
     else if ($role == 'tutor'){
-        header("Location: ../../users/Tutor/manageSubmissions.php");
+        header("Location: ../../users/tutor/manageSubmissions.php");
     } 
     exit();
 }
