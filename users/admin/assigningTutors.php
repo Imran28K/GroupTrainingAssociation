@@ -17,6 +17,8 @@ $tutorID = $_SESSION['userID'];
 
 <?php 
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 ?>
 
@@ -160,5 +162,8 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

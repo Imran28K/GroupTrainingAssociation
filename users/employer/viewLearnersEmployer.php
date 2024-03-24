@@ -5,6 +5,8 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 $employerID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'employer'){
 
 $querySessions = "SELECT * FROM learner WHERE EmployerID = $employerID"; 
 $resultSessions = $mysqli->query($querySessions); 
@@ -104,5 +106,8 @@ $details = $resultEmployer -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

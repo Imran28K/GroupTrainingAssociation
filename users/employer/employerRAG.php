@@ -15,6 +15,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'employer'){
 $learnerID = $_POST['uniqueLearnerNumber'];
 $learnerIDString = strval($learnerID);
 
@@ -128,5 +130,8 @@ $existingReviewCheck = $resultAlreadyReviewed -> num_rows;
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

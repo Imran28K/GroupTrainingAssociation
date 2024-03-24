@@ -23,6 +23,8 @@
     }
 
     $userID = $_SESSION['userID'];
+    $role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
     $queryDetails = "SELECT * FROM tutor WHERE TutorID = ?";
     $stmtDetails = $mysqli->prepare($queryDetails);
@@ -171,5 +173,8 @@
     </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

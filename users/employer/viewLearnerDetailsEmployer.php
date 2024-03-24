@@ -16,6 +16,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $employerID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'employer'){
 
 $queryDetails = "SELECT * FROM employer WHERE EmployerID = '$employerID'"; 
 $resultDetails= $mysqli->query($queryDetails);
@@ -149,5 +151,8 @@ if ($EmployerRAGCheck > 0) {
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

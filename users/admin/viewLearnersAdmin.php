@@ -5,6 +5,8 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
 $resultSessions = $mysqli->query($querySessions); 
@@ -17,14 +19,6 @@ $resultSessions = $mysqli->query($querySessions);
     <title>View learners tutor</title>
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
-
-<?php 
-$tutorID = $_SESSION['userID'];
-
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
-$resultSessions = $mysqli->query($querySessions); 
-
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -129,5 +123,8 @@ $details = $resultLearner -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

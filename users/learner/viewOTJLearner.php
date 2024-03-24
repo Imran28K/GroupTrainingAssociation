@@ -5,6 +5,8 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'learner'){
 
 $querySessions = "SELECT * FROM learner"; 
 $resultSessions = $mysqli->query($querySessions); 
@@ -145,5 +147,8 @@ $obj = $resultLearner->fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

@@ -22,6 +22,8 @@ $resultSessions = $mysqli->query($querySessions);
 
 <?php
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 $learnerID = $_POST['learnerID'];
 
 $queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
@@ -510,5 +512,8 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

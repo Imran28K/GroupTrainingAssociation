@@ -11,6 +11,8 @@ else {
     $sessionID = $_SESSION['sessionID'];
 }
 
+$role = $_SESSION['userRole'];
+if ($role == 'tutor'){
 require_once ("../../db/dbconnection.php");
 
 $querySessions = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
@@ -178,5 +180,8 @@ $details = $resultLearner -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>
