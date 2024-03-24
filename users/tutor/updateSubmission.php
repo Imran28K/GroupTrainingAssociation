@@ -120,11 +120,19 @@ $result = $stmt->get_result();
                             $result = $stmt->get_result();
 
                             while ($row = $result->fetch_assoc()) {
+
+                                $statusClass = '';
+                                if ($row['CurrentStatus'] === 'Overdue') {
+                                    $statusClass = 'status-overdue';
+                                } elseif ($row['CurrentStatus'] === 'Completed') {
+                                    $statusClass = 'status-completed';
+                                }
+
                                 echo "<tr>
                                       <td>{$row['UnitID']}</td>
                                       <td>{$row['UnitName']}</td>
                                       <td>{$row['SubmissionDate']}</td>
-                                      <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
+                                      <td class='{$statusClass}'>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
                                       <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
                                       <input type='hidden' name='unitId' value='{$row['UnitID']}'>
