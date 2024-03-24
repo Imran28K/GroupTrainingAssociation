@@ -48,7 +48,7 @@
     $result = $stmt->get_result();
 
     $today = date("Y-m-d");
-
+//only updates ti Overdue if the CurrentStatus is "Uncompleted", if its "Completed" it will just ignore
     while ($row = $result->fetch_assoc()) {
         if ($today > $row['SubmissionDate'] && $row['CurrentStatus'] === 'Uncompleted') {
             
