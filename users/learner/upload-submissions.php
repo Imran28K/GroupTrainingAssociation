@@ -54,6 +54,13 @@ foreach ($progressDetails as $detail) {
     $UnitID = $detail['UnitID'];
     $CurrentStatus = $detail['CurrentStatus'];
 
+    $statusClass = ''; 
+    if ($CurrentStatus === 'Overdue') {
+        $statusClass = 'status-overdue'; 
+    } elseif ($CurrentStatus === 'Completed') {
+        $statusClass = 'status-completed'; 
+    }
+
     // Fetch UnitName and SubmissionDate for each UnitID
     $sqlUnits = "SELECT UnitName, SubmissionDate FROM units WHERE UnitID = ?";
     $stmtUnits = mysqli_prepare($mysqli, $sqlUnits);
@@ -63,7 +70,7 @@ foreach ($progressDetails as $detail) {
     while ($rowU = $resultUnits->fetch_assoc()) {
         $UnitName = $rowU['UnitName'];
         $SubmissionDate = $rowU['SubmissionDate'];
-        $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td>$CurrentStatus</td></tr>";
+        $tableRows[] = "<tr><td>$UnitName</td><td>$SubmissionDate</td><td class='$statusClass'>$CurrentStatus</td></tr>";
     }
     mysqli_stmt_close($stmtUnits);
 }
