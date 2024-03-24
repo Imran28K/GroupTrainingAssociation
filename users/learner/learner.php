@@ -37,7 +37,7 @@ $progressID = $obj -> ProgressID;
   }
   $valueProgress = (($getProgressRAGCompleted/$getProgressRAG)*100 );
 
-  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$learnerID'"; 
+  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$userID'"; 
 $resultOTJRAG = $mysqli -> query($queryOTJRAG);
 $OTJRAGCheck = $resultOTJRAG -> num_rows;
 if ($OTJRAGCheck > 0) {
