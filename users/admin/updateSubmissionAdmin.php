@@ -12,44 +12,64 @@
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
-<?php
-session_start();
-require_once '../../db/dbconnection.php';
-
-$userID = $_SESSION['userID'];
-
-$queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
-$resultDetails = $mysqli->query($queryDetails);
-
-$details = $resultDetails->fetch_object();
-
-if (isset($_POST['progressID'])) {
-    $progressID = $_POST['progressID'];
-} else {
-
-    echo "Progress ID not provided.";
-    exit;
-}
-
-
-$query = "SELECT pu.UnitID, u.SubmissionDate FROM progressunits pu INNER JOIN units u ON pu.UnitID = u.UnitID WHERE pu.ProgressID = ?";
-
-$stmt = $mysqli->prepare($query);
-$stmt->bind_param("i", $progressID);
-$stmt->execute();
-$result = $stmt->get_result();
-?>
-
 <body>
+    <?php
+    session_start();
+    require_once '../../db/dbconnection.php';
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../../credentials/login.php");
+        exit;
+    }
+
+    $userID = $_SESSION['userID'];
+
+    $queryDetails = "SELECT * FROM tutor WHERE TutorID = ?";
+    $stmtDetails = $mysqli->prepare($queryDetails);
+    $stmtDetails->bind_param("i", $userID);
+    $stmtDetails->execute();
+    $resultDetails = $stmtDetails->get_result();
+    $details = $resultDetails->fetch_object();
+    $stmtDetails->close();
+
+    if (!isset($_POST['progressID'])) {
+        echo "Progress ID not provided.";
+        exit;
+    }
+    $progressID = $_POST['progressID'];
+
+    $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate, pu.CurrentStatus
+          FROM progressunits pu
+          INNER JOIN units u ON pu.UnitID = u.UnitID
+          WHERE pu.ProgressID = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $progressID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $today = date("Y-m-d");
+
+    while ($row = $result->fetch_assoc()) {
+        if ($today > $row['SubmissionDate'] && $row['CurrentStatus'] === 'Uncompleted') {
+            
+            $updateQuery = "UPDATE progressunits SET CurrentStatus = 'Overdue' WHERE UnitID = ? AND ProgressID = ?";
+            $updateStmt = $mysqli->prepare($updateQuery);
+            $updateStmt->bind_param("ii", $row['UnitID'], $progressID);
+            $updateStmt->execute();
+            $updateStmt->close();
+    
+            $row['CurrentStatus'] = 'Overdue';
+        }
+    }
+    $stmt->close();
+    ?>
 
     <div class="wrapper">
         <div class="sidebar">
             <div class="profile">
                 <img src="../../images/logos/gtalogo.png" alt="profile_picture">
-                <?php
-                echo "<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
-                echo "<p>{$details->Role}</p>";
-                ?>
+                <h3><?php echo "{$details->TutorFirstName} {$details->TutorLastName}"; ?></h3>
+                <p><?php echo $details->Role; ?></p>
             </div>
             <ul>
                 <li><a href="tutor.php">
@@ -64,7 +84,7 @@ $result = $stmt->get_result();
                 </li>
                 <li><a href="viewLearnersTutor.php">
                         <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">View learners</span>
+                        <span class="item">View Learners</span>
                     </a>
                 </li>
                 <li><a href="viewOTJTutor.php">
@@ -93,7 +113,6 @@ $result = $stmt->get_result();
             <div class="container">
                 <h2>Learner Units</h2>
                 <br>
-
                 <table style="width:100%">
                     <thead>
                         <tr>
@@ -106,44 +125,27 @@ $result = $stmt->get_result();
                     </thead>
                     <tbody>
                         <?php
-                        if (isset($_POST['progressID'])) {
-                            $progressID = $_POST['progressID'];
+                        
+                        $result->data_seek(0);
 
-                            // Updated the SQL query to include CurrentStatus
-                            $query = "SELECT pu.UnitID, u.UnitName, u.SubmissionDate, pu.CurrentStatus
-                            FROM progressunits pu
-                            INNER JOIN units u ON pu.UnitID = u.UnitID
-                            WHERE pu.ProgressID = ?";
-
-                            $stmt = $mysqli->prepare($query);
-                            $stmt->bind_param("i", $progressID);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>
-                                      <td>{$row['UnitID']}</td>
-                                      <td>{$row['UnitName']}</td>
-                                      <td>{$row['SubmissionDate']}</td>
-                                      <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
-                                      <td>
-                                      <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
-                                      <input type='hidden' name='unitId' value='{$row['UnitID']}'>
-                                      <input type='hidden' name='progressId' value='{$progressID}'>
-                                      <label for='taskCheckbox-{$row['UnitID']}'></label>
-                                      <input type='password' name='password' placeholder='Enter Password' required>
-                                      <input type='submit' value='Complete Task'>
-                                      </form>
-                                      </td>
-                                      </tr>";
-                            }
-                            $stmt->close();
-                        } else {
-                            echo "<tr><td colspan='5'>No progress ID provided.</td></tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$row['UnitID']}</td>
+                                <td>{$row['UnitName']}</td>
+                                <td>{$row['SubmissionDate']}</td>
+                                <td>{$row['CurrentStatus']}</td>
+                                <td>
+                                    <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
+                                        <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                        <input type='hidden' name='progressId' value='{$progressID}'>
+                                        <input type='password' name='password' placeholder='Enter Password' required>
+                                        <input type='submit' value='Complete Task'>
+                                    </form>
+                                </td>
+                              </tr>";
                         }
                         ?>
                     </tbody>
-
                 </table>
                 <a href="javascript:history.back()" class="back-button">&#8592; Back</a>
             </div>
@@ -151,17 +153,12 @@ $result = $stmt->get_result();
     </div>
 
     <script type="text/javascript">
-        var hamburger = document.querySelector(".hamburger");
-        hamburger.addEventListener("click", function() {
-            document.querySelector("body").classList.toggle("active");
-        })
+        $(document).ready(function() {
+            $(".hamburger").click(function() {
+                $("body").toggleClass("active");
+            });
+        });
     </script>
-    
-    
-
-
-
-
 
 </body>
 
