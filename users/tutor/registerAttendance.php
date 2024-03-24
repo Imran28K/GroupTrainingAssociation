@@ -36,7 +36,7 @@ $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
   if ($learnerCheck <= 0){
     $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
     $resultAddLearners= $mysqli->query($queryAddLearners);
-}
+  }
 }
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendance = $mysqli->query($queryAttendance);
