@@ -129,20 +129,28 @@
                         $result->data_seek(0);
 
                         while ($row = $result->fetch_assoc()) {
+
+                            $statusClass = ''; 
+                            if ($row['CurrentStatus'] === 'Overdue') {
+                                $statusClass = 'status-overdue'; 
+                            } elseif ($row['CurrentStatus'] === 'Completed') {
+                                $statusClass = 'status-completed'; 
+                            }
+                        
                             echo "<tr>
-                                <td>{$row['UnitID']}</td>
-                                <td>{$row['UnitName']}</td>
-                                <td>{$row['SubmissionDate']}</td>
-                                <td>{$row['CurrentStatus']}</td>
-                                <td>
-                                    <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
-                                        <input type='hidden' name='unitId' value='{$row['UnitID']}'>
-                                        <input type='hidden' name='progressId' value='{$progressID}'>
-                                        <input type='password' name='password' placeholder='Enter Password' required>
-                                        <input type='submit' value='Complete Task'>
-                                    </form>
-                                </td>
-                              </tr>";
+                                    <td>{$row['UnitID']}</td>
+                                    <td>{$row['UnitName']}</td>
+                                    <td>{$row['SubmissionDate']}</td>
+                                    <td class='{$statusClass}'>{$row['CurrentStatus']}</td> 
+                                    <td>
+                                        <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
+                                            <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                            <input type='hidden' name='progressId' value='{$progressID}'>
+                                            <input type='password' name='password' placeholder='Enter Password' required>
+                                            <input type='submit' value='Complete Task'>
+                                        </form>
+                                    </td>
+                                  </tr>";
                         }
                         ?>
                     </tbody>
