@@ -79,10 +79,6 @@ $details = $resultLearner -> fetch_object();
         <li> <a href='registerChoice.php'> Register Attendance </a> </li>
         <li> <a href='createSession.php'> Create a new session </a> </li>
       </ul>
-
-      <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='tutor.php'> To profile details </a> </li>
-      </ul>
     </div>
   </div>
 
