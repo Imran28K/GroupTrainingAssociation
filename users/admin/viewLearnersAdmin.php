@@ -26,6 +26,7 @@ $resultSessions = $mysqli->query($querySessions);
     <title>view learners tutor</title>
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -90,10 +91,12 @@ $details = $resultLearner -> fetch_object();
       </div>
       <div class="container">
         <h1>View Learners</h1>
+        <br>
         <table>
         <tr>
-            <td>Learner name</td>
-            <td>Apprenticeship</td>
+            <th>Learner name</th>
+            <th>Apprenticeship</th>
+            <th>Action</th>
         </tr>
         <?php while ($obj = $resultSessions -> fetch_object()){
         $learnerID = $obj -> UniqueLearnerNumber;
@@ -105,7 +108,7 @@ $details = $resultLearner -> fetch_object();
             <td>
                 <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
                 <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='View learner'>
+                <input type='submit' value='View progress'>
             </form>
             </td>
         </tr>";
