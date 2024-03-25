@@ -129,7 +129,6 @@ if (isset($_POST["import"])) {
                 
                 $ident = $row[0]; 
                 $UniqueLearnerNumber = $row[12];
-                $TutorID = 2; 
                 $EmployerID = 1; 
                 $OTJID = 1; 
                 $EmploymentID = 1; 
@@ -138,6 +137,8 @@ if (isset($_POST["import"])) {
                 $Cohort = $row[3]; 
                 $Site = $row[4]; 
                 $learnerExportStatus = $row[10];
+                $tutorName = $row[11];
+                [$TutorFirstName, $TutorLastName] = explode(' ', $tutorName);
                 $qualificationAimDescription = $row[13];
                 $achievedTarget = $row[17];
                 $DayReleaseDay = $row[18]; 
@@ -145,13 +146,24 @@ if (isset($_POST["import"])) {
 
                 $queryCheckTemplate = "SELECT * FROM apprenticeshiptemplates WHERE ApprenticeshipTemplateID = '$ApprenticeshipID'"; 
                 $resultCheckTemplate = $mysqli->query($queryCheckTemplate); 
-                $TemplateExists = $resultCheckTemplate -> num_rows;
-                if ($TemplateExists > 0 ) {
+                $templateExists = $resultCheckTemplate -> num_rows;
+                if ($templateExists > 0 ) {
                     $getTemplateName = $resultCheckTemplate -> fetch_object();
                     $templateName = $getTemplateName -> apprenticeshipName;
                 }
 
-                $stmtLearner = "INSERT INTO learner (ident, UniqueLearnerNumber, TutorID, EmployerID, ProgressID, OTJID, EmploymentID, ApprenticeshipID, TemplateID, LearnerFirstName, LearnerLastName, ApprenticeshipName, Cohort, Site, DayReleaseDay, LearnerExportStatus, Main_Qualification_Aim_Description, AchievedTarget, Active) VALUES ('$ident', '$UniqueLearnerNumber', '$TutorID', '$EmployerID', '$progressID', '$OTJID', '$EmploymentID', '$ApprenticeshipID', '$TemplateID', '$LearnerFirstName', '$LearnerLastName', '$templateName', '$Cohort', '$Site', '$DayReleaseDay', '$learnerExportStatus', '$qualificationAimDescription', '$achievedTarget', '$Active')";
+                $queryCheckTutor= "SELECT * FROM tutor WHERE TutorFirstName = '$TutorFirstName' AND TutorLastName = '$TutorLastName'"; 
+                $resultCheckTutor = $mysqli->query($queryCheckTutor); 
+                $tutorExists = $resultCheckTutor -> num_rows;
+                if ($tutorExists > 0 ) {
+                    $getTutorID = $resultCheckTutor -> fetch_object();
+                    $tutorID = $getTemplateName -> TutorID;
+                }
+                else {
+                    $tutorID = 3;
+                }
+
+                $stmtLearner = "INSERT INTO learner (ident, UniqueLearnerNumber, TutorID, EmployerID, ProgressID, OTJID, EmploymentID, ApprenticeshipID, TemplateID, LearnerFirstName, LearnerLastName, ApprenticeshipName, Cohort, Site, DayReleaseDay, LearnerExportStatus, Main_Qualification_Aim_Description, AchievedTarget, Active) VALUES ('$ident', '$UniqueLearnerNumber', '$tutorID', '$EmployerID', '$progressID', '$OTJID', '$EmploymentID', '$ApprenticeshipID', '$TemplateID', '$LearnerFirstName', '$LearnerLastName', '$templateName', '$Cohort', '$Site', '$DayReleaseDay', '$learnerExportStatus', '$qualificationAimDescription', '$achievedTarget', '$Active')";
                 $resultLearner = $mysqli->query($stmtLearner);
                 }
             }

@@ -142,6 +142,15 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
+                    <h5 class="card-title">Give learners an email</h5>
+                   
+                    <a href="setEmail.php" class="btn btn-primary">Give learners an email</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
                     <h5 class="card-title">Upload learners file</h5>
                    
                     <a href="../importExcel\uploads\importerPage.php" class="btn btn-primary">Go to upload learners</a>
