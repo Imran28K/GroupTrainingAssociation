@@ -75,7 +75,7 @@ $details = $resultLearner -> fetch_object();
         <div class="container">
             <p>Choose Which User you want to edit</p>
             <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-                <li> <a href='learnerAccounts.php'> Edit Learner Details </a> </li>
+                <li> <a href='edit-learner.php'> Edit Learner Details </a> </li>
                 <li> <a href='tutorAccounts.php'> Edit Tutor Details  </a> </li>
                 <li> <a href='employerAccounts.php'>Edit Employer Details </a> </li>
                 <li> <a href='admin-account.php'> Edit Admin Details  </a> </li>

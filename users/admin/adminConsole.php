@@ -56,7 +56,7 @@ $details = $resultTutor -> fetch_object();
             <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="adminConsole.php" class="active">
+        <li><a href="adminConsole.php" >
             <span class="icon"><i class="fas fa-user-shield"></i></span>
             <span class="item">Admin Page</span>
           </a>

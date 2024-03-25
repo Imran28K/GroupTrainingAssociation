@@ -1,98 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<?php 
+session_start();
+require_once ("../../db/dbconnection.php");
+$tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
+
+$querySessions = "SELECT * FROM learner"; 
+$resultSessions = $mysqli->query($querySessions); 
+
+?>
 
 <head>
-  <meta charset="utf-8">
-  <title>Learner Info</title>
-    <link rel="stylesheet" href="../../css/learnerinfo.css">
-  <link rel="stylesheet" type="text/css" href="../../css/learnerprogress.css">
-  <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Learners</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
+</head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Learners</title>
+    <link rel="stylesheet" href="../css/navfoot.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <?php
-session_start();
-require_once '../../db/dbconnection.php';
+$userID = $_SESSION['userID'];
 
-$learnerID = $_SESSION['userID'];
-
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
-$obj = $resultLearner->fetch_object();
-
-$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
-
-$stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, "s", $learnerID);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $ApprenticeshipName, $EmployerID);
-if (!mysqli_stmt_fetch($stmt)) {
-  echo "0 results";
-}
-
-mysqli_stmt_close($stmt);
-
-$employerID = $EmployerID;
-
-$sqlEmployer = "SELECT EmployerFirstName, EmployerLastName FROM employer WHERE EmployerID = ?";
-$stmtEmployer = mysqli_prepare($mysqli, $sqlEmployer);
-
-if ($stmtEmployer) {
-
-  mysqli_stmt_bind_param($stmtEmployer, "i", $employerID);
-  mysqli_stmt_execute($stmtEmployer);
-  mysqli_stmt_bind_result($stmtEmployer, $EmployerFirstName, $EmployerLastName);
-
-  if (!mysqli_stmt_fetch($stmtEmployer)) {
-    echo "No employer found with the specified ID";
-  }
-  mysqli_stmt_close($stmtEmployer);
-} else {
-  echo "Failed to prepare the SQL statement";
-}
-
-mysqli_close($mysqli);
+$details = $resultLearner -> fetch_object();
 ?>
 
-<body>
+  <body>
 
   <div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php
-        echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
-        echo "<p>Admin</p>";
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
+        <?php 
+        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
         ?>
       </div>
       <ul>
-        <li><a href="learner.php">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">View Progress</span>
+            <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="viewAttendance.php">
+        <li><a href="attendanceLandingAdmin.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="view-employer.php">
+        <li><a href="viewLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View Employer</span>
+            <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php">
-            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-            <span class="item">Module Information</span>
+        <li><a href="adminConsole.php" class="active">
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">User Information</span>
+        <li><a href="manageSubmissionAdmin.php">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
@@ -106,136 +90,37 @@ mysqli_close($mysqli);
         </div>
       </div>
       <div class="container">
-        <div class="main">
-
-            <div class="card">
-
-          <?php if(isset($_GET['msg'])) { ?>
-                        <div class="alert alert-success alert-dismissible mt-4 mb-2 fade show" role="alert" style="background-color:#8d599f;  margin-right:15px;margin-left:15px;">
-                            <strong class=px-2 style="color:black; font-weight:Bold; margin-left:180px;">Success :</strong> <?php echo $_GET['msg']; ?>
-                            
-                        </div>
-                    <?php } ?>
-
-            <div class="card-body">
-              <table class="info-table">
-                <tbody>
-                  <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    
-                    <td>
-                      <form action="edit-learnerquerry.php" method="post">
-                        <input type="text" 
-
-                        style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';"
-           
-
-                        onmouseover="this.style.borderColor='#8d599f';" 
-            onmouseout="this.style.borderColor='#fff';"
-                        name="learnerFirstName" value="<?php echo $LearnerFirstName; ?>" required />
-                        <input type="text"
-                                     style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';"
-                        name="learnerLastName" value="<?php echo $LearnerLastName; ?>" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Edit</button>
-                      </form>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>ULN</td>
-                    <td>:</td>
-                    <td><?php echo $learnerID; ?></td>
-                  </tr>
-                  <tr>
-                     <tr>
-                    <td>Email</td>
-                    <td>:</td>
-                    
-                    <td>
-                      <form action="edit-learnerquerry.php" method="post">
-                        <input 
-                        
-                        type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Edit</button>
-                      </form>
-                    </td>
-                  </tr>
-                  <tr>
-
-                    <td>Cohort</td>
-                    <td>:</td>
-                    
-                    <td>
-                      <form action="edit-learnerquerry.php" method="post">
-                        <input id="fieldstyle" type="text" name="cohort" 
-             style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';"
-
-                        
-                        value="<?php echo $Cohort; ?>" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Edit</button>
-                      </form>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Apprenticeship</td>
-                    <td>:</td>
-                    
-                   <td>
-  <form action="edit-learnerquerry.php" method="post">
-    <input type="text" name="apprenticeship" value="<?php echo $ApprenticeshipName; ?>" required 
-                        style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';" />
-    <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-    <button type="submit">Edit</button>
-  </form>
-</td>
-
-                  </tr>
-                  <tr>
-                    <td>Start Date</td>
-                    <td>:</td>
-                    <td>
-                      <form action="edit-learnerquerry.php" method="post">
-                        <input type="date" 
-                                     style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';"
-                         name="startDate" value="<?php echo date('Y-m-d', strtotime($startDate)); ?>" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <!-- <button type="submit">Edit</button> -->
-                      </form>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>End Date</td>
-                    <td>:</td>
-                    <td>
-                      <form action="edit-learnerquerry.php" method="post">
-                        <input type="date" name="endDate" value="<?php echo date('Y-m-d', strtotime($endDate)); ?>" 
-                                     style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
-           onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
-           onmouseout="this.style.boxShadow='none';"value="27/12/2023" required />
-                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <!-- <button type="submit">Edit</button> -->
-                      </form>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+        <h1>Edit Learners</h1>
+        <br>
+        <table>
+        <tr>
+            <th>Learner name</th>
+            <th>Apprenticeship</th>
+            <th>Site Code</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <?php while ($obj = $resultSessions -> fetch_object()){
+        $learnerID = $obj -> UniqueLearnerNumber;
+        echo"<tr>
+            <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
+            <td>
+                {$obj -> ApprenticeshipName}
+            </td>
+            <td>{$obj -> Cohort} </td>
+            <td>{$obj -> LearnerEmail}</td>
+            <td>{$obj -> Active}</td>
+            <td>
+                <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
+                <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
+                <input type='submit' value='Edit Details'>
+            </form>
+            </td>
+        </tr>";
+        }        ?>
+        </table>
+    </div>
     </div>
   </div>
 
@@ -247,5 +132,8 @@ mysqli_close($mysqli);
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>
