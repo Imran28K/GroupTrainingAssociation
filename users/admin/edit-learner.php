@@ -112,10 +112,7 @@ $details = $resultLearner -> fetch_object();
             <td>{$obj -> LearnerEmail}</td>
             <td>{$obj -> Active}</td>
             <td>
-                <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
-                <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='Edit Details'>
-            </form>
+               <button><a href='edit-learnerdetails.php'>Edit Details</a></button>       
             </td>
         </tr>";
         }        ?>
