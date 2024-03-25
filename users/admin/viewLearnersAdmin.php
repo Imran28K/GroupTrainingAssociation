@@ -96,6 +96,9 @@ $details = $resultLearner -> fetch_object();
         <tr>
             <th>Learner name</th>
             <th>Apprenticeship</th>
+            <th>Site Code</th>
+            <th>Email</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
         <?php while ($obj = $resultSessions -> fetch_object()){
@@ -105,6 +108,9 @@ $details = $resultLearner -> fetch_object();
             <td>
                 {$obj -> ApprenticeshipName}
             </td>
+            <td>{$obj -> Cohort} </td>
+            <td>{$obj -> LearnerEmail}</td>
+            <td>{$obj -> Active}</td>
             <td>
                 <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
                 <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
