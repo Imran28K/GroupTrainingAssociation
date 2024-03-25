@@ -5,6 +5,8 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'tutor'){
 
 $querySessions = "SELECT * FROM learner"; 
 $resultSessions = $mysqli->query($querySessions); 
@@ -17,11 +19,6 @@ $resultSessions = $mysqli->query($querySessions);
     <title>View Off The Job tutor</title>
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
-
-<?php 
-$tutorID = $_SESSION['userID'];
-
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -205,5 +202,8 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

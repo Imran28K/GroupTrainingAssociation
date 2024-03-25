@@ -5,6 +5,8 @@ session_start();
 require_once ("../../db/dbconnection.php");
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryDetails = "SELECT * FROM tutor WHERE TutorID = ?"; 
 $stmt = $mysqli->prepare($queryDetails);
@@ -138,7 +140,9 @@ $resultTutors = $mysqli->query($queryTutors);
         window.location.href = 'admin-account.php'; // Redirect to admin-account.php if cancel is clicked
     }
 </script>
-
-
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
+
 </html>

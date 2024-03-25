@@ -20,6 +20,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultTutor = $mysqli->query($queryTutor);
@@ -158,4 +160,8 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
+
 </html>

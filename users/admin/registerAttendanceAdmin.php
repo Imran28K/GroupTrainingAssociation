@@ -32,14 +32,16 @@ $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
   $learnerCheck = $resultAttendanceCheck -> num_rows;
 
   if ($learnerCheck <= 0){
-$queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
-$resultAddLearners= $mysqli->query($queryAddLearners);
-}
+    $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
+    $resultAddLearners= $mysqli->query($queryAddLearners);
+  }
 }
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
 $resultAttendance = $mysqli->query($queryAttendance); 
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultLearner = $mysqli->query($queryLearner);
@@ -177,5 +179,8 @@ $details = $resultLearner -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

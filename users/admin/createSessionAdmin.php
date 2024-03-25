@@ -23,6 +23,8 @@
             require_once '../../db/dbconnection.php';
 
             $userID = $_SESSION['userID'];
+            $role = $_SESSION['userRole'];
+            if ($role == 'admin'){
 
             $queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
             $resultLearner = $mysqli->query($queryLearner);
@@ -124,5 +126,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

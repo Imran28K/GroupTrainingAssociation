@@ -17,6 +17,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'learner'){
 
 $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
@@ -168,5 +170,8 @@ else {
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

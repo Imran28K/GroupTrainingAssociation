@@ -27,6 +27,7 @@ $tableColumnMapping = [
 
 $loginSuccessful = false;
 $isActive = true;
+$_SESSION['userRole'] = '';
 $userRole = '';
 $userId = '';
 
@@ -87,7 +88,7 @@ if ($loginSuccessful) {
             header('location:../../users/learner/learner.php');
             break;
         case 'employer':
-            $_SESSION['userRole'] = "Employer";
+            $_SESSION['userRole'] = "employer";
             header('location:../../users/employer/employer.php');
             break;
         case 'Tutor':

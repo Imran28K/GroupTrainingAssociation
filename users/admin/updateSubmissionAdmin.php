@@ -23,6 +23,8 @@
     }
 
     $userID = $_SESSION['userID'];
+    $role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
     $queryDetails = "SELECT * FROM tutor WHERE TutorID = ?";
     $stmtDetails = $mysqli->prepare($queryDetails);
@@ -64,52 +66,54 @@
     $stmt->close();
     ?>
 
-    <div class="wrapper">
-        <div class="sidebar">
-            <div class="profile">
-                <img src="../../images/logos/gtalogo.png" alt="profile_picture">
-                <h3><?php echo "{$details->TutorFirstName} {$details->TutorLastName}"; ?></h3>
-                <p><?php echo $details->Role; ?></p>
-            </div>
-            <ul>
-                <li><a href="tutor.php">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item">Profile Details</span>
-                    </a>
-                </li>
-                <li><a href="attendanceLanding.php">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">View Attendance</span>
-                    </a>
-                </li>
-                <li><a href="viewLearnersTutor.php">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">View Learners</span>
-                    </a>
-                </li>
-                <li><a href="viewOTJTutor.php">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
-                        <span class="item">Off The Job Hours</span>
-                    </a>
-                </li>
-                <li><a href="manageSubmissionAdmin.php" class="active">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Submissions</span>
-                    </a>
-                </li>
-                <li><a href="../../credentials/login.php">
-                        <span class="icon"><i class="fas fa-door-open"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
-                </li>
-            </ul>
+<div class="wrapper">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
+        <?php 
+        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
+        ?>
+      </div>
+      <ul>
+        <li><a href="admin.php">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="item">Profile Details</span>
+          </a>
+        </li>
+        <li><a href="attendanceLandingAdmin.php">
+            <span class="icon"><i class="fas fa-desktop"></i></span>
+            <span class="item">View Attendance</span>
+          </a>
+        </li>
+        <li><a href="viewLearnersAdmin.php">
+            <span class="icon"><i class="fas fa-user-friends"></i></span>
+            <span class="item">View learners</span>
+          </a>
+        </li>
+        <li><a href="adminConsole.php">
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
+          </a>
+        </li>
+        <li><a href="manageSubmissionAdmin.php" class="active">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Submissions</span>
+          </a>
+        </li>
+        <li><a href="../../credentials/login.php">
+            <span class="icon"><i class="fas fa-door-open"></i></span>
+            <span class="item">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="top_navbar">
+        <div class="hamburger">
+          <a href="#"><i class="fas fa-bars"></i></a>
         </div>
-        <div class="section">
-            <div class="top_navbar">
-                <div class="hamburger">
-                    <a href="#"><i class="fas fa-bars"></i></a>
-                </div>
-            </div>
+      </div>
             <div class="container">
                 <h2>Learner Units</h2>
                 <br>
@@ -169,5 +173,8 @@
     </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

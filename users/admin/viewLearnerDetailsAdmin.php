@@ -15,6 +15,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryDetails = "SELECT * FROM tutor WHERE TutorID = '$tutorID'"; 
 $resultDetails= $mysqli->query($queryDetails);
@@ -159,5 +161,8 @@ else {
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>
