@@ -8,7 +8,7 @@
 <?php 
   $userID = $_SESSION['userID'];
   $queryLearner = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
-  $resultLearner = $mysqli->query($queryLearner);
+  $resultLearner = $mysqli -> query($queryLearner);
   $getEmployerRAG = $resultLearner -> fetch_object();
   $employerRAG = $getEmployerRAG -> EmploymentRAG;
 

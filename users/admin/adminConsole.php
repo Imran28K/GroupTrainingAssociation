@@ -20,6 +20,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultTutor = $mysqli->query($queryTutor);
@@ -140,9 +142,18 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Create/update accounts</h5>
+                    <h5 class="card-title">Give learners an email</h5>
                    
-                    <a href="createOrUpdateAccount.php" class="btn btn-primary">Go to create/update accounts</a>
+                    <a href="setEmail.php" class="btn btn-primary">Give learners an email</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Upload learners file</h5>
+                   
+                    <a href="../importExcel\uploads\importerPage.php" class="btn btn-primary">Go to upload learners</a>
                 </div>
             </div>
         </div>
@@ -158,4 +169,8 @@ $details = $resultTutor -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
+
 </html>

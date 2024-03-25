@@ -31,6 +31,8 @@ $EmployerID = $_SESSION['userID'];
 
 <?php
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
 $queryEmployer = "SELECT * FROM employer WHERE EmployerID = '$userID'"; 
 $resultEmployer = $mysqli->query($queryEmployer);
@@ -160,5 +162,8 @@ $details = $resultEmployer -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

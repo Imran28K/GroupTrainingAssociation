@@ -5,8 +5,10 @@
 session_start();
 require_once ("../../db/dbconnection.php");
 $tutorID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'admin'){
 
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
+$querySessions = "SELECT * FROM learner"; 
 $resultSessions = $mysqli->query($querySessions); 
 
 ?>
@@ -18,20 +20,13 @@ $resultSessions = $mysqli->query($querySessions);
     <link rel="stylesheet" href="../css/navfoot.css">
 </head>
 
-<?php 
-$tutorID = $_SESSION['userID'];
-
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
-$resultSessions = $mysqli->query($querySessions); 
-
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>view learners tutor</title>
     <link rel="stylesheet" href="../css/navfoot.css">
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabledesign.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -96,10 +91,15 @@ $details = $resultLearner -> fetch_object();
       </div>
       <div class="container">
         <h1>View Learners</h1>
+        <br>
         <table>
         <tr>
-            <td>Learner name</td>
-            <td>Apprenticeship</td>
+            <th>Learner name</th>
+            <th>Apprenticeship</th>
+            <th>Site Code</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
         <?php while ($obj = $resultSessions -> fetch_object()){
         $learnerID = $obj -> UniqueLearnerNumber;
@@ -108,10 +108,13 @@ $details = $resultLearner -> fetch_object();
             <td>
                 {$obj -> ApprenticeshipName}
             </td>
+            <td>{$obj -> Cohort} </td>
+            <td>{$obj -> LearnerEmail}</td>
+            <td>{$obj -> Active}</td>
             <td>
                 <form action='viewLearnerDetailsAdmin.php' name='uniqueLearnerNumber' method='post'>
                 <input type='hidden' id='uniqueLearnerNumber' name='uniqueLearnerNumber' value={$obj -> UniqueLearnerNumber}>
-                <input type='submit' value='View learner'>
+                <input type='submit' value='View progress'>
             </form>
             </td>
         </tr>";
@@ -129,5 +132,8 @@ $details = $resultLearner -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

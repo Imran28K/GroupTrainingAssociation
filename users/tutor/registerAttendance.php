@@ -11,6 +11,8 @@ else {
     $sessionID = $_SESSION['sessionID'];
 }
 
+$role = $_SESSION['userRole'];
+if ($role == 'tutor'){
 require_once ("../../db/dbconnection.php");
 
 $querySessions = "SELECT * FROM registersessions WHERE SessionID = $sessionID"; 
@@ -26,19 +28,18 @@ $resultLearner= $mysqli->query($queryLearner);
 while ($getLearners = $resultLearner -> fetch_object()){
 $learner = $getLearners -> UniqueLearnerNumber;
 
-$queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID"; 
+$queryAttendanceCheck = "SELECT UniqueLearnerNumber FROM attendance WHERE SessionID = $sessionID AND UniqueLearnerNumber = '$learner'"; 
 $resultAttendanceCheck = $mysqli->query($queryAttendanceCheck);
 
-    $getLearnerCheck = $resultAttendanceCheck -> fetch_object();
-    $learnerCheck = $getLearnerCheck -> UniqueLearnerNumber;
+  $learnerCheck = $resultAttendanceCheck -> num_rows;
 
-if ($learnerCheck != $learner){
-$queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
-$resultAddLearners= $mysqli->query($queryAddLearners);
-}
+  if ($learnerCheck <= 0){
+    $queryAddLearners = "INSERT INTO attendance (UniqueLearnerNumber, SessionID, Present) VALUES ('$learner', '$sessionID', 'No')"; 
+    $resultAddLearners= $mysqli->query($queryAddLearners);
+  }
 }
 $queryAttendance = "SELECT * FROM attendance WHERE SessionID = $sessionID"; 
-$resultAttendance = $mysqli->query($queryAttendance); 
+$resultAttendance = $mysqli->query($queryAttendance);
 
 $userID = $_SESSION['userID'];
 
@@ -178,5 +179,8 @@ $details = $resultLearner -> fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

@@ -16,6 +16,8 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'tutor'){
 
 $queryDetails = "SELECT * FROM tutor WHERE TutorID = '$userID'";
 $resultDetails = $mysqli->query($queryDetails);
@@ -90,7 +92,7 @@ $result = $stmt->get_result();
                 </div>
             </div>
             <div class="container">
-                <h2>Learner Units</h2>
+            <h2>Learner Units</h2>
                 <br>
 
                 <table style="width:100%">
@@ -120,20 +122,27 @@ $result = $stmt->get_result();
                             $result = $stmt->get_result();
 
                             while ($row = $result->fetch_assoc()) {
+
+                                $statusClass = '';
+                                if ($row['CurrentStatus'] === 'Overdue') {
+                                    $statusClass = 'status-overdue';
+                                } elseif ($row['CurrentStatus'] === 'Completed') {
+                                    $statusClass = 'status-completed';
+                                }
+
                                 echo "<tr>
                                       <td>{$row['UnitID']}</td>
                                       <td>{$row['UnitName']}</td>
                                       <td>{$row['SubmissionDate']}</td>
-                                      <td>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
+                                      <td class='{$statusClass}'>{$row['CurrentStatus']}</td> <!-- Output the CurrentStatus -->
                                       <td>
-                                        <div class='task-completer'>
-                                        <input type='checkbox' id='taskCheckbox' name='taskCheckbox'>
-                                        <label for='taskCheckbox'></label>
-                                        <input type='password' id='passwordInput' placeholder='Enter Password'>
-                                        <br>
-                                        <button id='completeButton'disabled>Complete Task</button>
-                                        </br>
-                                        </div>
+                                      <form method='POST' action='../../credentials/query/updateSubmissionVerification.php'>
+                                      <input type='hidden' name='unitId' value='{$row['UnitID']}'>
+                                      <input type='hidden' name='progressId' value='{$progressID}'>
+                                      <label for='taskCheckbox-{$row['UnitID']}'></label>
+                                      <input type='password' name='password' placeholder='Enter Password' required>
+                                      <input type='submit' value='Complete Task'>
+                                      </form>
                                       </td>
                                       </tr>";
                             }
@@ -156,23 +165,10 @@ $result = $stmt->get_result();
             document.querySelector("body").classList.toggle("active");
         })
     </script>
-    <script>
-        document.getElementById('taskCheckbox').addEventListener('change', function() {
-        document.getElementById('completeButton').disabled = !this.checked;
-        });
-
-        document.getElementById('completeButton').addEventListener('click', function() {
-        var password = document.getElementById('passwordInput').value;
-        var correctPassword = '123456'; 
-        if (password === correctPassword) {
-          alert('Task marked as complete!');
-    
-        } else {
-           alert('Incorrect password. Please try again.');
-        }
-        });
-    </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

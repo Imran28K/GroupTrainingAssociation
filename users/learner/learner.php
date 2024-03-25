@@ -17,19 +17,80 @@ session_start();
 require_once '../../db/dbconnection.php';
 
 $userID = $_SESSION['userID'];
+$role = $_SESSION['userRole'];
+if ($role == 'learner'){
 
 $queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$userID'";
 $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
+$progressID = $obj -> ProgressID;
+
+  $queryProgressRAG = "SELECT * FROM progressunits WHERE ProgressID = '$progressID'"; 
+  $resultProgressRAG = $mysqli -> query($queryProgressRAG);
+  $getProgressRAG = $resultProgressRAG -> num_rows;
+
+  $queryProgressRAGCompleted = "SELECT * FROM progressunits WHERE ProgressID = '$progressID' AND CurrentStatus = 'Completed'"; 
+  $resultProgressRAGCompleted = $mysqli -> query($queryProgressRAGCompleted);
+  $getProgressRAGCompleted = $resultProgressRAGCompleted -> num_rows;
+
+  if ($getProgressRAG <= 0){
+    $getProgressRAG = 1;
+  }
+  $valueProgress = (($getProgressRAGCompleted/$getProgressRAG)*100 );
+
+  $queryOTJRAG = "SELECT * FROM otjhours WHERE UniqueLearnerNumber = '$userID'"; 
+$resultOTJRAG = $mysqli -> query($queryOTJRAG);
+$OTJRAGCheck = $resultOTJRAG -> num_rows;
+if ($OTJRAGCheck > 0) {
+$getOTJRAG = $resultOTJRAG -> fetch_object();
+$ExpectedHours = $getOTJRAG -> ExpectedHours;
+$OverallHours = $getOTJRAG -> CumulativeHours;
+
+if ($ExpectedHours <= 0){
+  $ExpectedHours = 1;
+}
+$valueOTJ = (($OverallHours/$ExpectedHours)*100);
+if ($valueOTJ > 100){
+  $valueOTJ = 100;
+}
+}
+else {
+  $valueOTJ = 0;
+}
+
+  $queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
+  $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
+  $EmployerRAGCheck = $resultEmployerRAG -> num_rows;
+if ($EmployerRAGCheck > 0) {
+  $getEmployerRAG = $resultEmployerRAG -> fetch_object();
+  $employerRAG = $getEmployerRAG -> EmploymentRAG;
+  if ($employerRAG == "Green"){
+    $valueEMP = 100;
+  }
+  else if ($employerRAG == "Amber"){
+    $valueEMP = 50;
+  }
+  else if ($employerRAG == "Red"){
+    $valueEMP = 10;
+  }
+}
+else {
+  $valueEMP = 0;
+}
+
 
 //checks the CurrentStatus of all units where $userID.
 //progress RAG will depend on Units completed / Total Units * 100%
 //0-39% = red   40-79% = amber   80-100% = green
 //the calculation will only be done once the submission date is passed
-
-
 ?>
+<script> 
+  let Progressvalue = parseInt('<?php echo $valueProgress ?>')
+  let OTJvalue = parseInt('<?php echo $valueOTJ; ?>')
+  console.log(OTJvalue)
+  let EMPvalue = parseInt('<?php echo $valueEMP; ?>')
+</script>
 
 <body>
 
@@ -109,5 +170,8 @@ $obj = $resultLearner->fetch_object();
   </script>
 
 </body>
+<?php } else { ?>
+<body> <p> You don't have access to this page </p> </body>
+<?php } ?>
 
 </html>

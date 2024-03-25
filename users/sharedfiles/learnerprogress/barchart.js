@@ -4,17 +4,15 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   // Initialize the DataTable and add columns for the chart
   const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Country');
+  data.addColumn('string', 'Progress');
   data.addColumn('number', 'Value');
   data.addColumn({type: 'string', role: 'style'});
 
   // Add rows to the DataTable. The third value in each row represents the color.
   data.addRows([
-    ['PROGRESS RAG', 50, null],
-    ['OTJ', 49, null],
-    ['EMP', 44, null],
-    ['COMPLETED', 24, null],
-    ['IN-PROGRESS', 100, null]
+    ['PROGRESS RAG', Progressvalue, null],
+    ['OTJ', OTJvalue, null],
+    ['EMP', EMPvalue, null],
   ]);
 
   // Function to determine the color based on the value
