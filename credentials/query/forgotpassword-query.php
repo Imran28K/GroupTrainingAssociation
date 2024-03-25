@@ -49,12 +49,12 @@ if ($emailFound) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'imran28may@gmail.com'; // SMTP username
-        $mail->Password = 'eahqppsbctocrcxg'; // SMTP password
+        $mail->Username = 'gtapwverify@gmail.com'; // SMTP username
+        $mail->Password = 'nzhjaazofjjtnkad'; // SMTP password
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
-        $mail->setFrom('imran28may@gmail.com', 'GTAReset');
+        $mail->setFrom('gtapwverify@gmail.com', 'GTAReset');
         $mail->addAddress($userEmail);
 
         $mail->isHTML(true);
