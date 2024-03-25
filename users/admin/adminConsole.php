@@ -153,7 +153,7 @@ $details = $resultTutor -> fetch_object();
                 <div class="card-body">
                     <h5 class="card-title">Upadte Users</h5>
                    
-                    <a href="setEmail.php" class="btn btn-primary">Update Users</a>
+                    <a href="update-users.php" class="btn btn-primary">Update Users</a>
                 </div>
             </div>
         </div>
