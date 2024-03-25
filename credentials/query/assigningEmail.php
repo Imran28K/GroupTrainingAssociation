@@ -14,18 +14,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'], $_POST['learn
         echo"successful";
 
         $msg = "Tutor assigned";
-        header("location: ../../users/admin/assigningTutors.php");
     }
     else {
-        echo" The name of the tutor you have input was either spelt incorrectly or does not exist";
+        echo"You need to input an email";
     }
 
 // Define an associative array mapping tables to their email and password columns
+$tableColumnMapping = [
+    'learner' => ['emailColumn' => 'LearnerEmail', 'passwordColumn' => 'LearnerPassword'],
+];
 $emailFound = false;
 $tableFound = '';
 
 foreach ($tableColumnMapping as $table => $columns) {
-    $query = "SELECT * FROM {$table} WHERE {$columns['LearnerEmail']} = ?";
+    $query = "SELECT * FROM {$table} WHERE {$columns['emailColumn']} = ?";
     $stmt = $mysqli->prepare($query);
 
     if ($stmt) {
