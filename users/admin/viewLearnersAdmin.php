@@ -8,7 +8,7 @@ $tutorID = $_SESSION['userID'];
 $role = $_SESSION['userRole'];
 if ($role == 'admin'){
 
-$querySessions = "SELECT * FROM learner WHERE TutorID = $tutorID"; 
+$querySessions = "SELECT * FROM learner"; 
 $resultSessions = $mysqli->query($querySessions); 
 
 ?>
