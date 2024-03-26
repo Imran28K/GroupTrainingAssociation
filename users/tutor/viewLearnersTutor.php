@@ -8,6 +8,9 @@ $tutorID = $_SESSION['userID'];
 $role = $_SESSION['userRole'];
 if ($role == 'tutor'){
 
+  $querySessions = "SELECT * FROM learner WHERE TutorID = '$tutorID'";
+  $resultSessions = $mysqli->query($querySessions); 
+
 ?>
 
 <head>
@@ -19,7 +22,7 @@ if ($role == 'tutor'){
 </head>
 
 <?php
-$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
+$queryLearner = "SELECT * FROM tutor WHERE TutorID = '$tutorID'"; 
 $resultLearner = $mysqli->query($queryLearner);
 
 $details = $resultLearner -> fetch_object();
