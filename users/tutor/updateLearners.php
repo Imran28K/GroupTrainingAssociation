@@ -65,7 +65,7 @@ $obj = $resultLearner -> fetch_object();
           </a>
         </li>
         <li><a href="manageSubmissions.php">
-            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="icon"><i class="fas fa-upload"></i></span>
             <span class="item">Submissions</span>
           </a>
         </li>
