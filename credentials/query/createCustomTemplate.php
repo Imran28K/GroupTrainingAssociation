@@ -633,7 +633,7 @@ $details = $resultTutor -> fetch_object();
 
     echo"Any rows? $existsCheck";
 
-    $queryCreateTemplate = "UPDATE learner SET TemplateID = $templateID, ApprenticeshipName = $apprenticeshipName WHERE UniqueLearnerNumber = '$learnerID'";
+    $queryCreateTemplate = "UPDATE learner SET TemplateID = $templateID, ApprenticeshipName = '$apprenticeshipName' WHERE UniqueLearnerNumber = '$learnerID'";
     $resultCreateTemplate = $mysqli->query($queryCreateTemplate);
 
     $queryGetLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
