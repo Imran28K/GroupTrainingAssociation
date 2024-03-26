@@ -73,7 +73,7 @@ $details = $resultLearner -> fetch_object();
         </div>
       </div>
         <div class="container">
-            <p>Choose whether you want to go to the register or to create a new session</p>
+            <p>Choose which type of account to edit</p>
             <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
                 <li> <a href='learnerAccounts.php'> learner accounts </a> </li>
                 <li> <a href='tutorAccounts.php'> tutor accounts </a> </li>

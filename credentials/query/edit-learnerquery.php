@@ -144,11 +144,11 @@ if (isset($_POST['endDate'])) {
 
 
     // Redirect back to learnerinfo.php
-    header("location: edit-learner.php");
+    header("location: ../../users/admin/edit-learner.php");
     exit();
 } else {
     // If no POST data is received, redirect back to learnerinfo.php
-    header("location: edit-learner.php");
+    header("location: ../../users/admin/edit-learner.php");
     exit();
 }
 ?>

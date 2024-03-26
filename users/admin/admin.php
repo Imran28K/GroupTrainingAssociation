@@ -84,6 +84,15 @@ $details = $resultDetails -> fetch_object();
               <button type="submit">Change email</button>
             </form>
           </li>
+          <li>
+            <form action="../../credentials/query/updateTutorPassword.php" method="post">
+            <label> Your password is: </label>
+              <input type="password" id="password" name="password" value="<?php echo"{$details->TutorPassword}"; ?>" required />
+              <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button>
+              <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
+              <button type="submit">Change Password</button>
+            </form>
+          </li>
           <li>Your tutor code is: <?php echo"{$details->TutorCode}"; ?></li>
           <li>Your role is: <?php echo"{$details->Role}"; ?></li>
         </ul>
@@ -95,6 +104,20 @@ $details = $resultDetails -> fetch_object();
     hamburger.addEventListener("click", function() {
       document.querySelector("body").classList.toggle("active");
     })
+
+    function togglePasswordVisibility() 
+    {
+    var passwordInput = document.getElementById('password');
+    var toggleButton = document.querySelector('.toggle-password');
+    if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleButton.innerHTML = '&#128065;'; // Change to an "open eye" icon if you wish
+    } else {
+
+    passwordInput.type = 'password';
+    toggleButton.innerHTML = '&#128065;'; // Change back to the original icon
+    }
+        }
   </script>
 
 </body>

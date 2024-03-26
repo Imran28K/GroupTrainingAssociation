@@ -14,12 +14,13 @@
 session_start();
 require_once '../../db/dbconnection.php';
 
-$learnerID = $_SESSION['userID'];
+$userID = $_SESSION['userID'];
+$learnerID = $_POST['learnerID'];
 
-$queryLearner = "SELECT * FROM learner WHERE UniqueLearnerNumber = '$learnerID'";
-$resultLearner = $mysqli->query($queryLearner);
+$queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'";
+$resultTutor = $mysqli->query($queryTutor);
 
-$obj = $resultLearner->fetch_object();
+$details = $resultTutor -> fetch_object();
 
 $sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
 
@@ -57,42 +58,42 @@ mysqli_close($mysqli);
 
 <body>
 
-  <div class="wrapper">
+<div class="wrapper">
     <div class="sidebar">
       <div class="profile">
-        <img src="http://localhost/GroupTrainingAssociation/images/logos/gtalogo.png" alt="profile_picture">
-        <?php
-        echo "<h3>{$obj->LearnerFirstName} {$obj->LearnerLastName}</h3>";
-        echo "<p>Learner</p>";
+        <img src="../../images/logos/gtalogo.png" alt="profile_picture">
+        <?php 
+        echo"<h3>{$details->TutorFirstName} {$details->TutorLastName}</h3>";
+        echo"<p>{$details->Role}</p>";
         ?>
       </div>
       <ul>
-        <li><a href="learner.php">
+        <li><a href="admin.php">
             <span class="icon"><i class="fas fa-home"></i></span>
-            <span class="item">View Progress</span>
+            <span class="item">Profile Details</span>
           </a>
         </li>
-        <li><a href="viewAttendance.php">
+        <li><a href="attendanceLandingAdmin.php">
             <span class="icon"><i class="fas fa-desktop"></i></span>
             <span class="item">View Attendance</span>
           </a>
         </li>
-        <li><a href="view-employer.php">
+        <li><a href="viewLearnersAdmin.php">
             <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">View Employer</span>
+            <span class="item">View learners</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/users/learner/view-apprent.php">
-            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-            <span class="item">Module Information</span>
+        <li><a href="adminConsole.php" >
+            <span class="icon"><i class="fas fa-user-shield"></i></span>
+            <span class="item">Admin Page</span>
           </a>
         </li>
-        <li><a href="learnerinfo.php" class="active">
-            <span class="icon"><i class="fas fa-user-friends"></i></span>
-            <span class="item">User Information</span>
+        <li><a href="manageSubmissionAdmin.php">
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="item">Submissions</span>
           </a>
         </li>
-        <li><a href="http://localhost/GroupTrainingAssociation/credentials/login.php">
+        <li><a href="../../credentials/login.php">
             <span class="icon"><i class="fas fa-door-open"></i></span>
             <span class="item">Logout</span>
           </a>
@@ -125,7 +126,7 @@ mysqli_close($mysqli);
                     <td>:</td>
                     
                     <td>
-                      <form action="update-learnerinfo.php" method="post">
+                      <form action="../../credentials/query/edit-learnerquery.php" method="post">
                         <input type="text" 
 
                         style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
@@ -157,7 +158,7 @@ mysqli_close($mysqli);
                     <td>:</td>
                     
                     <td>
-                      <form action="update-learnerinfo.php" method="post">
+                      <form action="../../credentials/query/edit-learnerquery.php" method="post">
                         <input 
                         
                         type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
@@ -172,7 +173,7 @@ mysqli_close($mysqli);
                     <td>:</td>
                     
                     <td>
-                      <form action="update-learnerinfo.php" method="post">
+                      <form action="../../credentials/query/edit-learnerquery.php" method="post">
                         <input id="fieldstyle" type="text" name="cohort" 
              style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
            onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
@@ -190,7 +191,7 @@ mysqli_close($mysqli);
                     <td>:</td>
                     
                    <td>
-  <form action="update-learnerinfo.php" method="post">
+  <form action="../../credentials/query/edit-learnerquery.php" method="post">
     <input type="text" name="apprenticeship" value="<?php echo $ApprenticeshipName; ?>" required 
                         style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
            onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
@@ -205,7 +206,7 @@ mysqli_close($mysqli);
                     <td>Start Date</td>
                     <td>:</td>
                     <td>
-                      <form action="update-learnerinfo.php" method="post">
+                      <form action="../../credentials/query/edit-learnerquery.php" method="post">
                         <input type="date" 
                                      style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
            onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 
@@ -220,7 +221,7 @@ mysqli_close($mysqli);
                     <td>End Date</td>
                     <td>:</td>
                     <td>
-                      <form action="update-learnerinfo.php" method="post">
+                      <form action="../../credentials/query/edit-learnerquery.php" method="post">
                         <input type="date" name="endDate" value="<?php echo date('Y-m-d', strtotime($endDate)); ?>" 
                                      style="margin-top: 5px; padding: 5px; font-size: 14px; width: 300px; border: 1px solid #ccc; border-radius: 5px; transition: box-shadow 0.3s ease;"
            onmouseover="this.style.boxShadow='0 0 8px #8d599f';" 

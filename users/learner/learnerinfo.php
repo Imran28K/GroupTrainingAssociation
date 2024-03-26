@@ -23,12 +23,12 @@ $resultLearner = $mysqli->query($queryLearner);
 
 $obj = $resultLearner->fetch_object();
 
-$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
+$sql = "SELECT LearnerFirstName, LearnerLastName, LearnerEmail, Cohort, ApprenticeshipName, LearnerPassword, EmployerID FROM learner WHERE UniqueLearnerNumber = ? ";
 
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "s", $learnerID);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $ApprenticeshipName, $EmployerID);
+mysqli_stmt_bind_result($stmt, $LearnerFirstName, $LearnerLastName, $LearnerEmail, $Cohort, $ApprenticeshipName, $learnerPassword, $EmployerID);
 if (!mysqli_stmt_fetch($stmt)) {
   echo "0 results";
 }
@@ -154,7 +154,19 @@ mysqli_close($mysqli);
                       <form action="update-learnerinfo.php" method="post">
                         <input type="email" name="email" value="<?php echo $LearnerEmail; ?>" required />
                         <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
-                        <button type="submit">Change</button>
+                        <button type="submit">Change Email</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Password</td>
+                    <td>:</td>
+                    <td>
+                      <form action="../../credentials/query/updateLearnerPassword.php" method="post">
+                        <input type="password" id="password" name="password" value="<?php echo $learnerPassword; ?>" required />
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button>
+                        <input type="hidden" name="learnerID" value="<?php echo $learnerID; ?>" />
+                        <button type="submit">Change Password</button>
                       </form>
                     </td>
                   </tr>
@@ -194,6 +206,20 @@ mysqli_close($mysqli);
       hamburger.addEventListener("click", function() {
         document.querySelector("body").classList.toggle("active");
       })
+
+        function togglePasswordVisibility() 
+        {
+        var passwordInput = document.getElementById('password');
+        var toggleButton = document.querySelector('.toggle-password');
+        if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.innerHTML = '&#128065;'; // Change to an "open eye" icon if you wish
+        } else {
+
+            passwordInput.type = 'password';
+            toggleButton.innerHTML = '&#128065;'; // Change back to the original icon
+            }
+        }
     </script>
 
 </body>

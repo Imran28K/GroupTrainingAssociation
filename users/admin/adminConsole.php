@@ -151,9 +151,9 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Update Users</h5>
+                    <h5 class="card-title">Update learner accounts</h5>
                    
-                    <a href="update-users.php" class="btn btn-primary">Update Users</a>
+                    <a href="edit-learner.php" class="btn btn-primary">Update learners</a>
                 </div>
             </div>
         </div>
