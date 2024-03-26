@@ -62,7 +62,7 @@ else {
   $valueOTJ = 0;
 }
 
-$queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$userID'"; 
+$queryEmployerRAG = "SELECT * FROM employmentProgress WHERE UniqueLearnerNumber = '$learnerID'"; 
   $resultEmployerRAG = $mysqli -> query($queryEmployerRAG);
   $EmployerRAGCheck = $resultEmployerRAG -> num_rows;
 if ($EmployerRAGCheck > 0) {
