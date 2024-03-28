@@ -12,8 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-fE3GAyYdAMWSR9EJp0IhPDiw6PRx41HjrFI12wPz/D9V9SgJb3cc7i2JhuSvmXPA" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+5KVcL1e/JTq8Ck+8M+eG2lPUfww/tq+X" crossorigin="anonymous"></script>
-
-  </head>
+</head>
 
 <?php
 session_start();
@@ -25,7 +24,6 @@ if ($role == 'admin'){
 
 $queryTutor = "SELECT * FROM tutor WHERE TutorID = '$userID'"; 
 $resultTutor = $mysqli->query($queryTutor);
-
 $details = $resultTutor -> fetch_object();
 ?>
 
@@ -133,8 +131,7 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">View Off The Job Hours</h5>
-                   
+                    <h5 class="card-title">View Off The Job Hours</h5>                   
                     <a href="viewOTJAdmin.php" class="btn btn-primary">Go to View OTJ Hours</a>
                 </div>
             </div>
@@ -142,8 +139,7 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Give learners an email</h5>
-                   
+                    <h5 class="card-title">Give learners an email</h5>                   
                     <a href="setEmail.php" class="btn btn-primary">Give learners an email</a>
                 </div>
             </div>
@@ -166,6 +162,15 @@ $details = $resultTutor -> fetch_object();
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Update Users</h5>
+                   
+                    <a href="update-users.php" class="btn btn-primary">Update Users</a>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
   </div>
@@ -176,10 +181,8 @@ $details = $resultTutor -> fetch_object();
       document.querySelector("body").classList.toggle("active");
     })
   </script>
-
 </body>
 <?php } else { ?>
 <body> <p> You don't have access to this page </p> </body>
 <?php } ?>
-
 </html>
