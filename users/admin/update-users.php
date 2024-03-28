@@ -77,7 +77,7 @@ $details = $resultLearner -> fetch_object();
             <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
                 <li> <a href='edit-learner.php'> Edit Learner Details </a> </li>
                 <li> <a href='edit-tutor.php'> Edit Tutor Details  </a> </li>
-                <li> <a href='#'>Edit Employer Details </a> </li>
+                <li> <a href='edit-employer.php'>Edit Employer Details </a> </li>
              
             </ul>
 
