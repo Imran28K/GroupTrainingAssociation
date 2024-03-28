@@ -144,15 +144,7 @@ $details = $resultTutor -> fetch_object();
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Update learner accounts</h5>
-                   
-                    <a href="edit-learner.php" class="btn btn-primary">Update learners</a>
-                </div>
-            </div>
-        </div>
+       
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
@@ -165,7 +157,16 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Update Tutors</h5>
+                    <h5 class="card-title">Update learner accounts</h5>
+                   
+                    <a href="edit-learner.php" class="btn btn-primary">Update learners</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Update Tutor Accounts</h5>
                    
                     <a href="edit-tutor.php" class="btn btn-primary">Update Tutors</a>
                 </div>
@@ -174,7 +175,7 @@ $details = $resultTutor -> fetch_object();
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Update Employers</h5>
+                    <h5 class="card-title">Update Employer Accounts</h5>
                    
                     <a href="edit-employer.php" class="btn btn-primary">Update Employers</a>
                 </div>
