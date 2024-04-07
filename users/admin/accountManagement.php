@@ -2,8 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>attendance landing page</title>
+    <title>Attendance Landing Page</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .container p {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .nav-pills li {
+        list-style: none;
+        margin-bottom: 10px;
+      }
+
+      .nav-pills a {
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .nav-pills a:hover {
+        background-color: #0056b3;
+      }
+    </style>
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
   </head>
 
@@ -74,15 +112,15 @@ $details = $resultLearner -> fetch_object();
       </div>
         <div class="container">
             <p>Choose which type of account to edit</p>
-            <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-                <li> <a href='learnerAccounts.php'> learner accounts </a> </li>
-                <li> <a href='tutorAccounts.php'> tutor accounts </a> </li>
-                <li> <a href='employerAccounts.php'> employer accounts </a> </li>
-                <li> <a href='admin-account.php'> Admin accounts </a> </li>
+            <ul class="nav-pills">
+                <li> <a href="learnerAccounts.php">Learner Accounts</a> </li>
+                <li> <a href="tutorAccounts.php">Tutor Accounts</a> </li>
+                <li> <a href="employerAccounts.php">Employer Accounts</a> </li>
+                <li> <a href="admin-account.php">Admin Accounts</a> </li>
             </ul>
 
-            <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-                <li> <a href='adminConsole.php'> Back </a> </li>
+            <ul class="nav-pills">
+                <li> <a href="adminConsole.php">Back</a> </li>
             </ul>
         </div>
     </div>
