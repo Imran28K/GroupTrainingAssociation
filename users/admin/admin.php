@@ -2,9 +2,67 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Admin home</title>
+  <title>Admin Home</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     
+    }
+
+    .container h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .container table {
+      width: 100%;
+    }
+
+    .container table tr td {
+      padding: 10px 0;
+    }
+
+    .container label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .container input[type="email"],
+    .container input[type="password"] {
+      width: calc(70% - 20px);
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .container button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #8d599f;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -74,28 +132,41 @@ $details = $resultDetails -> fetch_object();
       </div>
       <div class="container">
         <h2>Your Details</h2>
-        <ul>
-          <li>Your name is: <?php echo"{$details->TutorFirstName} {$details->TutorLastName}"; ?></li>
-          <li> 
-            <form action="updateAdminInfo.php" method="post">
-              <label> Your email is: </label>
-              <input type="email" name="email" value="<?php echo"{$details->TutorEmail}"; ?>" required />
-              <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
-              <button type="submit">Change email</button>
-            </form>
-          </li>
-          <li>
-            <form action="../../credentials/query/updateTutorPassword.php" method="post">
-            <label> Your password is: </label>
-              <input type="password" id="password" name="password" value="<?php echo"{$details->TutorPassword}"; ?>" required />
-              <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button>
-              <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
-              <button type="submit">Change Password</button>
-            </form>
-          </li>
-          <li>Your tutor code is: <?php echo"{$details->TutorCode}"; ?></li>
-          <li>Your role is: <?php echo"{$details->Role}"; ?></li>
-        </ul>
+        <table>
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td><?php echo "{$details->TutorFirstName} {$details->TutorLastName}"; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Tutor code:</strong></td>
+            <td><?php echo "{$details->TutorCode}"; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Role:</strong></td>
+            <td><?php echo "{$details->Role}"; ?></td>
+          </tr>
+          <tr>
+            <td><label>Email:</label></td>
+            <td>
+              <form action="updateAdminInfo.php" method="post">
+                <input type="email" name="email" value="<?php echo "{$details->TutorEmail}"; ?>" required />
+                <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
+                <button type="submit">Change Email</button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Password:</label></td>
+            <td>
+              <form action="../../credentials/query/updateTutorPassword.php" method="post">
+                <input type="password" id="password" name="password" value="<?php echo "{$details->TutorPassword}"; ?>" required />
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">&#128065;</button>
+                <input type="hidden" name="tutorID" value="<?php echo "{$details->TutorID}"; ?>" />
+                <button type="submit">Change Password</button>
+              </form>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
 
