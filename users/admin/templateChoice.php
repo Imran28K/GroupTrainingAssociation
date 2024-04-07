@@ -24,6 +24,67 @@ $details = $resultDetails -> fetch_object();
     <title>Template Choice</title>
     <link rel="stylesheet" type="text/css" href="../../css/sidebarStyling.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #343a40;
+            color: #fff;
+            padding: 30px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        .nav-stacked li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -81,53 +142,53 @@ $details = $resultDetails -> fetch_object();
       <div class="container">
         <h1>Learner accounts</h1>
         <table>
-        <tr>
-            <td>Learner name</td>
-            <td>Apprenticeship</td>
-        </tr>
-        <?php 
-        while ($obj = $resultLearners -> fetch_object()){
-          $template = $obj -> TemplateID;
-          $queryTemplate = "SELECT * FROM apprenticeshiptemplates WHERE ApprenticeshipTemplateID = '$template'"; 
-          $resultTemplate = $mysqli->query($queryTemplate);
-          $objTemplate = $resultTemplate -> fetch_object();
-            echo"<tr>
-            <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
-            <td>
-                {$objTemplate -> apprenticeshipName}
-            </td>
-            <td> 
+          <tr>
+            <th>Learner name</th>
+            <th>Apprenticeship</th>
+            <th>Action</th>
+          </tr>
+          <?php 
+          while ($obj = $resultLearners -> fetch_object()){
+            $template = $obj -> TemplateID;
+            $queryTemplate = "SELECT * FROM apprenticeshiptemplates WHERE ApprenticeshipTemplateID = '$template'"; 
+            $resultTemplate = $mysqli->query($queryTemplate);
+            $objTemplate = $resultTemplate -> fetch_object();
+            echo "<tr>
+              <td>{$obj -> LearnerFirstName} {$obj -> LearnerLastName}</td>
+              <td>{$objTemplate -> apprenticeshipName}</td>
+              <td> 
                 <form action='changeApprenticeshipTemplates.php' name='attendance' method='post'>
-                    <input type='hidden' id='learnerID' name='learnerID' value={$obj -> UniqueLearnerNumber}>
-                    <input type='submit' value='Edit Template'>
+                  <input type='hidden' id='learnerID' name='learnerID' value={$obj -> UniqueLearnerNumber}>
+                  <input type='submit' value='Edit Template'>
                 </form>
-            </td>
-        </tr>"; 
-        }        ?>
+              </td>
+            </tr>"; 
+          }        
+          ?>
         </table>
 
-    <ul class = 'nav nav-pills nav-stacked' role = 'tablist'>
-        <li> <a href='adminConsole.php'> Back </a> </li>
-    </ul>
-    </div>
+        <ul class='nav nav-pills nav-stacked' role='tablist'>
+          <li><a href='adminConsole.php'> Back </a></li>
+        </ul>
+      </div>
 
-          <div class="details">
-            <ul></ul>
-          </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../../learnerprogress/main.js"></script>
+      <div class="details">
+        <ul></ul>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript">
-    var hamburger = document.querySelector(".hamburger");
-    hamburger.addEventListener("click", function() {
-      document.querySelector("body").classList.toggle("active");
-    })
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../learnerprogress/main.js"></script>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+  var hamburger = document.querySelector(".hamburger");
+  hamburger.addEventListener("click", function() {
+    document.querySelector("body").classList.toggle("active");
+  })
+</script>
 
 </body>
 <?php } else { ?>
