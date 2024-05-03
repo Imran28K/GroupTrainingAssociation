@@ -5,7 +5,7 @@ Collaborated with clients from Group Training Association, Doncaster, UK. This s
 
 ## Purpose of Project
 
-Our objective is to take advantage of this rare opportunity to work with professional clients during our time at univeristy. We aim to enhance the learning process by providing a user-friendly platform that supports all users using this application.
+Our objective is to take advantage of this rare opportunity to work with professional clients during our time at university. We aim to enhance the learning process by providing a user-friendly platform that supports all users using this application.
 
 ## Our Team/Contributors
 
